@@ -25,4 +25,17 @@ public class HOFDriver{
 
    }
 
+   public static class listen implements KeyListener{
+      public void keyPressed(KeyEvent e){
+         w.keyCommand(new Integer(e.getKeyCode()));
+      }
+      public void keyReleased(KeyEvent e){
+         w.keyRemove(new Integer(e.getKeyCode()));
+      }
+      public void keyTyped(KeyEvent e){}
+
+
+
+
+   }
 }

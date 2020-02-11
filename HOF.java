@@ -42,7 +42,7 @@ public class HOF extends JPanel{
             if(keysDown.contains(KeyEvent.VK_L)){ //right
                dx2+=speed;
             }
-            if(keysDown.contains( KeyEvent.VK_K)){ //down
+            if(keysDown.contains(KeyEvent.VK_K)){ //down
                dy2+=speed;
             }
             if(keysDown.contains(KeyEvent.VK_J)){ //left
@@ -60,28 +60,27 @@ public class HOF extends JPanel{
             dy1*=velocity;
             y2+=dy2;
             dy2*=velocity;
-            //test message
-            System.out.println("x: " + x1 + " y: " + y1 + " dy: " + dy1);
+            //System.out.println("x: " + x1 + " y: " + y1 + " dy: " + dy1);
          
             repaint();
          }
       };
 
 
-   static String mode; // menu, credits, ingame
-   static int x1=0, y1=0, dx1=0, dy1=0;// player 1 instance ints
-   static int x2=0, y2=0, dx2=0, dy2=0; // player 2 instance ints
+   //static String mode; // menu, credits, ingame
+   static double x1=100, y1=600, dx1=0, dy1=0;// player 1 instance ints
+   static double x2=500, y2=200, dx2=0, dy2=0; // player 2 instance ints
    static ArrayList<Integer> keysDown;
 
 
-   public HOF(){ // constructor for jpanel
+   public HOF(){ // constructor
       keysDown = new ArrayList<Integer>();
       this.start();
       
    }
 
    public void start(){
-      timer1.scheduleAtFixedRate(task1,0,10); // delay = 1ms, period = 10ms
+      timer1.scheduleAtFixedRate(task1,1,10); // delay = 1ms, period = 10ms
    }
    
    public void paintComponent(Graphics g){ //method override for graphics

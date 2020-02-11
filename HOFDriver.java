@@ -20,8 +20,8 @@ public class HOFDriver{
       HOF graphics = window;
       w.setSize(1300,745);
       w.setResizable(false); // can't resize screen
-      
       w.setVisible(true); // show it
+      
       w.addKeyListener(new listen());
    }
 

@@ -24,12 +24,14 @@ public class HOF extends JPanel{
    };
 
    static String mode; // menu, credits, ingame
-   static int x1, y1, dx1, dy1;// player 1 instance ints
-   static int x2, y2, dx2, dy2; // player 2 instance ints
+   static int x1=0, y1=0, dx1=0, dy1=0;// player 1 instance ints
+   static int x2=0, y2=0, dx2=0, dy2=0; // player 2 instance ints
+   static ArrayList<Integer> keysDown;
 
 
    public HOF(){ // constructor for jpanel
-      
+      keysDown = new ArrayList<Integer>();
+
       
    }
 
@@ -51,14 +53,23 @@ public class HOF extends JPanel{
 
    public void keyCommand(Integer key){
       // IMPORTANT: https://stackoverflow.com/questions/15313469/java-keyboard-keycodes-list
-      if(mode.equals("ingame")){ // main chunk for in game
+      //if(mode.equals("ingame")){ // main chunk for in game
+         if (!keysDown.contains(key)){
+            keysDown.add(key);
+         }
+         System.out.println(key);
          if(key == KeyEvent.VK_W){ // p1 moving up
               
          }
 
 
-      }
+      //}
       
+   }
+   
+   public void keyRemove(Integer key){
+      keysDown.remove(key);
+   
    }
 
 

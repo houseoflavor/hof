@@ -23,7 +23,6 @@ public class HOFDriver{
       
       w.setVisible(true); // show it
       w.addKeyListener(new listen());
-
    }
 
    public static class listen implements KeyListener{

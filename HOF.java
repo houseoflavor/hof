@@ -68,8 +68,9 @@ public class HOF extends JPanel{
       };
 
 
-   static double x1=0, y1=550, dx1=0, dy1=0;// player 1 instance ints
-   static double x2=0, y2=0, dx2=0, dy2=0; // player 2 instance ints
+   static String mode; // menu, credits, ingame
+   static int x1=0, y1=0, dx1=0, dy1=0;// player 1 instance ints
+   static int x2=0, y2=0, dx2=0, dy2=0; // player 2 instance ints
    static ArrayList<Integer> keysDown;
 
 

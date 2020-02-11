@@ -22,6 +22,7 @@ public class HOFDriver{
       w.setResizable(false); // can't resize screen
       
       w.setVisible(true); // show it
+      w.addKeyListener(new listen());
 
    }
 
@@ -32,10 +33,11 @@ public class HOFDriver{
       public void keyReleased(KeyEvent e){
          window.keyRemove(new Integer(e.getKeyCode()));
       }
-      public void keyTyped(KeyEvent e){}
-
-
-
-
+      public void keyTyped(KeyEvent e){
+      }
+   
+   
+   
+   
    }
 }

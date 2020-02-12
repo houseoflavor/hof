@@ -1,4 +1,4 @@
-# House o' Flavor
+# House of Flavor
 final project
 
 # important links

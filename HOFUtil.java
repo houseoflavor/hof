@@ -12,9 +12,9 @@ public class HOFUtil extends HOF{
    
       // character drawing
       g.setColor(Color.RED);
-      g.fillOval(((int)x1),((int)y1),50,50);
+      g.fillOval(((int)p1.getx()),((int)p1.gety()),50,50);
       g.setColor(Color.BLUE);
-      g.fillOval(((int)x2),((int)y2),50,50);
+      g.fillOval(((int)p2.getx()),((int)p2.gety()),50,50);
    
    
    

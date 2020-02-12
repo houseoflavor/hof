@@ -24,56 +24,50 @@ public class HOF extends JPanel{
             double speed = 0.4;
             //player 1
             if(keysDown.contains(KeyEvent.VK_W)){//up
-               dy1-=speed;
+               p1.input(UP);
             }
             if(keysDown.contains(KeyEvent.VK_D)){ //right
-               dx1+=speed;
+               p1.input(RIGHT);
             }
-            if(keysDown.contains( KeyEvent.VK_S)){ //down
-               dy1+=speed;
+            if(keysDown.contains(KeyEvent.VK_S)){ //down
+               p1.input(DOWN);
             }
             if(keysDown.contains(KeyEvent.VK_A)){ //left
-               dx1-=speed;
+               p1.input(LEFT);
             }
             //player 2
             if(keysDown.contains(KeyEvent.VK_I)){ //up
-               dy2-=speed;
+               p2.input(UP);
             }
             if(keysDown.contains(KeyEvent.VK_L)){ //right
-               dx2+=speed;
+               p2.input(RIGHT);
             }
             if(keysDown.contains(KeyEvent.VK_K)){ //down
-               dy2+=speed;
+               p2.input(DOWN);
             }
             if(keysDown.contains(KeyEvent.VK_J)){ //left
-               dx2-=speed;
+               p2.input(LEFT);
             }
          
          
             //physics
-            double velocity=0.8;
-            x1+=dx1;
-            dx1*=velocity;
-            x2+=dx2;
-            dx2*=velocity;
-            y1+=dy1;
-            dy1*=velocity;
-            y2+=dy2;
-            dy2*=velocity;
-            //System.out.println("x: " + x1 + " y: " + y1 + " dy: " + dy1);
-         
+            
+            p1.move();
+            p2.move();
+            
             repaint();
          }
       };
 
-
+   final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
    //static String mode; // menu, credits, ingame
-   static double x1=100, y1=600, dx1=0, dy1=0;// player 1 instance ints
-   static double x2=500, y2=200, dx2=0, dy2=0; // player 2 instance ints
    static ArrayList<Integer> keysDown;
+   static Player p1, p2;
 
 
    public HOF(){ // constructor
+      p1 = new Player();
+      p2 = new Player();
       keysDown = new ArrayList<Integer>();
       this.start();
       

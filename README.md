@@ -1,5 +1,7 @@
 # House o' Flavor
-final project
+Advanced CS Final Project
+
+by Ethan, Vinhan, and An
 
 # Important Links
 level creator: https://forkphorus.github.io/#366957956

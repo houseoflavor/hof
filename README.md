@@ -1,7 +1,7 @@
 # House of Flavor
 final project
 
-# important links
+# Important Links
 level creator: https://forkphorus.github.io/#366957956
 
 pixel font: https://www.1001fonts.com/dpcomic-font.html

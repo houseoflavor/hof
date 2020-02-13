@@ -11,3 +11,6 @@ fonts:
 - https://www.1001fonts.com/vtf-misterpixel-font.html
 
 art editor: https://www.piskelapp.com/
+
+# Credits
+- Background music: https://www.youtube.com/watch?v=xJs87FJEWQQ

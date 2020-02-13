@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.*;
 import java.io.*;
 
+
 public class HOFDriver{
 
    public static HOF window;
@@ -18,7 +19,7 @@ public class HOFDriver{
       w.setContentPane(window);
       w.setLocation(0, 0);
       HOF graphics = window;
-      w.setSize(1316,789); // for some reason the window size is slightly off, pretend 1300x750
+      w.setSize(1316,789); // the window size is slightly off, pretend 1300x750
       w.setResizable(true);
       w.setVisible(true); // show it
       

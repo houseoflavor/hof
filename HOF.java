@@ -19,6 +19,12 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.awt.event.MouseWheelEvent;
 import java.awt.event.MouseWheelListener;
+// music stuff
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.DataLine;
 
 public class HOF extends JPanel implements MouseListener, MouseMotionListener{
 
@@ -65,13 +71,21 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          }
       };
 
-   final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
    static String mode; // menu, controls, ingame
+   static String transMode;
    static ArrayList<Integer> keysDown;
    static Player p1, p2;
 
    static int mouseX, mouseY;
-
+   static int buttonTouching;
+   
+   static int transX, transition;
+   
+   
+   //finals
+   static final int NONE = 0, START = 1, CONTROLS = 2, EXIT = 3;
+   static final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
+   
    public HOF(){ // constructor
       p1 = new Player();
       p2 = new Player();
@@ -83,6 +97,9 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       addMouseMotionListener(this);
       mouseX=0;
       mouseY=0;
+      buttonTouching = NONE;
+      transition = 0;
+      playMusic();
       
       this.start();
       
@@ -129,8 +146,13 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       mouseX=e.getX();
       mouseY=e.getY();
       if(mode.equals("menu")){
-         
+         if(buttonTouching == START){
+            transMode = "start";
+            transition = 1;
+            transX=1500;
+         }
       }
+      
    }
    public void mousePressed(MouseEvent e){ }
    public void mouseReleased(MouseEvent e){ }
@@ -138,7 +160,28 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    public void mouseExited(MouseEvent e){ }
    public void mouseDragged(MouseEvent e){ }
 
-
-
-
+   // music
+   public static void playMusic(){
+      try {
+         File file = new File("sounds/background-music.wav");
+         AudioInputStream stream;
+         AudioFormat format;
+         DataLine.Info info;
+         Clip clip;
+      
+         stream = AudioSystem.getAudioInputStream(file);
+         format = stream.getFormat();
+         info = new DataLine.Info(Clip.class, format);
+         clip = (Clip) AudioSystem.getLine(info);
+         clip.open(stream);
+         clip.start();
+      } 
+      catch (Exception exception) {
+         System.out.println("No music detected");
+      }
+   }
+   
+   
 }
+
+

@@ -22,8 +22,21 @@ public class HOFUtil extends HOF{
       g.fillOval(((int)p2.getx()),((int)p2.gety()),50,50);
    */
    
-   
+      // final thing to draw is transition
+      if(transition==1){
+         drawTransition(g);
+      }
         
+   }
+   
+   public static void drawTransition(Graphics g){
+      transX+=((Math.abs(transX))*(-0.03)-1);
+      ImageIcon black = new ImageIcon("images/black.png");
+      g.drawImage(black.getImage(),transX,0,1300,750,null);
+      if(transX<0){
+         mode = transMode;
+      }
+      
    }
    
    public static void drawMenu(Graphics g){
@@ -35,18 +48,18 @@ public class HOFUtil extends HOF{
       ImageIcon startcl = new ImageIcon("images/start-click.png");
       ImageIcon controlun = new ImageIcon("images/controls-unclicked.png");
       ImageIcon controlcl = new ImageIcon("images/controls-click.png");
-      if(mouseX<360 && mouseX>0 && mouseY<365 && mouseY>273){
-         g.drawImage(startcl.getImage(), 0, 0, 1300, 750, null);
+      g.drawImage(controlun.getImage(), 0, 0, null);
+      g.drawImage(startun.getImage(), 0, 0, null);
+      if(mouseX<360 && mouseX>0 && mouseY<365 && mouseY>273 && mode.equals("menu")){
+         g.drawImage(startcl.getImage(), 0, 0, null);
+         buttonTouching = START;
+      }
+      else if(mouseX<360 && mouseX>0 && mouseY<546 && mouseY>454 && mode.equals("menu")){
+         g.drawImage(controlcl.getImage(), 0, 0, null);
+         buttonTouching = CONTROLS;
       }
       else{
-         g.drawImage(startun.getImage(), 0, 0, 1300, 750, null);
-      }
-      
-      if(mouseX<360 && mouseX>0 && mouseY<546 && mouseY>454){
-         g.drawImage(controlcl.getImage(), 0, 0, 1300, 750, null);
-      }
-      else{
-         g.drawImage(controlun.getImage(), 0, 0, 1300, 750, null);
+         buttonTouching = NONE;
       }
    }
    

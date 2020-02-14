@@ -11,7 +11,11 @@ public class HOFUtil extends HOF{
       if(mode.equals("menu")){
          drawMenu(g);
       }
+      if(mode.equals("controls")){
+         drawControls(g);
+      }
       if(mode.equals("game")){
+         drawBoard(g);
          drawGame(g);
       }
    
@@ -24,12 +28,30 @@ public class HOFUtil extends HOF{
    }
    
    public static void drawTransition(Graphics g){
-      transX+=((Math.abs(transX))*(-0.03)-1);
+      transX+=((Math.abs(transX))*(-0.07)-1);
       ImageIcon black = new ImageIcon("images/black.png");
       g.drawImage(black.getImage(),transX,0,1300,750,null);
       if(transX<0){
          mode = transMode;
       }  
+      if(transX<-1500){
+         transX=1500;
+         transMode = "none";
+         transition = 0;
+      }
+   }
+   
+   public static void drawControls(Graphics g){
+      ImageIcon controls = new ImageIcon("images/controls.png");
+      ImageIcon clickX = new ImageIcon("images/X.png");
+      g.drawImage(controls.getImage(),0,0,null);
+      if(mouseX<1161 && mouseX>1136 && mouseY<151 && mouseY>113 && mode.equals("controls")){
+         g.drawImage(clickX.getImage(),0,0,null);
+         buttonTouching = EXIT;
+      }
+      else{
+         buttonTouching = NONE;
+      }
    }
    
    public static void drawGame(Graphics g){
@@ -37,6 +59,10 @@ public class HOFUtil extends HOF{
       g.fillOval(((int)p1.getx()),((int)p1.gety()),50,50);
       g.setColor(Color.BLUE);
       g.fillOval(((int)p2.getx()),((int)p2.gety()),50,50);
+   }
+   
+   public static void drawBoard(Graphics g){
+   
    }
    
    public static void drawMenu(Graphics g){

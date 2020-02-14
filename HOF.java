@@ -82,6 +82,11 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    
    static int transX, transition;
    
+   static Tile [][] gameTiles;
+   static Tile [][] allTiles;
+   
+   static int[] levels; // -1 = not beat, 0, 1, 2, 3 stars per level
+   
    
    //finals
    static final int NONE = 0, START = 1, CONTROLS = 2, EXIT = 3;
@@ -92,6 +97,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       p2 = new Player();
       keysDown = new ArrayList<Integer>();
       mode = "menu";
+      
+      gameTiles = new Tile[13][13];
       
       //mouse stuff
       addMouseListener(this);
@@ -105,10 +112,21 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       
       this.start();
       
+      levels = new int[5];
+      
    }
 
    public void start(){
       timer1.scheduleAtFixedRate(task1,1,10); // delay = 1ms, period = 10ms
+   }
+   
+   public int lastBeat(){ //returns the index of the level that is next to beat
+      for(int i=0; i<levels.length; i++){
+         if(levels[i]==-1){
+            return i;
+         }
+      }
+      return levels.length-1;
    }
    
    public void paintComponent(Graphics g){ //method override for graphics
@@ -121,6 +139,25 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       timer.cancel();
       timer.purge();
       */
+   }
+   
+   //file reading
+   public static void readFile(String fileName)throws IOException{
+      String [][]list = new String[13][13];
+      Scanner input = new Scanner(new FileReader(fileName));
+      String line;
+      for(int i=0; i<13; i++){
+         line = input.nextLine();
+         //System.out.println(line);
+         String [] singleLine = line.split(" ");
+         for(int j=0; j<13; j++){
+            gameTiles[i][j] = new Tile(singleLine[j]);
+            //System.out.print(tiles[i][j].getName());
+         }
+      }
+      input.close();
+      
+   
    }
 
    public void keyCommand(Integer key){
@@ -142,16 +179,29 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    public void mouseMoved(MouseEvent e){
       mouseX=e.getX();
       mouseY=e.getY();
-      //System.out.println("mousex: " + mouseX + " mousey: " + mouseY);
+     // System.out.println("mousex: " + mouseX + " mousey: " + mouseY);
    }
    public void mouseClicked(MouseEvent e){
       mouseX=e.getX();
       mouseY=e.getY();
       if(mode.equals("menu") && transMode.equals("none")){
-         if(buttonTouching == START){
+         if(buttonTouching == START){ // clicking start button (from menu)
             transMode = "game";
+            transX=1500;            
             transition = 1;
+         }
+         if(buttonTouching == CONTROLS){ // clicking controls button (from menu)
+            transMode = "controls";            
             transX=1500;
+            transition = 1;
+         }
+      }
+      
+      if(mode.equals("controls") && transMode.equals("none")){
+         if(buttonTouching == EXIT){ // clicking X button (from controls)
+            transMode = "menu";
+            transX=1500;
+            transition = 1;
          }
       }
       

@@ -25,6 +25,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.DataLine;
+import javax.sound.sampled.FloatControl;
 
 public class HOF extends JPanel implements MouseListener, MouseMotionListener{
 
@@ -71,7 +72,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          }
       };
 
-   static String mode; // menu, controls, ingame
+   static String mode; // menu, controls, game
    static String transMode;
    static ArrayList<Integer> keysDown;
    static Player p1, p2;
@@ -99,6 +100,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       mouseY=0;
       buttonTouching = NONE;
       transition = 0;
+      transMode = "none";
       playMusic();
       
       this.start();
@@ -123,7 +125,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
 
    public void keyCommand(Integer key){
       // IMPORTANT: https://stackoverflow.com/questions/15313469/java-keyboard-keycodes-list
-      if(mode.equals("ingame")){ // main chunk for in game
+      if(mode.equals("game")){ // main chunk for in game
          if (!keysDown.contains(key)){
             keysDown.add(key);
          }
@@ -145,9 +147,9 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    public void mouseClicked(MouseEvent e){
       mouseX=e.getX();
       mouseY=e.getY();
-      if(mode.equals("menu")){
+      if(mode.equals("menu") && transMode.equals("none")){
          if(buttonTouching == START){
-            transMode = "start";
+            transMode = "game";
             transition = 1;
             transX=1500;
          }
@@ -174,7 +176,12 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          info = new DataLine.Info(Clip.class, format);
          clip = (Clip) AudioSystem.getLine(info);
          clip.open(stream);
+         // control volume
+         FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+         volume.setValue(-4);
          clip.start();
+         //loop music
+         clip.loop(Clip.LOOP_CONTINUOUSLY);
       } 
       catch (Exception exception) {
          System.out.println("No music detected");

@@ -11,16 +11,10 @@ public class HOFUtil extends HOF{
       if(mode.equals("menu")){
          drawMenu(g);
       }
-      // background drawing
+      if(mode.equals("game")){
+         drawGame(g);
+      }
    
-   
-   /*
-      // character drawing
-      g.setColor(Color.RED);
-      g.fillOval(((int)p1.getx()),((int)p1.gety()),50,50);
-      g.setColor(Color.BLUE);
-      g.fillOval(((int)p2.getx()),((int)p2.gety()),50,50);
-   */
    
       // final thing to draw is transition
       if(transition==1){
@@ -35,8 +29,14 @@ public class HOFUtil extends HOF{
       g.drawImage(black.getImage(),transX,0,1300,750,null);
       if(transX<0){
          mode = transMode;
-      }
-      
+      }  
+   }
+   
+   public static void drawGame(Graphics g){
+      g.setColor(Color.RED);
+      g.fillOval(((int)p1.getx()),((int)p1.gety()),50,50);
+      g.setColor(Color.BLUE);
+      g.fillOval(((int)p2.getx()),((int)p2.gety()),50,50);
    }
    
    public static void drawMenu(Graphics g){

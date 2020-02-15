@@ -62,7 +62,11 @@ public class HOFUtil extends HOF{
    }
    
    public static void drawBoard(Graphics g){
-   
+      for(int i=0; i<13; i++){
+         for (int j=0; j<13; j++){
+            //g.drawImage(tiles[i][j].image(), i*
+         }
+      }
    }
    
    public static void drawMenu(Graphics g){

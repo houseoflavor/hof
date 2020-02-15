@@ -98,7 +98,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       keysDown = new ArrayList<Integer>();
       mode = "menu";
       
-      gameTiles = new Tile[13][13];
+      gameTiles = new Tile[16][28];
       
       //mouse stuff
       addMouseListener(this);
@@ -143,14 +143,13 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    
    //file reading
    public static void readFile(String fileName)throws IOException{
-      String [][]list = new String[13][13];
       Scanner input = new Scanner(new FileReader(fileName));
       String line;
-      for(int i=0; i<13; i++){
+      for(int i=0; i<16; i++){
          line = input.nextLine();
          //System.out.println(line);
          String [] singleLine = line.split(" ");
-         for(int j=0; j<13; j++){
+         for(int j=0; j<28; j++){
             gameTiles[i][j] = new Tile(singleLine[j]);
             //System.out.print(tiles[i][j].getName());
          }

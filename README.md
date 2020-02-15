@@ -6,6 +6,8 @@ by Ethan, Vinhan, and An
 # Important Links
 level creator: https://forkphorus.github.io/#366957956
 
+tile codes: https://pastebin.com/hWSCfS7A
+
 fonts: 
 - https://www.1001fonts.com/dpcomic-font.html
 - https://www.1001fonts.com/vtf-misterpixel-font.html

@@ -28,10 +28,10 @@ public class HOFDriver{
 
    public static class listen implements KeyListener{
       public void keyPressed(KeyEvent e){
-         window.keyCommand(new Integer(e.getKeyCode()));
+         window.keyCommand(e);
       }
       public void keyReleased(KeyEvent e){
-         window.keyRemove(new Integer(e.getKeyCode()));
+         window.keyRemove(e);
       }
       public void keyTyped(KeyEvent e){
       }

@@ -33,38 +33,61 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    TimerTask task1 = 
       new TimerTask(){
          public void run(){
-            // movement
+            // movement stuff
+            
             double speed = 0.4;
+            // dashing
+            boolean p1Boost = false;
+            boolean p2Boost = false;
+            //p1 dash
+            if(keysDown.contains(KeyEvent.VK_CONTROL) && dirKeys.contains(KeyEvent.KEY_LOCATION_LEFT)){
+               if(!hasP1Boost){ // prevents players from holding dash
+                  p1Boost = true;
+                  hasP1Boost = true;
+               }
+            }
+            else{
+               hasP1Boost = false;
+            }
+            //p2 dash
+            if(keysDown.contains(KeyEvent.VK_CONTROL) && dirKeys.contains(KeyEvent.KEY_LOCATION_RIGHT)){
+               if(!hasP2Boost){
+                  p2Boost = true;
+                  hasP2Boost = true;
+               }
+            }
+            else{
+               hasP2Boost = false;
+            }
             //player 1
             if(keysDown.contains(KeyEvent.VK_W)){//up
-               p1.input(UP);
+               p1.input(UP, p1Boost);
             }
             if(keysDown.contains(KeyEvent.VK_D)){ //right
-               p1.input(RIGHT);
+               p1.input(RIGHT, p1Boost);
             }
             if(keysDown.contains(KeyEvent.VK_S)){ //down
-               p1.input(DOWN);
+               p1.input(DOWN, p1Boost);
             }
             if(keysDown.contains(KeyEvent.VK_A)){ //left
-               p1.input(LEFT);
+               p1.input(LEFT, p1Boost);
             }
             //player 2
-            if(keysDown.contains(KeyEvent.VK_I)){ //up
-               p2.input(UP);
+            if(keysDown.contains(KeyEvent.VK_UP)){ //up
+               p2.input(UP, p2Boost);
             }
-            if(keysDown.contains(KeyEvent.VK_L)){ //right
-               p2.input(RIGHT);
+            if(keysDown.contains(KeyEvent.VK_RIGHT)){ //right
+               p2.input(RIGHT, p2Boost);
             }
-            if(keysDown.contains(KeyEvent.VK_K)){ //down
-               p2.input(DOWN);
+            if(keysDown.contains(KeyEvent.VK_DOWN)){ //down
+               p2.input(DOWN, p2Boost);
             }
-            if(keysDown.contains(KeyEvent.VK_J)){ //left
-               p2.input(LEFT);
+            if(keysDown.contains(KeyEvent.VK_LEFT)){ //left
+               p2.input(LEFT, p2Boost);
             }
          
          
             //physics
-            
             p1.move();
             p2.move();
             
@@ -75,8 +98,10 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static String mode; // menu, controls, game
    static String transMode;
    static ArrayList<Integer> keysDown;
+   static ArrayList<Integer> dirKeys;
    static Player p1, p2;
 
+   static boolean hasP1Boost = false, hasP2Boost = false;
    static int mouseX, mouseY;
    static int buttonTouching;
    
@@ -96,9 +121,10 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       p1 = new Player();
       p2 = new Player();
       keysDown = new ArrayList<Integer>();
+      dirKeys = new ArrayList<Integer>();
       mode = "menu";
       
-      gameTiles = new Tile[16][28];
+      gameTiles = new Tile[12][20];
       
       //mouse stuff
       addMouseListener(this);
@@ -112,7 +138,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       
       this.start();
       
-      levels = new int[5];
+      levels = new int[5]; // change for num of levels
       
    }
 
@@ -145,11 +171,11 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    public static void readFile(String fileName)throws IOException{
       Scanner input = new Scanner(new FileReader(fileName));
       String line;
-      for(int i=0; i<16; i++){
+      for(int i=0; i<12; i++){
          line = input.nextLine();
          //System.out.println(line);
          String [] singleLine = line.split(" ");
-         for(int j=0; j<28; j++){
+         for(int j=0; j<20; j++){
             gameTiles[i][j] = new Tile(singleLine[j]);
             //System.out.print(tiles[i][j].getName());
          }
@@ -159,19 +185,25 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    
    }
 
-   public void keyCommand(Integer key){
+   public void keyCommand(KeyEvent e){
       // IMPORTANT: https://stackoverflow.com/questions/15313469/java-keyboard-keycodes-list
+      Integer key = new Integer(e.getKeyCode());
+      Integer loc = new Integer(e.getKeyLocation());
       if(mode.equals("game")){ // main chunk for in game
          if (!keysDown.contains(key)){
             keysDown.add(key);
+            dirKeys.add(loc);
          }
       
       }
       
    }
   
-   public void keyRemove(Integer key){
+   public void keyRemove(KeyEvent e){
+      Integer key = new Integer(e.getKeyCode());
+      Integer loc = new Integer(e.getKeyLocation());
       keysDown.remove(key);
+      dirKeys.remove(loc);
    }
    
    // more mouse stuff
@@ -204,7 +236,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          }
       }
       
-   }
+   } // interface stuff
    public void mousePressed(MouseEvent e){ }
    public void mouseReleased(MouseEvent e){ }
    public void mouseEntered(MouseEvent e){ }

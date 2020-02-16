@@ -3,7 +3,7 @@ Advanced CS Final Project
 
 by Ethan, Vinhan, and An
 
-# Important Links
+# Resources
 level creator: https://forkphorus.github.io/#366957956
 
 tile codes: https://pastebin.com/hWSCfS7A

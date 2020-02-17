@@ -14,7 +14,7 @@ fonts:
 
 art editor: https://www.piskelapp.com/
 
-max speed calculator: https://www.desmos.com/calculator/vcbpsjishq
+max speed calculator: https://www.desmos.com/calculator/fsqzdv2sji
 
 # Credits
 - Background music: https://www.youtube.com/watch?v=xJs87FJEWQQ

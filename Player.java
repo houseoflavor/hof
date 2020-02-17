@@ -8,8 +8,8 @@ public class Player{
    
    // CONTROL PLAYER SPEED HERE ---
    private final double speed = 0.4;    // 0 < speed
-   private final double velocity = 0.8; // 0 < velo < 1
-   private final double boostAmt = 3;   // 1 < boostAmt
+   private final double velocity = 0.9; // 0 (stop quickly) < velo < 1 (slippery)
+   private final double boostAmt = 4;   // 1 < boostAmt
    // -----------------------------
    
    // maxSpeed is useful for calculating when players can boost (if <= max speed)
@@ -49,7 +49,7 @@ public class Player{
    public void input(int dir, boolean boost){
       direction = dir;
       if(dir==UP){ // up
-         if(boost && Math.abs(dy)<=maxSpeed+0.2){
+         if(boost && Math.abs(dy)<=maxSpeed+0.1){
             dy-=maxSpeed*boostAmt;
          }
          else{
@@ -57,7 +57,7 @@ public class Player{
          }
       }
       if(dir==RIGHT){ //right
-         if(boost && Math.abs(dx)<=maxSpeed+0.2){
+         if(boost && Math.abs(dx)<=maxSpeed+0.1){
             dx+=maxSpeed*boostAmt;
          }
          else{
@@ -65,7 +65,7 @@ public class Player{
          }
       }
       if(dir==DOWN){ //down
-         if(boost && Math.abs(dy)<=maxSpeed+0.2){
+         if(boost && Math.abs(dy)<=maxSpeed+0.1){
             dy+=maxSpeed*boostAmt;
          }
          else{
@@ -73,7 +73,7 @@ public class Player{
          }
       }
       if(dir==LEFT){ //left
-         if(boost && Math.abs(dx)<=maxSpeed+0.2){
+         if(boost && Math.abs(dx)<=maxSpeed+0.1){
             dx-=maxSpeed*boostAmt;
          }
          else{

@@ -55,6 +55,11 @@ public class HOFUtil extends HOF{
    }
    
    public static void drawGame(Graphics g){
+      // background image
+      
+      // right sidebar + orders
+   
+      // players
       g.setColor(Color.RED);
       g.fillOval(((int)p1.getx()),((int)p1.gety()),50,50);
       g.setColor(Color.BLUE);

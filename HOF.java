@@ -33,9 +33,6 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    TimerTask task1 = 
       new TimerTask(){
          public void run(){
-            // movement stuff
-            
-            double speed = 0.4;
             // dashing
             boolean p1Boost = false;
             boolean p2Boost = false;
@@ -143,7 +140,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    }
 
    public void start(){
-      timer1.scheduleAtFixedRate(task1,1,10); // delay = 1ms, period = 10ms
+      timer1.scheduleAtFixedRate(task1,1,10);
    }
    
    public int lastBeat(){ //returns the index of the level that is next to beat

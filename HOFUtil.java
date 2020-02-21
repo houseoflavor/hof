@@ -60,20 +60,41 @@ public class HOFUtil extends HOF{
       // right sidebar + orders
    
       // players
-      ImageIcon playeridle;
+      ImageIcon player1;
       if(p1.getDir() == UP){
-         playeridle = new ImageIcon("images/characters/monkey-up-walk.gif");
+         if(((((int)(p1.getdx())*20)/20)==0)&&((((int)(p1.getdy())*20)/20)==0)){ // actually idle
+            player1 = new ImageIcon("images/characters/monkey-up-idle.gif");
+         }
+         else{
+            player1 = new ImageIcon("images/characters/monkey-up-walk.gif");
+         }
+      }
+      else if(p1.getDir() == DOWN){
+         if(((((int)(p1.getdx())*20)/20)==0)&&((((int)(p1.getdy())*20)/20)==0)){ // actually idle
+            player1 = new ImageIcon("images/characters/monkey-down-idle.gif");
+         }
+         else{
+            player1 = new ImageIcon("images/characters/monkey-down-walk.gif");
+         }      
       }
       else if(p1.getDir() == RIGHT){
-         playeridle = new ImageIcon("images/characters/monkey-right-walk.gif");
+         if(((((int)(p1.getdx())*20)/20)==0)&&((((int)(p1.getdy())*20)/20)==0)){ // actually idle
+            player1 = new ImageIcon("images/characters/monkey-right-idle.gif");
+         }
+         else{
+            player1 = new ImageIcon("images/characters/monkey-right-walk.gif");
+         }      
       }
-      else if(p1.getDir() == LEFT){
-         playeridle = new ImageIcon("images/characters/monkey-left-walk.gif");
+      else{ //if(p1.getDir() == LEFT){
+         if(((((int)(p1.getdx())*20)/20)==0)&&((((int)(p1.getdy())*20)/20)==0)){ // actually idle
+            player1 = new ImageIcon("images/characters/monkey-left-idle.gif");
+         }
+         else{
+            player1 = new ImageIcon("images/characters/monkey-left-walk.gif");
+         }      
       }
-      else{
-         playeridle = new ImageIcon("images/characters/monkey-down-walk.gif");
-      }
-      g.drawImage(playeridle.getImage(),((int)p1.getx()),((int)p1.gety()),null);
+   
+      g.drawImage(player1.getImage(),((int)p1.getx()),((int)p1.gety()),null);
       g.setColor(Color.BLUE);
       g.fillOval(((int)p2.getx()),((int)p2.gety()),50,50);
    }

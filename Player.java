@@ -7,9 +7,9 @@ public class Player{
    
    
    // CONTROL PLAYER SPEED HERE ---
-   private final double speed = 0.4;    // 0 < speed
+   private final double speed = 0.3;    // 0 < speed
    private final double velocity = 0.9; // 0 (stop quickly) < velo < 1 (slippery)
-   private final double boostAmt = 4;   // 1 < boostAmt
+   private final double boostAmt = 6;   // 1 < boostAmt
    // -----------------------------
    
    // maxSpeed is useful for calculating when players can boost (if <= max speed)

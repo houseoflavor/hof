@@ -29,7 +29,7 @@ public class HOFUtil extends HOF{
    
    public static void drawTransition(Graphics g){
       transX+=((Math.abs(transX))*(-0.07)-1);
-      ImageIcon black = new ImageIcon("images/black.png");
+      ImageIcon black = new ImageIcon("images/menus/black.png");
       g.drawImage(black.getImage(),transX,0,1300,750,null);
       if(transX<0){
          mode = transMode;
@@ -42,8 +42,8 @@ public class HOFUtil extends HOF{
    }
    
    public static void drawControls(Graphics g){
-      ImageIcon controls = new ImageIcon("images/controls.png");
-      ImageIcon clickX = new ImageIcon("images/X.png");
+      ImageIcon controls = new ImageIcon("images/menus/controls.png");
+      ImageIcon clickX = new ImageIcon("images/menus/X.png");
       g.drawImage(controls.getImage(),0,0,null);
       if(mouseX<1161 && mouseX>1136 && mouseY<151 && mouseY>113 && mode.equals("controls")){
          g.drawImage(clickX.getImage(),0,0,null);
@@ -60,8 +60,20 @@ public class HOFUtil extends HOF{
       // right sidebar + orders
    
       // players
-      g.setColor(Color.RED);
-      g.fillOval(((int)p1.getx()),((int)p1.gety()),50,50);
+      ImageIcon playeridle;
+      if(p1.getDir() == UP){
+         playeridle = new ImageIcon("images/characters/monkey-up-walk.gif");
+      }
+      else if(p1.getDir() == RIGHT){
+         playeridle = new ImageIcon("images/characters/monkey-right-walk.gif");
+      }
+      else if(p1.getDir() == LEFT){
+         playeridle = new ImageIcon("images/characters/monkey-left-walk.gif");
+      }
+      else{
+         playeridle = new ImageIcon("images/characters/monkey-down-walk.gif");
+      }
+      g.drawImage(playeridle.getImage(),((int)p1.getx()),((int)p1.gety()),null);
       g.setColor(Color.BLUE);
       g.fillOval(((int)p2.getx()),((int)p2.gety()),50,50);
    }
@@ -75,14 +87,14 @@ public class HOFUtil extends HOF{
    }
    
    public static void drawMenu(Graphics g){
-      ImageIcon homescreen = new ImageIcon("images/homescreen-no-buttons.png");
+      ImageIcon homescreen = new ImageIcon("images/menus/homescreen-no-buttons.png");
       g.drawImage(homescreen.getImage(),0,0,1300,750,null);
       
       // buttons
-      ImageIcon startun = new ImageIcon("images/start-unclicked.png");
-      ImageIcon startcl = new ImageIcon("images/start-click.png");
-      ImageIcon controlun = new ImageIcon("images/controls-unclicked.png");
-      ImageIcon controlcl = new ImageIcon("images/controls-click.png");
+      ImageIcon startun = new ImageIcon("images/menus/start-unclicked.png");
+      ImageIcon startcl = new ImageIcon("images/menus/start-click.png");
+      ImageIcon controlun = new ImageIcon("images/menus/controls-unclicked.png");
+      ImageIcon controlcl = new ImageIcon("images/menus/controls-click.png");
       g.drawImage(controlun.getImage(), 0, 0, null);
       g.drawImage(startun.getImage(), 0, 0, null);
       if(mouseX<360 && mouseX>0 && mouseY<365 && mouseY>273 && mode.equals("menu")){

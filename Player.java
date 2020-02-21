@@ -47,7 +47,6 @@ public class Player{
    // calculate max speed: https://www.desmos.com/calculator/vcbpsjishq
    //moving
    public void input(int dir, boolean boost){
-      direction = dir;
       if(dir==UP){ // up
          if(boost && Math.abs(dy)<=maxSpeed+0.1){
             dy-=maxSpeed*boostAmt;
@@ -80,6 +79,7 @@ public class Player{
             dx-=speed;
          }
       }
+      direction = dir;
    }
    
    
@@ -92,15 +92,19 @@ public class Player{
       // game screen collision
       if(x<50){ // left bound
          x=50;
+         dx=0;
       }
       if(x>1000){ // right bound
          x=1000;
+         dx=0;
       }
       if(y<50){ // top bound
          y=50;
+         dy=0;
       }
       if(y>500){ // bottom bound
          y=500;
+         dy=0;
       }
       
       // tile collision (oh no)

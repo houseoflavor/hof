@@ -153,15 +153,16 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    }
    
    public void paintComponent(Graphics g){ //method override for graphics
-      super.paintComponent(g);
-      this.setBackground(Color.WHITE); // set color (change if you want)
-      
+      super.paintComponent(g);      
       HOFUtil.doEverything(g); // main draw
    
       /* cancel timer (should never do because this timer draws everything)
       timer.cancel();
       timer.purge();
       */
+   }
+   public void update(Graphics g){
+      paint(g);
    }
    
    //file reading

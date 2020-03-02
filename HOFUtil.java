@@ -1,12 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.*;
 import java.util.ArrayList;
 import java.io.*;
 import java.util.Arrays.*;
 import java.util.*;
 
 public class HOFUtil extends HOF{
-   public static void doEverything(Graphics g){
+   public static void doEverything(Graphics g){   
    
       if(mode.equals("menu")){
          drawMenu(g);
@@ -111,6 +112,7 @@ public class HOFUtil extends HOF{
       ImageIcon gradient = new ImageIcon("images/menus/gradient.png");
       g.drawImage(gradient.getImage(),0,0,null);
       ImageIcon clouds = new ImageIcon("images/menus/clouds-moving.gif");
+      g.drawImage(clouds.getImage(),0,0,null);
       g.drawImage(clouds.getImage(),0,0,null);
       ImageIcon homescreen = new ImageIcon("images/menus/wall-and-sign.png");
       g.drawImage(homescreen.getImage(),0,0,1300,750,null);

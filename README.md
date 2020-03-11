@@ -3,7 +3,7 @@ Advanced CS Final Project
 
 by Ethan, Vinhan, and An
 
-# Resources
+## Resources
 level creator: https://forkphorus.github.io/#366957956
 
 tile codes: https://pastebin.com/hWSCfS7A
@@ -16,5 +16,5 @@ art editor: https://www.piskelapp.com/
 
 max speed calculator: https://www.desmos.com/calculator/fsqzdv2sji
 
-# Credits
+## Credits
 - Background music: https://www.youtube.com/watch?v=xJs87FJEWQQ

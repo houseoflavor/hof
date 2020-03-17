@@ -109,6 +109,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    
    static int[] levels; // -1 = not beat, 0, 1, 2, 3 stars per level
    
+   //static Clouds cloud;
    
    //finals
    static final int NONE = 0, START = 1, CONTROLS = 2, EXIT = 3;
@@ -137,10 +138,12 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       
       levels = new int[5]; // change for num of levels
       
+      //cloud = new Clouds();  // ------------------- clouds
+      
    }
 
    public void start(){
-      timer1.scheduleAtFixedRate(task1,1,10);
+      timer1.scheduleAtFixedRate(task1,1,30);
    }
    
    public int lastBeat(){ //returns the index of the level that is next to beat

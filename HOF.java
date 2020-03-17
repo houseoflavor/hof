@@ -143,7 +143,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    }
 
    public void start(){
-      timer1.scheduleAtFixedRate(task1,1,30);
+      timer1.scheduleAtFixedRate(task1,1,10);
    }
    
    public int lastBeat(){ //returns the index of the level that is next to beat

@@ -61,7 +61,7 @@ public class HOFUtil extends HOF{
       // right sidebar + orders
    
       // players
-      ImageIcon player1;
+      /*
       if(p1.getDir() == UP){
          if(((((int)(p1.getdx())*20)/20)==0)&&((((int)(p1.getdy())*20)/20)==0)){ // actually idle
             player1 = new ImageIcon("images/characters/monkey-up-idle.gif");
@@ -94,8 +94,8 @@ public class HOFUtil extends HOF{
             player1 = new ImageIcon("images/characters/monkey-left-walk.gif");
          }      
       }
-   
-      g.drawImage(player1.getImage(),((int)p1.getx()),((int)p1.gety()),null);
+      */
+      g.drawImage(p1.getPicture().getImage(),((int)p1.getx()),((int)p1.gety()),null);
       g.setColor(Color.BLUE);
       g.fillOval(((int)p2.getx()),((int)p2.gety()),50,50);
    }

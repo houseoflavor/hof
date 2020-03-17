@@ -1,8 +1,10 @@
+import javax.swing.*;
 public class Player{
    // instance vars
    private double x,y,dx=0,dy=0;
    private Holdable holding;
    private int direction;
+   private String name;
    private final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4, NONE = 0;
    
    
@@ -12,19 +14,71 @@ public class Player{
    private final double boostAmt = 6;   // 1 < boostAmt
    // -----------------------------
    
+   private ImageIcon [][][] frames; //[active/idle][direction][frameNum]
+   private int activeFrame = 0;
+   private int idleFrame = 0;
    // maxSpeed is useful for calculating when players can boost (if <= max speed)
    private final double maxSpeed = ((speed*velocity)/(1-velocity));
    
-   public Player(){ // no starting position
-      x=0;
-      y=0;
-      direction = NONE;
-   }
-   public Player(double x, double y){ // starting position
+   public Player(String name, int x, int y){
+      this.name=name;
       this.x=x;
-      this.y=0; // lol
-      direction = NONE;
+      this.y=y;
+      direction = DOWN;
+      frames = new ImageIcon[2][4][4];
+      
+      String type = "active";
+      for(int a=0; a<2; a++){ // active and idle
+         for(int i=0; i<4; i++){ // up right down left
+            for(int j=0; j<4; j++){ // indv frame
+               String dir="";
+               if(i==UP-1){
+                  dir = "up";
+               }
+               if(i==DOWN-1){
+                  dir = "down";
+               }
+               if(i==RIGHT-1){
+                  dir = "right";
+               }
+               if(i==LEFT-1){
+                  dir = "left";
+               }
+               frames[a][i][j] = new ImageIcon("images/characters/"+name+"/"+type+"/"+dir+"/frame_"+String.valueOf(j)+"_delay-0.17s.gif");
+            }
+         }
+         type = "idle";
+      }
+      
    }
+
+   // returns an ImageIcon of the current frame to show
+   // also advances animation by 1 frame
+   public ImageIcon getPicture(){
+      int activeSpeed = 10; // change speed of animation here, 1 = fastest
+      int idleSpeed = 75; // idle speed
+      String state;
+      int ai;
+      if((((int)(dx*20)/20)==0)&&((((int)(dy*20)/20)==0))){ // if idle
+         state = "idle";
+         ai = 1;
+         idleFrame++;
+         if(idleFrame==((4*idleSpeed)-(int)(idleSpeed/1.2))){ // -idleSpeed/# to make the closed eye part a lot faster
+            idleFrame=0;
+         }
+         return frames[ai][direction-1][idleFrame/idleSpeed];
+      }
+      else{
+         state = "active";
+         ai = 0;
+         activeFrame++;
+         if(activeFrame==(4*activeSpeed)){
+            activeFrame=0;
+         }
+         return frames[ai][direction-1][activeFrame/activeSpeed];
+      }
+   }
+
    
    //accessors
    public double getx(){

@@ -15,6 +15,7 @@ public class HOFDriver{
    public static void main(String[] args){
       window = new HOF();
       JFrame w = new JFrame("House of Flavor");
+      window.setDoubleBuffered(true);
       w.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       w.setContentPane(window);
       w.setLocation(0, 0);
@@ -24,6 +25,7 @@ public class HOFDriver{
       w.setVisible(true); // show it
       
       w.addKeyListener(new listen());
+      
    }
 
    public static class listen implements KeyListener{

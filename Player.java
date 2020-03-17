@@ -44,7 +44,7 @@ public class Player{
                if(i==LEFT-1){
                   dir = "left";
                }
-               frames[a][i][j] = new ImageIcon("images/characters/"+name+"/"+type+"/"+dir+"/frame_"+String.valueOf(j)+"_delay-0.17s.gif");
+               frames[a][i][j] = new ImageIcon("images/characters/"+name+"/"+type+"/"+dir+"/frame_"+String.valueOf(j)+".gif");
             }
          }
          type = "idle";

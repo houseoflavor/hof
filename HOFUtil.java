@@ -95,9 +95,9 @@ public class HOFUtil extends HOF{
          }      
       }
       */
-      g.drawImage(p1.getPicture().getImage(),((int)p1.getx()),((int)p1.gety()),null);
-      g.setColor(Color.BLUE);
-      g.fillOval(((int)p2.getx()),((int)p2.gety()),50,50);
+      int aspect = 48;
+      g.drawImage(p1.getPicture().getImage(),((int)p1.getx()),((int)p1.gety()),aspect,aspect,null); // normal size is 24x24 so change to proportional aspect ratio!!
+      g.drawImage(p2.getPicture().getImage(),((int)p2.getx()),((int)p2.gety()),aspect,aspect,null); // 24, 48, 72, 96, 120, 144, 168
    }
    
    public static void drawBoard(Graphics g){

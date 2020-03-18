@@ -60,52 +60,39 @@ public class HOFUtil extends HOF{
       
       // right sidebar + orders
    
-      // players
-      /*
-      if(p1.getDir() == UP){
-         if(((((int)(p1.getdx())*20)/20)==0)&&((((int)(p1.getdy())*20)/20)==0)){ // actually idle
-            player1 = new ImageIcon("images/characters/monkey-up-idle.gif");
-         }
-         else{
-            player1 = new ImageIcon("images/characters/monkey-up-walk.gif");
-         }
-      }
-      else if(p1.getDir() == DOWN){
-         if(((((int)(p1.getdx())*20)/20)==0)&&((((int)(p1.getdy())*20)/20)==0)){ // actually idle
-            player1 = new ImageIcon("images/characters/monkey-down-idle.gif");
-         }
-         else{
-            player1 = new ImageIcon("images/characters/monkey-down-walk.gif");
-         }      
-      }
-      else if(p1.getDir() == RIGHT){
-         if(((((int)(p1.getdx())*20)/20)==0)&&((((int)(p1.getdy())*20)/20)==0)){ // actually idle
-            player1 = new ImageIcon("images/characters/monkey-right-idle.gif");
-         }
-         else{
-            player1 = new ImageIcon("images/characters/monkey-right-walk.gif");
-         }      
-      }
-      else{ //if(p1.getDir() == LEFT){
-         if(((((int)(p1.getdx())*20)/20)==0)&&((((int)(p1.getdy())*20)/20)==0)){ // actually idle
-            player1 = new ImageIcon("images/characters/monkey-left-idle.gif");
-         }
-         else{
-            player1 = new ImageIcon("images/characters/monkey-left-walk.gif");
-         }      
-      }
-      */
       int aspect = 48;
-      g.drawImage(p1.getPicture().getImage(),((int)p1.getx()),((int)p1.gety()),aspect,aspect,null); // normal size is 24x24 so change to proportional aspect ratio!!
-      g.drawImage(p2.getPicture().getImage(),((int)p2.getx()),((int)p2.gety()),aspect,aspect,null); // 24, 48, 72, 96, 120, 144, 168
+      //background circle
+      int width = 30; // width of boundary box
+      int height = 25;
+      int yoffset = 17; // offset only for physical character, boundary box stays same
+      int alpha = 255; // transparency 
+      Color p1blue = new Color(17, 126, 233, alpha);
+      Color p2red = new Color(252, 46, 46, alpha);
+      g.setColor(p1blue);
+      drawThickCircle(g, (int)p1.getx()-(width/2), (int)p1.gety()-(width/2), width, height, 5);
+      g.drawImage(p1.getPicture().getImage(),((int)p1.getx())-aspect/2,((int)p1.gety())-aspect/2-yoffset,aspect,aspect,null); // normal size is 24x24 so change to proportional aspect ratio!!
+      g.setColor(p2red);
+      drawThickCircle(g, (int)p2.getx()-(width/2), (int)p2.gety()-(width/2), width, height, 5);
+      g.drawImage(p2.getPicture().getImage(),((int)p2.getx())-aspect/2,((int)p2.gety())-aspect/2-yoffset, aspect,aspect,null); // 12, 24, 48
    }
    
+   // draw a thicc circle at x, y
+   public static void drawThickCircle(Graphics g, int x, int y, int width, int height, int thick){
+      Graphics2D g2 = (Graphics2D)(g);
+      g2.setStroke(new BasicStroke(thick));
+      g2.drawOval(x, y, width, height);
+   }
    public static void drawBoard(Graphics g){
       for(int i=0; i<13; i++){
          for (int j=0; j<13; j++){
             //g.drawImage(tiles[i][j].image(), i*
          }
       }
+      g.setColor(Color.BLACK);
+      g.drawLine(50,50, 50,500);
+      g.drawLine(50,50, 1000,50);
+      g.drawLine(50,500, 1000,500);
+      g.drawLine(1000,50, 1000,500);
    }
    
    public static void drawMenu(Graphics g){

@@ -16,7 +16,6 @@ public class HOFUtil extends HOF{
          drawControls(g);
       }
       if(mode.equals("game")){
-         drawBoard(g);
          drawGame(g);
       }
    
@@ -57,23 +56,51 @@ public class HOFUtil extends HOF{
    
    public static void drawGame(Graphics g){
       // background image
+      g.drawImage((new ImageIcon("images/menus/tempbg.png")).getImage(),0,0,null);
+      
+      // floor
+      for(int i=0; i<20; i++){
+         for(int j=0; j<12; j++){
+            ImageIcon floor;
+            if(j%2==0){
+               if(i%2==0){
+                  floor = new ImageIcon("images/tile/floor1.gif");
+               }
+               else{
+                  floor = new ImageIcon("images/tile/floor2.gif");
+               }
+            }
+            else{
+               if(i%2==0){
+                  floor = new ImageIcon("images/tile/floor2.gif");
+               }
+               else{
+                  floor = new ImageIcon("images/tile/floor1.gif");
+               }
+            }
+            g.drawImage(floor.getImage(), (i*32)+228, (j*32)+178, 32, 32, null);
+         }
+      }
       
       // right sidebar + orders
    
       int aspect = 48;
       //background circle
-      int width = 30; // width of boundary box
-      int height = 25;
-      int yoffset = 17; // offset only for physical character, boundary box stays same
+      int width = 26; // width of boundary box
+      int height = 20;
+      int yoffset = 15; // offset only for physical character, boundary box stays same
       int alpha = 255; // transparency 
       Color p1blue = new Color(17, 126, 233, alpha);
       Color p2red = new Color(252, 46, 46, alpha);
       g.setColor(p1blue);
-      drawThickCircle(g, (int)p1.getx()-(width/2), (int)p1.gety()-(width/2), width, height, 5);
+      drawThickCircle(g, (int)p1.getx()-(width/2), (int)p1.gety()-(height/2), width, height, 5);
       g.drawImage(p1.getPicture().getImage(),((int)p1.getx())-aspect/2,((int)p1.gety())-aspect/2-yoffset,aspect,aspect,null); // normal size is 24x24 so change to proportional aspect ratio!!
       g.setColor(p2red);
-      drawThickCircle(g, (int)p2.getx()-(width/2), (int)p2.gety()-(width/2), width, height, 5);
+      drawThickCircle(g, (int)p2.getx()-(width/2), (int)p2.gety()-(height/2), width, height, 5);
       g.drawImage(p2.getPicture().getImage(),((int)p2.getx())-aspect/2,((int)p2.gety())-aspect/2-yoffset, aspect,aspect,null); // 12, 24, 48
+      
+      g.setColor(Color.YELLOW);
+      drawBounds(g); // test bounds
    }
    
    // draw a thicc circle at x, y
@@ -82,17 +109,12 @@ public class HOFUtil extends HOF{
       g2.setStroke(new BasicStroke(thick));
       g2.drawOval(x, y, width, height);
    }
-   public static void drawBoard(Graphics g){
-      for(int i=0; i<13; i++){
-         for (int j=0; j<13; j++){
-            //g.drawImage(tiles[i][j].image(), i*
-         }
-      }
-      g.setColor(Color.BLACK);
-      g.drawLine(50,50, 50,500);
-      g.drawLine(50,50, 1000,50);
-      g.drawLine(50,500, 1000,500);
-      g.drawLine(1000,50, 1000,500);
+   
+   public static void drawBounds(Graphics g){
+      Graphics2D g2 = (Graphics2D)(g);
+      g2.setStroke(new BasicStroke(2));
+      g2.draw(p1.getBounds());
+      g2.draw(p2.getBounds());
    }
    
    public static void drawMenu(Graphics g){

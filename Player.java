@@ -1,4 +1,7 @@
 import javax.swing.*;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+
 public class Player{
    // instance vars
    private double x,y,dx=0,dy=0;
@@ -10,8 +13,8 @@ public class Player{
    
    // CONTROL PLAYER SPEED HERE ---
    private final double speed = 0.3;    // 0 < speed
-   private final double velocity = 0.9; // 0 (stop quickly) < velo < 1 (slippery)
-   private final double boostAmt = 6;   // 1 < boostAmt
+   private final double velocity = 0.8; // 0 (stop quickly) < velo < 1 (slippery)
+   private final double boostAmt = 4;   // 1 < boostAmt
    // -----------------------------
    
    private ImageIcon [][][] frames; //[active/idle][direction][frameNum]
@@ -59,7 +62,7 @@ public class Player{
       int idleSpeed = 75; // idle speed
       String state;
       int ai;
-      if((((int)(dx*20)/20)==0)&&((((int)(dy*20)/20)==0))){ // if idle
+      if((((int)(dx*200)/200)==0)&&((((int)(dy*200)/200)==0))){ // if idle
          state = "idle";
          ai = 1;
          idleFrame++;
@@ -78,7 +81,11 @@ public class Player{
          return frames[ai][direction-1][activeFrame/activeSpeed];
       }
    }
-
+   
+   
+   public Rectangle getBounds(){
+      return new Rectangle((int)x-13, (int)y-10, 26, 20);
+   }  
    
    //accessors
    public double getx(){
@@ -97,6 +104,19 @@ public class Player{
       return direction;
    } 
    
+   // set other movement
+   public void setdx(double d){
+      dx=d;   
+   }
+   public void setdy(double d){
+      dy=d;
+   }
+   public void setx(double d){
+      x=d;   
+   }
+   public void sety(double d){
+      y=d;
+   }
    
    // calculate max speed: https://www.desmos.com/calculator/vcbpsjishq
    //moving
@@ -136,34 +156,65 @@ public class Player{
       direction = dir;
    }
    
+   public boolean collision(Player other){
+      return other.getBounds().intersects(getBounds());
+   }
    
-   public void move(){
+   public void move(Player other){
       x+=dx;
       y+=dy;
       
       //collision detection 
       
       // game screen collision
-      if(x<50){ // left bound
-         x=50;
+      if(x<228+15){ // left bound
+         x=228+15; // +13 - half of width, +2 for line thickness = +15
          dx=0;
       }
-      if(x>1000){ // right bound
-         x=1000;
+      if(x>868-15){ // right bound
+         x=868-15;
          dx=0;
       }
-      if(y<50){ // top bound
-         y=50;
+      if(y<178+12){ // top bound
+         y=178+12; // +10 - half of height, +2 for line thickness = +12
          dy=0;
       }
-      if(y>500){ // bottom bound
-         y=500;
+      if(y>562-12){ // bottom bound
+         y=562-12;
          dy=0;
+      }
+      
+      // player collision
+      if(collision(other)){ // one player is inside the other
+         double savedx=dx;
+         double savedy=dy; // check if dy or dx is positive/negative to see direction don't do this
+         if(this.x<other.getx()){ // collision on this's right, other's left
+            x-=savedx; // go backwards
+            other.setx(other.getx()+other.getdx());
+            dx=0;
+            other.setdx(0);
+         }
+         if(this.x>other.getx()){
+            x+=savedx;
+            other.setx(other.getx()+other.getdx());
+            dx=0;
+            other.setdx(0);
+         }
+         if(this.y<other.gety()){ // this's bottom, other's top
+            y-=savedy;
+            other.sety(other.gety()+other.getdy());
+            dy=0;
+            other.setdy(0);
+         }
+         if(this.y>other.gety()){
+            y+=savedy;
+            other.sety(other.gety()-other.getdy());
+            dy=0;
+            other.setdy(0);
+         }
       }
       
       // tile collision (oh no)
-      
-      
       dx*=velocity;
       dy*=velocity;
       

@@ -85,8 +85,10 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          
          
             //physics
-            p1.move();
-            p2.move();
+            p1.move(p2);
+            p2.move(p1);
+            
+            
             
             repaint();
          }
@@ -116,8 +118,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
    
    public HOF(){ // constructor
-      p1 = new Player("monkey",0,0);
-      p2 = new Player("cat",0,0);
+      p1 = new Player("monkey",300,300);
+      p2 = new Player("cat",500,500);
       keysDown = new ArrayList<Integer>();
       dirKeys = new ArrayList<Integer>();
       mode = "menu";

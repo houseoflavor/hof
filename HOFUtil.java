@@ -82,6 +82,20 @@ public class HOFUtil extends HOF{
          }
       }
       
+      // tiles above player (for now it is everything)
+      for(int i=0; i<12; i++){
+         for(int j=0; j<20; j++){
+            ImageIcon tile;
+            try{
+               tile = gameTiles[i][j].getPicture();
+            }
+            catch(Exception eee){
+               tile = new ImageIcon("");
+            }
+            g.drawImage(tile.getImage(),j*32+228, i*32+178-32, 32, 64, null);
+         }
+      }
+      
       // right sidebar + orders
    
       int aspect = 48;
@@ -115,6 +129,12 @@ public class HOFUtil extends HOF{
       g2.setStroke(new BasicStroke(2));
       g2.draw(p1.getBounds());
       g2.draw(p2.getBounds());
+      
+      for(int i=0; i<12; i++){
+         for(int j=0; j<20; j++){
+         }   
+      }
+      
    }
    
    public static void drawMenu(Graphics g){

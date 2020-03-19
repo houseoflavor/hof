@@ -107,7 +107,6 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static int transX, transition;
    
    static Tile [][] gameTiles;
-   static Tile [][] allTiles;
    
    static int[] levels; // -1 = not beat, 0, 1, 2, 3 stars per level
    
@@ -179,7 +178,9 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          //System.out.println(line);
          String [] singleLine = line.split(" ");
          for(int j=0; j<20; j++){
-            gameTiles[i][j] = new Tile(singleLine[j]);
+            if(!singleLine[j].equals("flo")){
+               gameTiles[i][j] = new Tile(singleLine[j], i, j);
+            }
             //System.out.print(tiles[i][j].getName());
          }
       }
@@ -221,6 +222,10 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       if(mode.equals("menu") && transMode.equals("none")){
          if(buttonTouching == START){ // clicking start button (from menu)
             transMode = "game";
+            try{
+               readFile("maps/level1.txt"); // --------------------------------- read file
+            }
+            catch(Exception ee){}
             transX=1500;            
             transition = 1;
          }

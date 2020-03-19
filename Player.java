@@ -188,29 +188,45 @@ public class Player{
       if(collision(other)){ // one player is inside the other
          double savedx=dx;
          double savedy=dy; // check if dy or dx is positive/negative to see direction don't do this
-         if(this.x<other.getx()){ // collision on this's right, other's left
-            x-=savedx; // go backwards
-            other.setx(other.getx()+other.getdx());
-            dx=0;
-            other.setdx(0);
+         if(dx>0){ // this is moving right
+            x-=savedx;
+            if(collision(other)){ // retain original movement if this was not the problem
+               x+=savedx;
+            }
+            else{
+               dx=0;
+               other.setdx(0);
+            }
          }
-         if(this.x>other.getx()){
-            x+=savedx;
-            other.setx(other.getx()+other.getdx());
-            dx=0;
-            other.setdx(0);
+         if(dx<0){ // this is moving left
+            x-=savedx;
+            if(collision(other)){
+               x+=savedx;
+            }
+            else{
+               dx=0;
+               other.setdx(0);
+            }
          }
-         if(this.y<other.gety()){ // this's bottom, other's top
+         if(dy>0){ // this is moving down
             y-=savedy;
-            other.sety(other.gety()+other.getdy());
-            dy=0;
-            other.setdy(0);
+            if(collision(other)){
+               y+=savedy;
+            }
+            else{
+               dy=0;
+               other.setdy(0);
+            }
          }
-         if(this.y>other.gety()){
-            y+=savedy;
-            other.sety(other.gety()-other.getdy());
-            dy=0;
-            other.setdy(0);
+         if(dy<0){ // this is moving up
+            y-=savedy;
+            if(collision(other)){
+               y+=savedy;
+            }
+            else{
+               dy=0;
+               other.setdy(0);
+            }
          }
       }
       

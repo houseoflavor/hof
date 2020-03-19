@@ -1,5 +1,5 @@
-# House o' Flavor
 ![Pizza](https://i.imgur.com/6okhz9Y.png)
+# House o' Flavor
 Advanced CS Final Project
 
 by Ethan, Vinhan, and An

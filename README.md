@@ -12,6 +12,8 @@ art editor: https://www.piskelapp.com/
 
 max speed calculator: https://www.desmos.com/calculator/fsqzdv2sji
 
+brightness editor: https://pinetools.com/change-image-brightness (set 50%)
+
 ## Credits
 - Background music: https://www.youtube.com/watch?v=xJs87FJEWQQ
 

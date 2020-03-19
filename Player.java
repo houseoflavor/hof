@@ -1,12 +1,15 @@
 import javax.swing.*;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.io.*;
+import java.util.*;
 
 public class Player{
    // instance vars
    private double x,y,dx=0,dy=0;
    private Holdable holding;
    private int direction;
+   private List<Integer> directions;
    private String name;
    private final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4, NONE = 0;
    
@@ -30,6 +33,7 @@ public class Player{
       this.x=x;
       this.y=y;
       direction = DOWN;
+      directions = new ArrayList<Integer>();
       frames = new ImageIcon[2][4][4];
       
       String type = "active";
@@ -71,7 +75,7 @@ public class Player{
          if(idleFrame==((4*idleSpeed)-(int)(idleSpeed/1.2))){ // -idleSpeed/# to make the closed eye part a lot faster
             idleFrame=0;
          }
-         return frames[ai][direction-1][idleFrame/idleSpeed];
+         return frames[ai][directions.get(directions.size()-1)-1][idleFrame/idleSpeed];
       }
       else{
          state = "active";
@@ -80,7 +84,7 @@ public class Player{
          if(activeFrame==(4*activeSpeed)){
             activeFrame=0;
          }
-         return frames[ai][direction-1][activeFrame/activeSpeed];
+         return frames[ai][directions.get(directions.size()-1)-1][activeFrame/activeSpeed]; // direction-1
       }
    }
    
@@ -162,6 +166,13 @@ public class Player{
       direction = dir;
    }
    
+   public void direction(List<Integer> l){
+      directions = l;
+      if(l.size()==0){
+         directions.add(direction);
+      }
+   }
+   
    public boolean collision(Object o){
       if(o instanceof Player){
          Player other = (Player)(o);
@@ -179,13 +190,13 @@ public class Player{
    }
    public int getFacing(){
       int f = getLoc();
-      if(direction==UP){
+      if(directions.get(directions.size()-1)==UP){
          return f-20;
       }
-      if(direction==DOWN){
+      if(directions.get(directions.size()-1)==DOWN){
          return f+20;
       }
-      if(direction==RIGHT){
+      if(directions.get(directions.size()-1)==RIGHT){
          return f+1;
       }
       else{ // dir==LEFT
@@ -271,21 +282,75 @@ public class Player{
          else{
             dx=0;
          }
-      }  // right                                                                   left
-      if(collision(level[row+1][col+1]) || collision(level[row-1][col+1]) || collision(level[row+1][col-1]) || collision(level[row-1][col-1])){
-         x-=savedx; 
-         if(collision(level[row+1][col+1]) || collision(level[row-1][col+1])){ // right (top or bot)
-            x+=savedx;
-         }
-         else{
+      }  
+      // bottom right
+      if(collision(level[row+1][col+1])){
+         // am i moving upright or downleft?
+         //lowest priority > UP, RIGHT, DOWN, LEFT > highest priority
+         if(directions.contains(RIGHT) && directions.contains(DOWN)){ // trying to clip in
             dx=0;
-         }
-         y-=savedy; 
-         if (collision(level[row+1][col-1]) || collision(level[row-1][col-1])){
-            y+=savedy;
-         }
-         else{
             dy=0;
+            x-=savedx;
+            y-=savedy;
+         }
+         else if(directions.contains(RIGHT) || directions.contains(UP)){
+            dx=0;
+            x-=savedx;
+         }
+         else{ // down or left
+            dy=0;
+            y-=savedy;
+         }
+      }
+      // bottom left
+      if(collision(level[row+1][col-1])){
+         if(directions.contains(DOWN) && directions.contains(LEFT)){ // clipping
+            dx=0;
+            dy=0;
+            x-=savedx;
+            y-=savedy;
+         }
+         else if(directions.contains(LEFT) || directions.contains(UP)){
+            dx=0;
+            x-=savedx;
+         }
+         else{ // down or right
+            dy=0;
+            y-=savedy;
+         }
+      }
+      // top right
+      if(collision(level[row-1][col+1])){
+         if(directions.contains(RIGHT) && directions.contains(UP)){ // clipping
+            dx=0;
+            dy=0;
+            x-=savedx;
+            y-=savedy;
+         }
+         else if(directions.contains(RIGHT) || directions.contains(DOWN)){
+            dx=0;
+            x-=savedx;
+         }
+         else{ // left or up
+            dy=0;
+            y-=savedy;
+         }
+      }
+      // top left
+      if(collision(level[row-1][col-1])){
+         if(directions.contains(LEFT) && directions.contains(UP)){ // clipping
+            dx=0;
+            dy=0;
+            x-=savedx;
+            y-=savedy;
+         }
+         else if(directions.contains(LEFT) || directions.contains(DOWN)){
+            dx=0;
+            x-=savedx;
+         }
+         else{ // right or up
+            dy=0;
+            y-=savedy;
          }
       }
       

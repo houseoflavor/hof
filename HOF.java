@@ -57,32 +57,44 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                else{
                   hasP2Boost = false;
                }
+               java.util.List<Integer> p1d = new ArrayList<Integer>(); // refer to java.util.List not java.awt.List
+               java.util.List<Integer> p2d = new ArrayList<Integer>();
             //player 1
                if(keysDown.contains(KeyEvent.VK_W)){//up
                   p1.input(UP, p1Boost);
+                  p1d.add(UP);
                }
                if(keysDown.contains(KeyEvent.VK_D)){ //right
                   p1.input(RIGHT, p1Boost);
+                  p1d.add(RIGHT);
                }
                if(keysDown.contains(KeyEvent.VK_S)){ //down
                   p1.input(DOWN, p1Boost);
+                  p1d.add(DOWN);
                }
                if(keysDown.contains(KeyEvent.VK_A)){ //left
                   p1.input(LEFT, p1Boost);
+                  p1d.add(LEFT);
                }
             //player 2
                if(keysDown.contains(KeyEvent.VK_UP)){ //up
                   p2.input(UP, p2Boost);
+                  p2d.add(UP);
                }
                if(keysDown.contains(KeyEvent.VK_RIGHT)){ //right
                   p2.input(RIGHT, p2Boost);
+                  p2d.add(RIGHT);
                }
                if(keysDown.contains(KeyEvent.VK_DOWN)){ //down
                   p2.input(DOWN, p2Boost);
+                  p2d.add(DOWN);
                }
                if(keysDown.contains(KeyEvent.VK_LEFT)){ //left
                   p2.input(LEFT, p2Boost);
+                  p2d.add(LEFT);
                }
+               p1.direction(p1d);
+               p2.direction(p2d);
             
             
             //physics

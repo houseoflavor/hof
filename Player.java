@@ -226,94 +226,70 @@ public class Player{
       // player collision
       if(collision(other)){ // one player is inside the other
          double savedx=dx;
+         x-=savedx;
+         if(collision(other)){ // retain original movement if this was not the problem
+            x+=savedx;
+         }
+         else{
+            dx=0;
+            other.setdx(0);
+         }
+      }
+      if(collision(other)){
          double savedy=dy;
-         if(dx>0){ // this is moving right
-            x-=savedx;
-            if(collision(other)){ // retain original movement if this was not the problem
-               x+=savedx;
-            }
-            else{
-               dx=0;
-               other.setdx(0);
-            }
+         y-=savedy;
+         if(collision(other)){
+            y+=savedy;
          }
-         if(dx<0){ // this is moving left
-            x-=savedx;
-            if(collision(other)){
-               x+=savedx;
-            }
-            else{
-               dx=0;
-               other.setdx(0);
-            }
-         }
-         if(dy>0){ // this is moving down
-            y-=savedy;
-            if(collision(other)){
-               y+=savedy;
-            }
-            else{
-               dy=0;
-               other.setdy(0);
-            }
-         }
-         if(dy<0){ // this is moving up
-            y-=savedy;
-            if(collision(other)){
-               y+=savedy;
-            }
-            else{
-               dy=0;
-               other.setdy(0);
-            }
+         else{
+            dy=0;
+            other.setdy(0);
          }
       }
       
       // tile collision
-      for(int i=0; i<12; i++){
-         for(int j=0; j<20; j++){
-            if(collision(level[i][j])){ // player is inside tile
-               double savedx=dx;
-               double savedy=dy; 
-               if(dx>0){ // this is moving right
-                  x-=savedx;
-                  if(collision(level[i][j])){ // retain original movement if this was not the problem
-                     x+=savedx;
-                  }
-                  else{
-                     dx=0;
-                  }
-               }
-               if(dx<0){ // this is moving left
-                  x-=savedx;
-                  if(collision(level[i][j])){
-                     x+=savedx;
-                  }
-                  else{
-                     dx=0;
-                  }
-               }
-               if(dy>0){ // this is moving down
-                  y-=savedy;
-                  if(collision(level[i][j])){
-                     y+=savedy;
-                  }
-                  else{
-                     dy=0;
-                  }
-               }
-               if(dy<0){ // this is moving up
-                  y-=savedy;
-                  if(collision(level[i][j])){
-                     y+=savedy;
-                  }
-                  else{
-                     dy=0;
-                  }
-               }
-            }
+      int row = getRow();
+      int col = getCol();
+      double savedx=dx;
+      double savedy=dy; 
+      // colliding directly above or below
+      if(collision(level[row+1][col]) || collision(level[row-1][col]) ){ // player is inside tile
+         y-=savedy;
+         if(collision(level[row+1][col]) || collision(level[row-1][col])){
+            y+=savedy;
+         }
+         else{
+            dy=0;
          }
       }
+      // colliding directly left or right
+      if(collision(level[row][col+1]) || collision(level[row][col-1])){ // player is inside tile
+         x-=savedx; // move out
+         if(collision(level[row][col+1]) || collision(level[row][col-1])){ // check when was this a bad decision
+            x+=savedx; // go back to original location if it was a bad decision
+         }
+         else{
+            dx=0;
+         }
+      }  // right                                                                   left
+      if(collision(level[row+1][col+1]) || collision(level[row-1][col+1]) || collision(level[row+1][col-1]) || collision(level[row-1][col-1])){
+         x-=savedx; 
+         if(collision(level[row+1][col+1]) || collision(level[row-1][col+1])){ // right (top or bot)
+            x+=savedx;
+         }
+         else{
+            dx=0;
+         }
+         y-=savedy; 
+         if (collision(level[row+1][col-1]) || collision(level[row-1][col-1])){
+            y+=savedy;
+         }
+         else{
+            dy=0;
+         }
+      }
+      
+      
       
       dx*=velocity;
       dy*=velocity;

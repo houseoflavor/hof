@@ -148,7 +148,7 @@ public class HOFUtil extends HOF{
       else{
          drawSomeTiles(g, p1.getRow()+1, 12);
       }
-      //drawBounds(g); // draw test bounds ----------------------------------------------
+      drawBounds(g); // draw test bounds ----------------------------------------------
    }
    
    // draw a thicc circle at x, y

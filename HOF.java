@@ -139,7 +139,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       
       levels = new int[5]; // change for num of levels
       
-      //cloud = new Clouds();  // ------------------- clouds
+      //cloud = new Clouds();
       
    }
 
@@ -226,7 +226,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          if(buttonTouching == START){ // clicking start button (from menu)
             transMode = "game";
             try{
-               readFile("maps/level1.txt"); // --------------------------------- read file
+               readFile("maps/level3.txt"); // --------------------------------- read file
                p1 = new Player("monkey",300,300);
                p2 = new Player("cat",500,500);
                p1.setLevel(gameTiles); // very important to have these 2 lines!!

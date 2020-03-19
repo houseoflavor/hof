@@ -96,7 +96,7 @@ public class HOFUtil extends HOF{
       int width = 26; // width of boundary box
       int height = 20;
       int yoffset = 15; // offset only for physical character, boundary box stays same
-      int alpha = 255; // transparency 
+      int alpha = 190; // transparency 
       Color p1blue = new Color(17, 126, 233, alpha);
       Color p2red = new Color(252, 46, 46, alpha);
       

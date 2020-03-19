@@ -66,7 +66,7 @@ public class Player{
    // returns an ImageIcon of the current frame to show
    // also advances animation by 1 frame
    public ImageIcon getPicture(){
-      int activeSpeed = 10; // change speed of animation here, 1 = fastest
+      int activeSpeed = 7; // change speed of animation here, 1 = fastest
       int idleSpeed = 75; // idle speed
       String state;
       int ai;

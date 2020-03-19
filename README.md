@@ -15,6 +15,10 @@ max speed calculator: https://www.desmos.com/calculator/fsqzdv2sji
 
 brightness editor: https://pinetools.com/change-image-brightness (set 50%)
 
+.java to .exe: https://medium.com/@sulabh4/how-to-make-a-executable-file-from-your-java-code-3f521938ae5c (last step)
+
+pizza icon: https://imgur.com/a/892gXOK
+
 ## Credits
 - Background music: https://www.youtube.com/watch?v=xJs87FJEWQQ
 

@@ -199,8 +199,8 @@ public class HOFUtil extends HOF{
       ImageIcon gradient = new ImageIcon("images/menus/gradient.png");
       g.drawImage(gradient.getImage(),0,0,null);
       // clouds
-      g.drawImage(new ImageIcon("images/menus/clouds-moving-coalesced.gif").getImage(),0,0,null);
-      //g.drawImage(cloud.getPicture().getImage(),0,0,null);
+      //g.drawImage(new ImageIcon("images/menus/clouds-moving-coalesced.gif").getImage(),0,0,null);
+      g.drawImage(cloud.getPicture().getImage(),cloud.move(),0,null);
       // home
       ImageIcon homescreen = new ImageIcon("images/menus/wall-and-sign.png");
       g.drawImage(homescreen.getImage(),0,0,1300,750,null);

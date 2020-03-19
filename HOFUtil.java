@@ -116,7 +116,7 @@ public class HOFUtil extends HOF{
          drawSomeTiles(g, 0, p2.getRow()+1);
       }
       // 3 --
-      if(tall){
+      if(p1.gety()<p2.gety()){
          g.setColor(p1blue);
          drawThickCircle(g, (int)p1.getx()-(width/2), (int)p1.gety()-(height/2), width, height, 5);
          g.drawImage(p1.getPicture().getImage(),((int)p1.getx())-aspect/2,((int)p1.gety())-aspect/2-yoffset,aspect,aspect,null); 
@@ -134,7 +134,7 @@ public class HOFUtil extends HOF{
          drawSomeTiles(g, p2.getRow()+1, p1.getRow()+1);
       }
       // 5 --
-      if(tall){
+      if(p1.gety()<p2.gety()){
          g.setColor(p2red);
          drawThickCircle(g, (int)p2.getx()-(width/2), (int)p2.gety()-(height/2), width, height, 5);
          g.drawImage(p2.getPicture().getImage(),((int)p2.getx())-aspect/2,((int)p2.gety())-aspect/2-yoffset, aspect,aspect,null);

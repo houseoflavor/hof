@@ -15,12 +15,12 @@ public class Player{
    
    
    // CONTROL PLAYER SPEED HERE ---
-   private final double speed = 0.3;    // 0 < speed
-   private final double velocity = 0.8; // 0 (stop quickly) < velo < 1 (slippery)
-   private final double boostAmt = 4;   // 1 < boostAmt
+   private final double speed = 0.3;    // 0 < speed                                   recommended:   0.3
+   private final double velocity = 0.8; // 0 (stop quickly) < velo < 1 (slippery)                     0.8
+   private final double boostAmt = 4;   // 1 < boostAmt                                               4
    // -----------------------------
    
-   private ImageIcon [][][] frames; //[active/idle][direction][frameNum]
+   private ImageIcon [][][] frames; //[active or idle][direction][frameNum]
    private int activeFrame = 0;
    private int idleFrame = 0;
    
@@ -28,6 +28,7 @@ public class Player{
    // maxSpeed is useful for calculating when players can boost (if <= max speed)
    private final double maxSpeed = ((speed*velocity)/(1-velocity));
    
+   //constructor
    public Player(String name, int x, int y){
       this.name=name;
       this.x=x;
@@ -37,6 +38,7 @@ public class Player{
       frames = new ImageIcon[2][4][4];
       
       String type = "active";
+      // fill 3d array with imageicons for reference when doing getPicture
       for(int a=0; a<2; a++){ // active and idle
          for(int i=0; i<4; i++){ // up right down left
             for(int j=0; j<4; j++){ // indv frame
@@ -77,22 +79,23 @@ public class Player{
          }
          return frames[ai][directions.get(directions.size()-1)-1][idleFrame/idleSpeed];
       }
-      else{
+      else{ // moving
          state = "active";
          ai = 0;
          activeFrame++;
          if(activeFrame==(4*activeSpeed)){
             activeFrame=0;
          }
-         return frames[ai][directions.get(directions.size()-1)-1][activeFrame/activeSpeed]; // direction-1
+         return frames[ai][directions.get(directions.size()-1)-1][activeFrame/activeSpeed];
       }
    }
    
-   
+   // return a rectangle that surrounds the base of the player (the rotating circle)
    public Rectangle getBounds(){
       return new Rectangle((int)x-13, (int)y-10, 26, 20);
    }  
    
+   // called whenever a new level is read from a file
    public void setLevel(Tile[][] l){
       level = l;
    }   
@@ -114,7 +117,7 @@ public class Player{
       return direction;
    } 
    
-   // set other movement
+   // set movement
    public void setdx(double d){
       dx=d;   
    }
@@ -129,7 +132,7 @@ public class Player{
    }
    
    // calculate max speed: https://www.desmos.com/calculator/vcbpsjishq
-   //moving
+   // moving
    public void input(int dir, boolean boost){
       if(dir==UP){ // up
          if(boost && Math.abs(dy)<=maxSpeed+0.1){
@@ -166,13 +169,14 @@ public class Player{
       direction = dir;
    }
    
+   // sets the array list of all directions one is facing, defaults to the previous direction if none is given
    public void direction(List<Integer> l){
       directions = l;
       if(l.size()==0){
          directions.add(direction);
       }
    }
-   
+   // tests of the bounding box of 'this' collides with 'other', whether that be a Tile or Player object (for now...)
    public boolean collision(Object o){
       if(o instanceof Player){
          Player other = (Player)(o);
@@ -185,9 +189,11 @@ public class Player{
       return false;
    }
    
+   // returns the tile value of the player's position in the board ([0][0] = 0, [0][20] = 20, [1][0] = 21 aka wrap around, read like a book)
    public int getLoc(){
       return ((int)(x-228)/32)+(20*((int)(y-178)/32));
    }
+   // returns the tile value the player is looking at
    public int getFacing(){
       int f = getLoc();
       if(directions.get(directions.size()-1)==UP){
@@ -203,20 +209,23 @@ public class Player{
          return f-1;
       }
    }
+   // returns the row value, from 1-12 the player is in
    public int getRow(){
       return (int)(y-178)/32;
    }
+   // returns the column value, from 0-20 the player is in
    public int getCol(){
       return (int)(x-228)/32;
    }
    
+   // moves and checks collisions
    public void move(Player other){
+      // move with velocity
       x+=dx;
       y+=dy;
       
-      //collision detection 
-      
-      // game screen collision
+      // ALL collision detection 
+      // game screen collision (board size)
       if(x<228+15){ // left bound
          x=228+15; // +13 - half of width, +2 for line thickness = +15
          dx=0;
@@ -234,9 +243,9 @@ public class Player{
          dy=0;
       }
       
-      // player collision
+      // player-player collision
       if(collision(other)){ // one player is inside the other
-         double savedx=dx;
+         double savedx=dx; // check x positions first
          x-=savedx;
          if(collision(other)){ // retain original movement if this was not the problem
             x+=savedx;
@@ -247,13 +256,13 @@ public class Player{
          }
       }
       if(collision(other)){
-         double savedy=dy;
+         double savedy=dy; // check y positions
          y-=savedy;
          if(collision(other)){
             y+=savedy;
          }
          else{
-            dy=0;
+            dy=0; // if colliding, stop the other player from moving
             other.setdy(0);
          }
       }
@@ -265,9 +274,9 @@ public class Player{
       double savedy=dy; 
       // colliding directly above or below
       if(collision(level[row+1][col]) || collision(level[row-1][col]) ){ // player is inside tile
-         y-=savedy;
-         if(collision(level[row+1][col]) || collision(level[row-1][col])){
-            y+=savedy;
+         y-=savedy; // move out of tile
+         if(collision(level[row+1][col]) || collision(level[row-1][col])){ // check when was this a bad decision (am i still colliding?)
+            y+=savedy; // if still colliding, move back to original position
          }
          else{
             dy=0;
@@ -276,8 +285,8 @@ public class Player{
       // colliding directly left or right
       if(collision(level[row][col+1]) || collision(level[row][col-1])){ // player is inside tile
          x-=savedx; // move out
-         if(collision(level[row][col+1]) || collision(level[row][col-1])){ // check when was this a bad decision
-            x+=savedx; // go back to original location if it was a bad decision
+         if(collision(level[row][col+1]) || collision(level[row][col-1])){
+            x+=savedx;
          }
          else{
             dx=0;
@@ -353,9 +362,7 @@ public class Player{
             y-=savedy;
          }
       }
-      
-      
-      
+      // reduce change in movement by velocity (slows the speed)
       dx*=velocity;
       dy*=velocity;
       

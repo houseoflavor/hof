@@ -7,6 +7,7 @@ import java.util.Arrays.*;
 import java.util.*;
 
 public class HOFUtil extends HOF{
+   // do everything :)
    public static void doEverything(Graphics g){   
    
       if(mode.equals("menu")){
@@ -27,6 +28,7 @@ public class HOFUtil extends HOF{
         
    }
    
+   // draws the black transition that appears when switching menus
    public static void drawTransition(Graphics g){
       transX+=((Math.abs(transX))*(-0.07)-1);
       ImageIcon black = new ImageIcon("images/menus/black.png");
@@ -41,6 +43,7 @@ public class HOFUtil extends HOF{
       }
    }
    
+   // draws the controls screen
    public static void drawControls(Graphics g){
       ImageIcon controls = new ImageIcon("images/menus/controls.png");
       ImageIcon clickX = new ImageIcon("images/menus/X.png");
@@ -55,14 +58,14 @@ public class HOFUtil extends HOF{
    }
    
    public static void drawGame(Graphics g){
-      // background image
+      // background image (TEMPORARY ONE IS USED)
       g.drawImage((new ImageIcon("images/menus/tempbg.png")).getImage(),0,0,null);
       
       // floor
       for(int i=0; i<20; i++){
          for(int j=0; j<12; j++){
             ImageIcon floor;
-            if(j%2==0){
+            if(j%2==0){ // alternate between tile types
                if(i%2==0){
                   floor = new ImageIcon("images/tile/floor1.gif");
                }
@@ -70,7 +73,7 @@ public class HOFUtil extends HOF{
                   floor = new ImageIcon("images/tile/floor2.gif");
                }
             }
-            else{
+            else{ // new row starts on other tile type
                if(i%2==0){
                   floor = new ImageIcon("images/tile/floor2.gif");
                }
@@ -153,11 +156,12 @@ public class HOFUtil extends HOF{
    
    // draw a thicc circle at x, y
    public static void drawThickCircle(Graphics g, int x, int y, int width, int height, int thick){
-      Graphics2D g2 = (Graphics2D)(g);
+      Graphics2D g2 = (Graphics2D)(g); // cast to Graphics2D so i can use setStroke()
       g2.setStroke(new BasicStroke(thick));
       g2.drawOval(x, y, width, height);
    }
    
+   // draws all tiles from row 'start', inclusive to row 'end', exclusive
    public static void drawSomeTiles(Graphics g, int start, int end){
       for(int i=start; i<end; i++){
          for(int j=0; j<20; j++){
@@ -173,6 +177,7 @@ public class HOFUtil extends HOF{
       }
    }
    
+   // testing method - draws the bounding box of all things with hitboxes
    public static void drawBounds(Graphics g){
       g.setColor(Color.YELLOW);
       Graphics2D g2 = (Graphics2D)(g);
@@ -207,6 +212,7 @@ public class HOFUtil extends HOF{
       ImageIcon controlcl = new ImageIcon("images/menus/controls-click.png");
       g.drawImage(controlun.getImage(), 0, 0, null);
       g.drawImage(startun.getImage(), 0, 0, null);
+      // see if hovering over a button
       if(mouseX<360 && mouseX>0 && mouseY<365 && mouseY>273 && mode.equals("menu")){
          g.drawImage(startcl.getImage(), 0, 0, null);
          buttonTouching = START;

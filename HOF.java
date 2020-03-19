@@ -154,12 +154,13 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       //cloud = new Clouds();
       
    }
-
+   // stars the timer, 10ms refresh
    public void start(){
       timer1.scheduleAtFixedRate(task1,1,10);
    }
    
-   public int lastBeat(){ //returns the index of the level that is next to beat
+   //returns the index of the level that is next to beat
+   public int lastBeat(){ 
       for(int i=0; i<levels.length; i++){
          if(levels[i]==-1){
             return i;
@@ -218,6 +219,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       
    }
   
+   // called when the player untypes a key
    public void keyRemove(KeyEvent e){
       Integer key = new Integer(e.getKeyCode());
       Integer loc = new Integer(e.getKeyLocation());
@@ -225,7 +227,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       dirKeys.remove(loc);
    }
    
-   // more mouse stuff
+   // mouse stuff
    public void mouseMoved(MouseEvent e){
       mouseX=e.getX();
       mouseY=e.getY();
@@ -263,7 +265,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          }
       }
       
-   } // interface stuff
+   } // interface overwriting
    public void mousePressed(MouseEvent e){ }
    public void mouseReleased(MouseEvent e){ }
    public void mouseEntered(MouseEvent e){ }

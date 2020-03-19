@@ -82,23 +82,16 @@ public class HOFUtil extends HOF{
          }
       }
       
-      // tiles above player (for now it is everything)
-      for(int i=0; i<12; i++){
-         for(int j=0; j<20; j++){
-            ImageIcon tile;
-            try{
-               tile = gameTiles[i][j].getPicture();
-            }
-            catch(Exception eee){
-               tile = new ImageIcon("");
-            }
-            g.drawImage(tile.getImage(),j*32+228, i*32+178-32, 32, 64, null);
-         }
-      }
-      
-      // right sidebar + orders
-   
-      int aspect = 48;
+      /*
+      tile ordering:
+      1 - find tallest player (smallest row), let that be p1
+      2 - do all blocks above and including p1
+      3 - p1
+      4 - do all (if any) blocks between p1 and p2
+      5 - p2
+      6 - do all blocks remaining
+      */
+      int aspect = 48; // normal size is 24x24 so change to proportional aspect ratio!!
       //background circle
       int width = 26; // width of boundary box
       int height = 20;
@@ -106,15 +99,56 @@ public class HOFUtil extends HOF{
       int alpha = 255; // transparency 
       Color p1blue = new Color(17, 126, 233, alpha);
       Color p2red = new Color(252, 46, 46, alpha);
-      g.setColor(p1blue);
-      drawThickCircle(g, (int)p1.getx()-(width/2), (int)p1.gety()-(height/2), width, height, 5);
-      g.drawImage(p1.getPicture().getImage(),((int)p1.getx())-aspect/2,((int)p1.gety())-aspect/2-yoffset,aspect,aspect,null); // normal size is 24x24 so change to proportional aspect ratio!!
-      g.setColor(p2red);
-      drawThickCircle(g, (int)p2.getx()-(width/2), (int)p2.gety()-(height/2), width, height, 5);
-      g.drawImage(p2.getPicture().getImage(),((int)p2.getx())-aspect/2,((int)p2.gety())-aspect/2-yoffset, aspect,aspect,null); // 12, 24, 48
       
-      g.setColor(Color.YELLOW);
-      drawBounds(g); // test bounds
+      // 1 --
+      boolean tall = false; // true: p1 is tallest, false: p2 is tallest
+      if(p1.getRow()<p2.getRow()){
+         tall = true;
+      }
+      // 2 --
+      if(tall){
+         drawSomeTiles(g, 0, p1.getRow()+1);
+      }
+      else{
+         drawSomeTiles(g, 0, p2.getRow()+1);
+      }
+      // 3 --
+      if(tall){
+         g.setColor(p1blue);
+         drawThickCircle(g, (int)p1.getx()-(width/2), (int)p1.gety()-(height/2), width, height, 5);
+         g.drawImage(p1.getPicture().getImage(),((int)p1.getx())-aspect/2,((int)p1.gety())-aspect/2-yoffset,aspect,aspect,null); 
+      }
+      else{
+         g.setColor(p2red);
+         drawThickCircle(g, (int)p2.getx()-(width/2), (int)p2.gety()-(height/2), width, height, 5);
+         g.drawImage(p2.getPicture().getImage(),((int)p2.getx())-aspect/2,((int)p2.gety())-aspect/2-yoffset, aspect,aspect,null);
+      }
+      // 4 --
+      if(tall){
+         drawSomeTiles(g, p1.getRow()+1, p2.getRow()+1);
+      }
+      else{
+         drawSomeTiles(g, p2.getRow()+1, p1.getRow()+1);
+      }
+      // 5 --
+      if(tall){
+         g.setColor(p2red);
+         drawThickCircle(g, (int)p2.getx()-(width/2), (int)p2.gety()-(height/2), width, height, 5);
+         g.drawImage(p2.getPicture().getImage(),((int)p2.getx())-aspect/2,((int)p2.gety())-aspect/2-yoffset, aspect,aspect,null);
+      }
+      else{
+         g.setColor(p1blue);
+         drawThickCircle(g, (int)p1.getx()-(width/2), (int)p1.gety()-(height/2), width, height, 5);
+         g.drawImage(p1.getPicture().getImage(),((int)p1.getx())-aspect/2,((int)p1.gety())-aspect/2-yoffset,aspect,aspect,null);
+      }
+      // 6 -- 
+      if(tall){
+         drawSomeTiles(g, p2.getRow()+1, 12);
+      }
+      else{
+         drawSomeTiles(g, p1.getRow()+1, 12);
+      }
+      //drawBounds(g); // draw test bounds ----------------------------------------------
    }
    
    // draw a thicc circle at x, y
@@ -124,14 +158,32 @@ public class HOFUtil extends HOF{
       g2.drawOval(x, y, width, height);
    }
    
+   public static void drawSomeTiles(Graphics g, int start, int end){
+      for(int i=start; i<end; i++){
+         for(int j=0; j<20; j++){
+            ImageIcon tile;
+            try{
+               tile = gameTiles[i][j].getPicture(p1.getFacing(), p2.getFacing());
+            }
+            catch(Exception eee){
+               tile = new ImageIcon("");
+            }
+            g.drawImage(tile.getImage(),j*32+228, i*32+178-32, 32, 64, null);
+         }
+      }
+   }
+   
    public static void drawBounds(Graphics g){
+      g.setColor(Color.YELLOW);
       Graphics2D g2 = (Graphics2D)(g);
       g2.setStroke(new BasicStroke(2));
       g2.draw(p1.getBounds());
       g2.draw(p2.getBounds());
       
+      g2.setColor(Color.RED);
       for(int i=0; i<12; i++){
          for(int j=0; j<20; j++){
+            g2.draw(gameTiles[i][j].getBounds());
          }   
       }
       

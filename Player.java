@@ -20,6 +20,8 @@ public class Player{
    private ImageIcon [][][] frames; //[active/idle][direction][frameNum]
    private int activeFrame = 0;
    private int idleFrame = 0;
+   
+   private Tile [][] level;
    // maxSpeed is useful for calculating when players can boost (if <= max speed)
    private final double maxSpeed = ((speed*velocity)/(1-velocity));
    
@@ -86,6 +88,10 @@ public class Player{
    public Rectangle getBounds(){
       return new Rectangle((int)x-13, (int)y-10, 26, 20);
    }  
+   
+   public void setLevel(Tile[][] l){
+      level = l;
+   }   
    
    //accessors
    public double getx(){
@@ -156,8 +162,41 @@ public class Player{
       direction = dir;
    }
    
-   public boolean collision(Player other){
-      return other.getBounds().intersects(getBounds());
+   public boolean collision(Object o){
+      if(o instanceof Player){
+         Player other = (Player)(o);
+         return other.getBounds().intersects(getBounds());
+      }
+      else if(o instanceof Tile){
+         Tile other = (Tile)(o);
+         return other.getBounds().intersects(getBounds());
+      }
+      return false;
+   }
+   
+   public int getLoc(){
+      return ((int)(x-228)/32)+(20*((int)(y-178)/32));
+   }
+   public int getFacing(){
+      int f = getLoc();
+      if(direction==UP){
+         return f-20;
+      }
+      if(direction==DOWN){
+         return f+20;
+      }
+      if(direction==RIGHT){
+         return f+1;
+      }
+      else{ // dir==LEFT
+         return f-1;
+      }
+   }
+   public int getRow(){
+      return (int)(y-178)/32;
+   }
+   public int getCol(){
+      return (int)(x-228)/32;
    }
    
    public void move(Player other){
@@ -187,7 +226,7 @@ public class Player{
       // player collision
       if(collision(other)){ // one player is inside the other
          double savedx=dx;
-         double savedy=dy; // check if dy or dx is positive/negative to see direction don't do this
+         double savedy=dy;
          if(dx>0){ // this is moving right
             x-=savedx;
             if(collision(other)){ // retain original movement if this was not the problem
@@ -230,7 +269,52 @@ public class Player{
          }
       }
       
-      // tile collision (oh no)
+      // tile collision
+      for(int i=0; i<12; i++){
+         for(int j=0; j<20; j++){
+            if(collision(level[i][j])){ // player is inside tile
+               double savedx=dx;
+               double savedy=dy; 
+               if(dx>0){ // this is moving right
+                  x-=savedx;
+                  if(collision(level[i][j])){ // retain original movement if this was not the problem
+                     x+=savedx;
+                  }
+                  else{
+                     dx=0;
+                  }
+               }
+               if(dx<0){ // this is moving left
+                  x-=savedx;
+                  if(collision(level[i][j])){
+                     x+=savedx;
+                  }
+                  else{
+                     dx=0;
+                  }
+               }
+               if(dy>0){ // this is moving down
+                  y-=savedy;
+                  if(collision(level[i][j])){
+                     y+=savedy;
+                  }
+                  else{
+                     dy=0;
+                  }
+               }
+               if(dy<0){ // this is moving up
+                  y-=savedy;
+                  if(collision(level[i][j])){
+                     y+=savedy;
+                  }
+                  else{
+                     dy=0;
+                  }
+               }
+            }
+         }
+      }
+      
       dx*=velocity;
       dy*=velocity;
       

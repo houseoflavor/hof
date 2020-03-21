@@ -14,15 +14,18 @@ public class Tile {
    private int col;
    private int tileID;
    private boolean hitbox;
+   private boolean spawner;
    
    // constructor
-   public Tile(String n, int r, int c, boolean h){
+   //           name      row    col   hitbox?    spawner?
+   public Tile(String n, int r, int c, boolean h, boolean s){
       this.pic = new ImageIcon("images/tile/"+n+".gif");
       name = n;
       row=r;
       col=c;
       hitbox = h;
       tileID = (20*r)+c;
+      spawner = s;
    }
    
    // returns the imageicon of the tile
@@ -32,6 +35,11 @@ public class Tile {
          return new ImageIcon("images/tile/"+name+"H.gif");
       }
       return pic;
+   }
+   
+   // returns spawner
+   public boolean isSpawner(){
+      return spawner;
    }
    
    // returns the location of the tile represented by a single int

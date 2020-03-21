@@ -7,7 +7,8 @@ import java.util.*;
 public class Player{
    // instance vars
    private double x,y,dx=0,dy=0;
-   private Holdable holding;
+   private Item holding;
+   private boolean hold;
    private int direction;
    private List<Integer> directions;
    private String name;
@@ -23,6 +24,8 @@ public class Player{
    private ImageIcon [][][] frames; //[active or idle][direction][frameNum]
    private int activeFrame = 0;
    private int idleFrame = 0;
+   private final int activeSpeed = 7; // change speed of animation here, 1 = fastest
+   private final int idleSpeed = 75; // idle speed
    
    private Tile [][] level;
    // maxSpeed is useful for calculating when players can boost (if <= max speed)
@@ -36,6 +39,7 @@ public class Player{
       direction = DOWN;
       directions = new ArrayList<Integer>();
       frames = new ImageIcon[2][4][4];
+      hold = false;
       
       String type = "active";
       // fill 3d array with imageicons for reference when doing getPicture
@@ -66,8 +70,6 @@ public class Player{
    // returns an ImageIcon of the current frame to show
    // also advances animation by 1 frame
    public ImageIcon getPicture(){
-      int activeSpeed = 7; // change speed of animation here, 1 = fastest
-      int idleSpeed = 75; // idle speed
       String state;
       int ai;
       if((((int)(dx*200)/200)==0)&&((((int)(dy*200)/200)==0))){ // if idle
@@ -88,6 +90,16 @@ public class Player{
          }
          return frames[ai][directions.get(directions.size()-1)-1][activeFrame/activeSpeed];
       }
+   }
+   
+   // returns how the y changes of an item
+   public int yChange(){
+       if((((int)(dx*200)/200)==0)&&((((int)(dy*200)/200)==0))){
+         return 0;
+       }
+       else{
+         return 2*((int)(activeFrame/activeSpeed)%2);
+       }
    }
    
    // return a rectangle that surrounds the base of the player (the rotating circle)
@@ -130,6 +142,26 @@ public class Player{
    public void sety(double d){
       y=d;
    }
+   
+   public boolean isHold(){
+      return hold;
+   }
+   
+   // picks up an item if the hand is empty
+   public void pickUpEmpty(Item other){
+      holding = other;
+      hold = true;
+   }
+   // drop what is being held
+   public void drop(){
+      hold = false;
+      holding = null;
+   }
+   // returns what is being held
+   public Item whatHold(){
+      return holding;
+   }
+   
    
    // calculate max speed: https://www.desmos.com/calculator/vcbpsjishq
    // moving
@@ -207,6 +239,36 @@ public class Player{
       }
       else{ // dir==LEFT
          return f-1;
+      }
+   }
+   // returns the row value of the tile the player is looking at
+   public int getFRow(){
+      if(directions.get(directions.size()-1)==UP){
+         return getRow()-1;
+      }
+      if(directions.get(directions.size()-1)==DOWN){
+         return getRow()+1;
+      }
+      if(directions.get(directions.size()-1)==RIGHT){
+         return getRow();
+      }
+      else{ // dir==LEFT
+         return getRow();
+      }
+   }
+   // returns the column value of the tiel the player is looking at
+   public int getFCol(){
+      if(directions.get(directions.size()-1)==UP){
+         return getCol();
+      }
+      if(directions.get(directions.size()-1)==DOWN){
+         return getCol();
+      }
+      if(directions.get(directions.size()-1)==RIGHT){
+         return getCol()+1;
+      }
+      else{ // dir==LEFT
+         return getCol()-1;
       }
    }
    // returns the row value, from 1-12 the player is in

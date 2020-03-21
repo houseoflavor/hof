@@ -103,6 +103,55 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             
             }
             catch(Exception e){}
+            // interact
+            // p1
+            if(keysDown.contains(KeyEvent.VK_E)){
+               if(!hasP1Int){
+                  int i = p1.getFRow();
+                  int j = p1.getFCol();
+                  if(p1.isHold()){ // holding something -> drop item
+                     if(itemTiles[i][j] == null){   // space is empty
+                        // test if trash
+                        if(gameTiles[i][j].getName().equals("tra")){
+                           hasP1Int = true;
+                           p1.drop();
+                           itemTiles[i][j] = null;
+                        }
+                        else if (!gameTiles[i][j].getName().equals("") && !gameTiles[i][j].getName().equals("ove")){// does tile exist
+                           if(itemTiles[i][j]==null){// does the tile already have something on it
+                              hasP1Int = true;
+                              itemTiles[i][j] = p1.whatHold();
+                              p1.drop();
+                           }
+                        }
+                        
+                     }
+                  }
+                  else{ // picking up
+                     if(!p1.isHold()){ // player's hand is empty
+                        if(gameTiles[i][j].isSpawner()){ // is this tile a spawner
+                           hasP1Int = true;
+                           // create a new food object and place it on the tile
+                           itemTiles[i][j] = new Item(gameTiles[i][j].getName(), p1, true, false);
+                           // have the player pick it up
+                           p1.pickUpEmpty(itemTiles[i][j]);
+                           itemTiles[i][j] = null;
+                        }
+                        else if(!gameTiles[i][j].getName().equals("")){ // does tile exist
+                           if(itemTiles[i][j]!=null){// does the tile actually have something on it
+                              hasP1Int = true;
+                              p1.pickUpEmpty(itemTiles[i][j]);
+                              itemTiles[i][j] = null;
+                           }
+                        }
+                     }
+                  }
+               }
+            }
+            else{
+               hasP1Int = false;
+            }
+            
             
             repaint();
          }
@@ -115,12 +164,14 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static Player p1, p2;
 
    static boolean hasP1Boost = false, hasP2Boost = false;
+   static boolean hasP1Int = false, hasP2Int = false;
    static int mouseX, mouseY;
    static int buttonTouching;
    
    static int transX, transition;
    
    static Tile [][] gameTiles;
+   static Item [][] itemTiles;
    
    static int[] levels; // -1 = not beat, 0, 1, 2, 3 stars per level
    
@@ -136,6 +187,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       mode = "menu";
       
       gameTiles = new Tile[12][20];
+      itemTiles = new Item[12][20];
       
       //mouse stuff
       addMouseListener(this);
@@ -191,11 +243,15 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          //System.out.println(line);
          String [] singleLine = line.split(" ");
          for(int j=0; j<20; j++){
-            if(!singleLine[j].equals("flo")){
-               gameTiles[i][j] = new Tile(singleLine[j], i, j, true);
+            // if tomato, dough, cheese, sausage spawner
+            if(singleLine[j].equals("tom")||singleLine[j].equals("dou")||singleLine[j].equals("che")||singleLine[j].equals("sau")){
+               gameTiles[i][j] = new Tile(singleLine[j],i,j,true,true);
+            }
+            else if(!singleLine[j].equals("flo")){
+               gameTiles[i][j] = new Tile(singleLine[j], i, j, true,false);
             }
             else{
-               gameTiles[i][j] = new Tile("",i,j, false);
+               gameTiles[i][j] = new Tile("",i,j, false,false);
             }
             //System.out.print(tiles[i][j].getName());
          }

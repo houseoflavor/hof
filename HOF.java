@@ -124,7 +124,10 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               p1.drop();
                            }
                         }
-                        
+                     }
+                     else{ //tile is already occupied
+                     // test if combination is possible
+                     
                      }
                   }
                   else{ // picking up
@@ -173,12 +176,12 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static Tile [][] gameTiles;
    static Item [][] itemTiles;
    
-   static int[] levels; // -1 = not beat, 0, 1, 2, 3 stars per level
+   static int[] levels; // 0, 1, 2, 3 stars per level
    
    static Clouds cloud;
    
    //finals
-   static final int NONE = 0, START = 1, CONTROLS = 2, EXIT = 3;
+   static final int NONE = 0, START = 1, CONTROLS = 2, EXIT = 3; // 11+ is level 1, 2, 3, 4, 5 etc.
    static final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
    
    public HOF(){ // constructor
@@ -201,7 +204,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       
       this.start();
       
-      levels = new int[5]; // change for num of levels
+      levels = new int[10]; // change for num of levels
       
       cloud = new Clouds();
       
@@ -287,22 +290,14 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    public void mouseMoved(MouseEvent e){
       mouseX=e.getX();
       mouseY=e.getY();
-     // System.out.println("mousex: " + mouseX + " mousey: " + mouseY);
+      System.out.println("mousex: " + mouseX + " mousey: " + mouseY);
    }
    public void mouseClicked(MouseEvent e){
       mouseX=e.getX();
       mouseY=e.getY();
       if(mode.equals("menu") && transMode.equals("none")){
          if(buttonTouching == START){ // clicking start button (from menu)
-            transMode = "game";
-            try{
-               readFile("maps/level1.txt"); // --------------------------------- read file
-               p1 = new Player("monkey",300,300);
-               p2 = new Player("cat",500,500);
-               p1.setLevel(gameTiles); // very important to have these 2 lines!!
-               p2.setLevel(gameTiles);
-            }
-            catch(Exception ee){}
+            transMode = "level";
             transX=1500;            
             transition = 1;
          }
@@ -310,6 +305,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             transMode = "controls";            
             transX=1500;
             transition = 1;
+           
          }
       }
       
@@ -321,7 +317,25 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          }
       }
       
-   } // interface overwriting
+      if(mode.equals("level") && transMode.equals("none")){
+      if(buttonTouching >10){ // level select
+            if(buttonTouching == 11){
+               transMode = "game";
+               try{
+                  readFile("maps/level1.txt"); // --------------------------------- read file
+                  p1 = new Player("monkey",300,300);
+                  p2 = new Player("cat",500,500);
+                  p1.setLevel(gameTiles); // very important to have these 2 lines!!
+                  p2.setLevel(gameTiles);
+               }
+               catch(Exception ee){}
+               transX=1500;            
+               transition = 1;
+            }
+         }
+      }
+   } 
+   // interface overwriting
    public void mousePressed(MouseEvent e){ }
    public void mouseReleased(MouseEvent e){ }
    public void mouseEntered(MouseEvent e){ }

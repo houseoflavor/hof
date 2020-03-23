@@ -70,19 +70,21 @@ public class HOFUtil extends HOF{
       for(int i=0; i<2; i++){
          for(int j=0; j<5; j++){
             int size = 160;
-            int centx = j*170+300;
-            int centy = i*190+360;
+            int centx = j*170+220;
+            int centy = i*190+280;
             String high = "";
-            if(distance(mouseX, mouseY, centx, centy)<size/2){
+            if(distance(mouseX, mouseY, centx, centy)<size/2-5){
                high = "H";
             }
-            g.drawImage((new ImageIcon("images/menus/level/"+levels[i*2+j]+"star"+high+".png")).getImage(), centx-size, centy-size, size, size, null);
+            g.drawImage((new ImageIcon("images/menus/level/"+levels[i*2+j]+"star"+high+".png")).getImage(), centx-size/2, centy-size/2, size, size, null);
+            g.drawImage((new ImageIcon("images/numbers/"+i*5+j+1+".png")).getImage(), centx-size/2, centy-size/2, size, size, null);
+            
          }
       }
    }
    
    public static int distance(int mx, int my, int cx, int cy){
-      return (int)(Math.sqrt(Math.pow(cx-mx,2)+Math.pow(cy+my,2)));
+      return (int)(Math.sqrt(Math.pow(cx-mx,2)+Math.pow(cy-my,2)));
    }
    
    public static void drawGame(Graphics g){

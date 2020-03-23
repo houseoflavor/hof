@@ -77,7 +77,15 @@ public class HOFUtil extends HOF{
                high = "H";
             }
             g.drawImage((new ImageIcon("images/menus/level/"+levels[i*2+j]+"star"+high+".png")).getImage(), centx-size/2, centy-size/2, size, size, null);
-            g.drawImage((new ImageIcon("images/numbers/"+i*5+j+1+".png")).getImage(), centx-size/2, centy-size/2, size, size, null);
+            if(i*5+j+1==10){
+               g.drawImage((new ImageIcon("images/numbers/num"+high+(int)(i*5+j+1)+".png")).getImage(), centx-size/10-27, centy-size/10+55, null);
+            }
+            else{
+               g.drawImage((new ImageIcon("images/numbers/num"+high+(int)(i*5+j+1)+".png")).getImage(), centx-size/10-7, centy-size/10+55, null);
+            }
+            if(high.equals("H")){
+               buttonTouching = 11+i*5+j;
+            }
             
          }
       }

@@ -318,20 +318,18 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       }
       
       if(mode.equals("level") && transMode.equals("none")){
-      if(buttonTouching >10){ // level select
-            if(buttonTouching == 11){
-               transMode = "game";
-               try{
-                  readFile("maps/level1.txt"); // --------------------------------- read file
-                  p1 = new Player("monkey",300,300);
-                  p2 = new Player("cat",500,500);
-                  p1.setLevel(gameTiles); // very important to have these 2 lines!!
-                  p2.setLevel(gameTiles);
-               }
-               catch(Exception ee){}
-               transX=1500;            
-               transition = 1;
+         if(buttonTouching >10){ // level select
+            transMode = "game";
+            try{
+               readFile("maps/level"+(buttonTouching-10)+".txt"); // --------------------------------- read file
+               p1 = new Player("monkey",300,300);
+               p2 = new Player("cat",500,500);
+               p1.setLevel(gameTiles); // very important to have these 2 lines!!
+               p2.setLevel(gameTiles);
             }
+            catch(Exception ee){}
+            transX=1500;            
+            transition = 1;
          }
       }
    } 

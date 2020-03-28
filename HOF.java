@@ -177,6 +177,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static Item [][] itemTiles;
    
    static int[] levels; // 0, 1, 2, 3 stars per level
+   static Queue<Order> orders;
    
    static Clouds cloud;
    
@@ -326,6 +327,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                p2 = new Player("cat",500,500);
                p1.setLevel(gameTiles); // very important to have these 2 lines!!
                p2.setLevel(gameTiles);
+               orders = new PriorityQueue<Order>();
             }
             catch(Exception ee){}
             transX=1500;            

@@ -104,7 +104,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             }
             catch(Exception e){}
             // interact
-            // p1
+            // p1 -----
             if(keysDown.contains(KeyEvent.VK_E)){
                if(!hasP1Int){
                   int i = p1.getFRow();
@@ -154,6 +154,20 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             else{
                hasP1Int = false;
             }
+            // chopping
+            if(keysDown.contains(KeyEvent.VK_SHIFT) && dirKeys.contains(KeyEvent.KEY_LOCATION_LEFT)){
+               try{ // try to access a chop, if not then go to catch
+                  if(itemTiles[p1.getFRow()][p1.getFCol()].canChop() && !hasP1Chop && gameTiles[p1.getFRow()][p1.getFCol()].getName().equals("cut")){
+                     hasP1Chop = true;
+                     itemTiles[p1.getFRow()][p1.getFCol()].chop();
+                     knives.add(new Knife(p1.getFCol()*32+222, p1.getFRow()*32+178-12));
+                  }
+               }
+               catch(Exception e){} // no item here
+            }
+            else{
+               hasP1Chop = false;
+            }
             
             
             repaint();
@@ -168,6 +182,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
 
    static boolean hasP1Boost = false, hasP2Boost = false;
    static boolean hasP1Int = false, hasP2Int = false;
+   static boolean hasP1Chop = false, hasP2Chop = false;
+   static ArrayList<Knife> knives;
    static int mouseX, mouseY;
    static int buttonTouching;
    
@@ -192,6 +208,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       
       gameTiles = new Tile[12][20];
       itemTiles = new Item[12][20];
+      
+      knives = new ArrayList<Knife>();
       
       //mouse stuff
       addMouseListener(this);

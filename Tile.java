@@ -30,9 +30,20 @@ public class Tile {
    
    // returns the imageicon of the tile
    // if the tile can be selected, return the brighter version of the icon (append an H)
-   public ImageIcon getPicture(int t1, int t2){
+   // if the tile has an item on it, do not show knife (if cutting board)
+   public ImageIcon getPicture(int t1, int t2, boolean hasItem){
       if(t1==tileID || t2==tileID){
+         if(hasItem){
+            if(name.equals("cut")){
+               return new ImageIcon("images/tile/cutNH.gif");
+            }
+         }
          return new ImageIcon("images/tile/"+name+"H.gif");
+      }
+      if(hasItem){
+         if(name.equals("cut")){
+            return new ImageIcon("images/tile/cutN.gif");
+         }
       }
       return pic;
    }

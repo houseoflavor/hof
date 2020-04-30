@@ -94,12 +94,12 @@ public class Player{
    
    // returns how the y changes of an item
    public int yChange(){
-       if((((int)(dx*200)/200)==0)&&((((int)(dy*200)/200)==0))){
+      if((((int)(dx*200)/200)==0)&&((((int)(dy*200)/200)==0))){
          return 0;
-       }
-       else{
+      }
+      else{
          return 2*((int)(activeFrame/activeSpeed)%2);
-       }
+      }
    }
    
    // return a rectangle that surrounds the base of the player (the rotating circle)

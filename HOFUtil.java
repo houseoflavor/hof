@@ -135,6 +135,7 @@ public class HOFUtil extends HOF{
          a) if p2 facing up, items p2 is holding THEN p2
          b) else, p2 THEN items
       6 - do all blocks remaining
+      7 - do number chops & knives
       */
       int aspect = 48; // normal size is 24x24 so change to proportional aspect ratio!!
       //background circle
@@ -163,54 +164,54 @@ public class HOFUtil extends HOF{
             if(p1.isHold()){
                g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-16,((int)p1.gety())-24-p1.yChange(),32,32,null);
             }
-            drawSomeTiles(g, p1.getRow()+1, p1.getRow()+2);
+            //drawSomeTiles(g, p1.getRow()+1, p1.getRow()+2);
          }
          g.setColor(p1blue);
          drawThickCircle(g, (int)p1.getx()-(width/2), (int)p1.gety()-(height/2), width, height, 5);
          g.drawImage(p1.getPicture().getImage(),((int)p1.getx())-aspect/2,((int)p1.gety())-aspect/2-yoffset,aspect,aspect,null); 
-         if(p1.getDir() != UP){ 
-            if(p1.isHold()){
-               if(p1.getDir()==DOWN){
-                  g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-16,((int)p1.gety())-16-p1.yChange(),32,32,null);
-               }
-            }
-            drawSomeTiles(g, p1.getRow()+1, p1.getRow()+2);
-            if(p1.isHold()){
-               if(p1.getDir()==LEFT){
-                  g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-30,((int)p1.gety())-20-p1.yChange(),32,32,null);
-               }
-               if(p1.getDir()==RIGHT){
-                  g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-3,((int)p1.gety())-20-p1.yChange(),32,32,null);
-               }
+         //if(p1.getDir() != UP){ 
+         if(p1.isHold()){
+            if(p1.getDir()==DOWN){
+               g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-16,((int)p1.gety())-16-p1.yChange(),32,32,null);
             }
          }
+         drawSomeTiles(g, p1.getRow()+1, p1.getRow()+2);
+         if(p1.isHold()){
+            if(p1.getDir()==LEFT){
+               g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-30,((int)p1.gety())-20-p1.yChange(),32,32,null);
+            }
+            if(p1.getDir()==RIGHT){
+               g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-3,((int)p1.gety())-20-p1.yChange(),32,32,null);
+            }
+         }
+         //}
       }
       else{
          if(p2.getDir() == UP){
             if(p2.isHold()){
                g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-16,((int)p2.gety())-24-p2.yChange(),32,32,null);
             }
-            drawSomeTiles(g, p2.getRow()+1, p2.getRow()+2);
+            //drawSomeTiles(g, p2.getRow()+1, p2.getRow()+2);
          }
          g.setColor(p2red);
          drawThickCircle(g, (int)p2.getx()-(width/2), (int)p2.gety()-(height/2), width, height, 5);
          g.drawImage(p2.getPicture().getImage(),((int)p2.getx())-aspect/2,((int)p2.gety())-aspect/2-yoffset, aspect,aspect,null);
-         if(p2.getDir() != UP){ 
-            if(p2.isHold()){
-               if(p2.getDir()==DOWN){
-                  g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-16,((int)p2.gety())-16-p1.yChange(),32,32,null);
-               }
-            }
-            drawSomeTiles(g, p2.getRow()+1, p2.getRow()+2);
-            if(p2.isHold()){
-               if(p2.getDir()==LEFT){
-                  g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-30,((int)p1.gety())-20-p2.yChange(),32,32,null);
-               }
-               if(p2.getDir()==RIGHT){
-                  g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-3,((int)p1.gety())-20-p2.yChange(),32,32,null);
-               }
+         //if(p2.getDir() != UP){ 
+         if(p2.isHold()){
+            if(p2.getDir()==DOWN){
+               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-16,((int)p2.gety())-16-p1.yChange(),32,32,null);
             }
          }
+         drawSomeTiles(g, p2.getRow()+1, p2.getRow()+2);
+         if(p2.isHold()){
+            if(p2.getDir()==LEFT){
+               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-30,((int)p1.gety())-20-p2.yChange(),32,32,null);
+            }
+            if(p2.getDir()==RIGHT){
+               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-3,((int)p1.gety())-20-p2.yChange(),32,32,null);
+            }
+         }
+         //}
       
       }
       // 4 --
@@ -226,54 +227,54 @@ public class HOFUtil extends HOF{
             if(p1.isHold()){
                g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-16,((int)p1.gety())-24-p1.yChange(),32,32,null);
             }
-            drawSomeTiles(g, p1.getRow()+1, p1.getRow()+2);
+            //drawSomeTiles(g, p1.getRow()+1, p1.getRow()+2);
          }
          g.setColor(p1blue);
          drawThickCircle(g, (int)p1.getx()-(width/2), (int)p1.gety()-(height/2), width, height, 5);
          g.drawImage(p1.getPicture().getImage(),((int)p1.getx())-aspect/2,((int)p1.gety())-aspect/2-yoffset,aspect,aspect,null); 
-         if(p1.getDir() != UP){ 
-            if(p1.isHold()){
-               if(p1.getDir()==DOWN){
-                  g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-16,((int)p1.gety())-16-p1.yChange(),32,32,null);
-               }
-            }
-            drawSomeTiles(g, p1.getRow()+1, p1.getRow()+2);
-            if(p1.isHold()){
-               if(p1.getDir()==LEFT){
-                  g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-30,((int)p1.gety())-20-p1.yChange(),32,32,null);
-               }
-               if(p1.getDir()==RIGHT){
-                  g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-3,((int)p1.gety())-20-p1.yChange(),32,32,null);
-               }
+         //if(p1.getDir() != UP){ 
+         if(p1.isHold()){
+            if(p1.getDir()==DOWN){
+               g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-16,((int)p1.gety())-16-p1.yChange(),32,32,null);
             }
          }
+         drawSomeTiles(g, p1.getRow()+1, p1.getRow()+2);
+         if(p1.isHold()){
+            if(p1.getDir()==LEFT){
+               g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-30,((int)p1.gety())-20-p1.yChange(),32,32,null);
+            }
+            if(p1.getDir()==RIGHT){
+               g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-3,((int)p1.gety())-20-p1.yChange(),32,32,null);
+            }
+         }
+         //}
       }
       else{
          if(p2.getDir() == UP){
             if(p2.isHold()){
                g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-16,((int)p2.gety())-24-p2.yChange(),32,32,null);
             }
-            drawSomeTiles(g, p2.getRow()+1, p2.getRow()+2);
+            //drawSomeTiles(g, p2.getRow()+1, p2.getRow()+2);
          }
          g.setColor(p2red);
          drawThickCircle(g, (int)p2.getx()-(width/2), (int)p2.gety()-(height/2), width, height, 5);
          g.drawImage(p2.getPicture().getImage(),((int)p2.getx())-aspect/2,((int)p2.gety())-aspect/2-yoffset, aspect,aspect,null);
-         if(p2.getDir() != UP){ 
-            if(p2.isHold()){
-               if(p2.getDir()==DOWN){
-                  g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-16,((int)p2.gety())-16-p1.yChange(),32,32,null);
-               }
-            }
-            drawSomeTiles(g, p2.getRow()+1, p2.getRow()+2);
-            if(p2.isHold()){
-               if(p2.getDir()==LEFT){
-                  g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-30,((int)p1.gety())-20-p2.yChange(),32,32,null);
-               }
-               if(p2.getDir()==RIGHT){
-                  g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-3,((int)p1.gety())-20-p2.yChange(),32,32,null);
-               }
+         //if(p2.getDir() != UP){ 
+         if(p2.isHold()){
+            if(p2.getDir()==DOWN){
+               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-16,((int)p2.gety())-16-p1.yChange(),32,32,null);
             }
          }
+         drawSomeTiles(g, p2.getRow()+1, p2.getRow()+2);
+         if(p2.isHold()){
+            if(p2.getDir()==LEFT){
+               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-30,((int)p1.gety())-20-p2.yChange(),32,32,null);
+            }
+            if(p2.getDir()==RIGHT){
+               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-3,((int)p1.gety())-20-p2.yChange(),32,32,null);
+            }
+         }
+         //}
       
       
       }
@@ -284,6 +285,28 @@ public class HOFUtil extends HOF{
       else{
          drawSomeTiles(g, p1.getRow()+2, 12);
       }
+      // 7 -- 
+      for(int i=0; i<12; i++){
+         for(int j=0; j<20; j++){
+            try{
+               if((p1.getFRow()==i && p1.getFCol() == j) || (p2.getFRow()==i && p2.getFCol() == j)){
+                  g.drawImage((new ImageIcon("images/numbers/numH"+(int)(itemTiles[i][j].getChop())+".png")).getImage(), j*32+240, i*32+188, 9, 11, null);
+               }
+            }
+            catch(Exception eE){}
+         }
+      }
+      // draw knives, remove knife if done animating
+      for(int i=0; i<knives.size(); i++){
+         Knife k = knives.get(i);
+         if(k.getFrame()==10){
+            knives.remove(k);
+         }
+         else{
+            g.drawImage(k.getPicture().getImage(), k.getX(), k.getY(), 40, 40, null);
+         }
+      }
+      
       //drawBounds(g); // draw test bounds ----------------------------------------------
    }
    
@@ -300,20 +323,37 @@ public class HOFUtil extends HOF{
          for(int j=0; j<20; j++){
             ImageIcon tile;
             ImageIcon item;
+            Item physItem = new Item();
+            boolean hasItem = false;
             try{
-               tile = gameTiles[i][j].getPicture(p1.getFacing(), p2.getFacing());
+            // if p1 or p2 is looking at a tile
+               try{ // test if there is an item on the tile
+                  if(itemTiles[i][j] != null){
+                     hasItem = true;
+                     physItem = itemTiles[i][j];
+                  }
+               }
+               catch(Exception ee){}
+               tile = gameTiles[i][j].getPicture(p1.getFacing(), p2.getFacing(), hasItem);
             }
             catch(Exception eee){
                tile = new ImageIcon("");
             }
             try{
-               item = itemTiles[i][j].getPicture();
+            // if p1 or p2 are looking at an item
+               if((p1.getFRow()==i && p1.getFCol() == j) || (p2.getFRow()==i && p2.getFCol() == j)){
+                  item = itemTiles[i][j].getHPicture();
+                  
+               }
+               else{
+                  item = itemTiles[i][j].getPicture();
+               }
             }
             catch(Exception eee){
                item = new ImageIcon("");
             }
             g.drawImage(tile.getImage(),j*32+228, i*32+178-32, 32, 64, null);
-            g.drawImage(item.getImage(),j*32+228, i*32+178-12, 32, 32, null);
+            g.drawImage(item.getImage(),j*32+228+physItem.getXShake(), i*32+178-12+physItem.getXShake(), 32, 32, null);
          }
       }
    }

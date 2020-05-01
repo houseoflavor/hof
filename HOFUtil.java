@@ -135,7 +135,7 @@ public class HOFUtil extends HOF{
          a) if p2 facing up, items p2 is holding THEN p2
          b) else, p2 THEN items
       6 - do all blocks remaining
-      7 - do number chops & knives
+      7 - do number chops, knives, loader
       */
       int aspect = 48; // normal size is 24x24 so change to proportional aspect ratio!!
       //background circle
@@ -289,8 +289,8 @@ public class HOFUtil extends HOF{
       for(int i=0; i<12; i++){
          for(int j=0; j<20; j++){
             try{
-               if((p1.getFRow()==i && p1.getFCol() == j) || (p2.getFRow()==i && p2.getFCol() == j)){
-                  g.drawImage((new ImageIcon("images/numbers/numH"+(int)(itemTiles[i][j].getChop())+".png")).getImage(), j*32+240, i*32+188, 9, 11, null);
+               if(((p1.getFRow()==i && p1.getFCol() == j) || (p2.getFRow()==i && p2.getFCol() == j)) && itemTiles[i][j].canChop()){
+                  g.drawImage((new ImageIcon("images/numbers/numH"+(int)(itemTiles[i][j].getChop())+".png")).getImage(), j*32+240, i*32+168, 9, 11, null);
                }
             }
             catch(Exception eE){}
@@ -305,6 +305,12 @@ public class HOFUtil extends HOF{
          else{
             g.drawImage(k.getPicture().getImage(), k.getX(), k.getY(), 40, 40, null);
          }
+      }
+      
+      // loading
+      for(int i=0; i<loader.size(); i++){
+         Loader l = loader.get(i);
+         g.drawImage(l.getPicture().getImage(), l.getX()+7, l.getY()-8, 32, 16, null);
       }
       
       //drawBounds(g); // draw test bounds ----------------------------------------------
@@ -353,7 +359,7 @@ public class HOFUtil extends HOF{
                item = new ImageIcon("");
             }
             g.drawImage(tile.getImage(),j*32+228, i*32+178-32, 32, 64, null);
-            g.drawImage(item.getImage(),j*32+228+physItem.getXShake(), i*32+178-12+physItem.getXShake(), 32, 32, null);
+            g.drawImage(item.getImage(),j*32+228+physItem.getXShake(), i*32+178-12+physItem.getYShake(), 32, 32, null);
          }
       }
    }

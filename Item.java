@@ -4,18 +4,21 @@ import java.awt.Rectangle;
 import java.io.*;
 import java.util.*;
 public class Item{
-   private ImageIcon pic;
    private Player holder;
    private int chopLeft;
    private String name;
    private boolean food;
    private boolean tool;
+   private String cut;
+   private String oven;
    private int dx, dy;
+   private ArrayList<String> ingr;
    // Item constructor
    public Item(String name, Player h, boolean f, boolean t){
-      pic = new ImageIcon("images/items/"+name+".gif");
       holder = h;
       this.name=name;
+      ingr = new ArrayList<String>();
+      ingr.add(name);
       food = f;
       tool = t;
       if(food){
@@ -23,6 +26,8 @@ public class Item{
       }
       dx=0;
       dy=0;
+      oven = "";
+      cut = "";
    }
    public Item(){} // nothing constructor
    
@@ -33,20 +38,36 @@ public class Item{
       return tool;
    }
    public String getName(){
-      return name;
+      Collections.sort(ingr);
+      String ret = "";
+      for(String n:ingr){
+         ret+=n;
+      }
+      return ret;
+   }
+   
+   public ArrayList getList(){
+      return ingr;
+   }
+   
+   public boolean isChopped(){
+      return cut.equals("C");
    }
    
    public ImageIcon getPicture(){
-      return pic;
+      return new ImageIcon("images/items/"+name+cut+oven+".gif");
    }
    
    public ImageIcon getHPicture(){
-      return new ImageIcon("images/items/"+name+"H.gif");
+      return new ImageIcon("images/items/"+name+cut+oven+"H.gif");
    }
    
    public boolean canChop(){
       if(chopLeft>0){
          return true;
+      }
+      if(name.length()==3){
+         cut="C";
       }
       return false;
    }
@@ -55,18 +76,22 @@ public class Item{
       if(chopLeft>0){
          chopLeft--;
          // do some shaking
-         dx=(int)(Math.random()*25);
-         dy=(int)(Math.random()*25);
+         dx=(int)(Math.random()*400)-200;
+         dy=(int)(Math.random()*400)-200;
       }
    }
    
    public int getXShake(){
-      dx/=2;
-      return dx;
+      if(dx!=0){
+         dx-=2*(dx/Math.abs(dx));
+      }
+      return dx/40;
    }
    public int getYShake(){
-      dy/=2;
-      return dy;
+      if(dy!=0){
+         dy-=2*(dy/Math.abs(dy));
+      }
+      return dy/40;
    }
    public int getChop(){
       return chopLeft;
@@ -75,19 +100,46 @@ public class Item{
    
    // combines the other food with this
    public boolean combine(Item other){
-      if(other.isFood()){
-         if(name.compareTo(other.getName())<0){ // this < other
-            name=name+other.getName();
-            return true;
+      if(other.isFood() && (other.isChopped() || other.getName().length()!= 3) && (this.isChopped() || this.getName().length()!= 3)){
+         ArrayList<String> oList = other.getList();
+         // are you adding something that already exists on the other item
+         for(String n : ingr){ // if any item is a duplicate, can't combine
+            if(oList.contains(n)){
+               return false;
+            }
          }
-         if(name.compareTo(other.getName())==0){ // this = other
-            return false; // can't combine two of same thing
+         // is it a valid food combination?
+         String validCombo = " doutom chedou chedoutom "; // expand as needed
+         for(String n : ingr){
+            oList.add(n);
          }
-         else{ // this > other
-            name=other.getName()+name;
-            return true;
+         Collections.sort(oList);
+         String ret = "";
+         for(String n : oList){
+            ret+=n;
          }
+         if(!validCombo.contains(" " + ret + " ")){
+            return false;
+         }
+         // valid! (delete other, keep this)
+         ingr = oList;
+         name = this.getName();
+         cut = "";
+         return true;
       }
       return false;
+   }
+   
+   public boolean oven(){
+      String validOven = " chedoutom ";
+      if(validOven.contains(" " + this.getName() + " ")){
+         oven = "X"; // filler to make invisible
+         return true;
+      }
+      return false;
+   }
+   
+   public void ovenCooked(){
+      oven = "O";
    }
 }

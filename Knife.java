@@ -13,7 +13,7 @@ public class Knife{ // why the f do i need a knife object i dont know this sucks
    // advance animation frame by 1, get the ImageIcon frame apprioriately
    public ImageIcon getPicture(){
       frame++;
-      return new ImageIcon("images/items/chop/"+rand+"/chop"+frame+".png");
+      return new ImageIcon("images/items/chop/"+rand+"/chop"+(frame/2)+".png");
    }
    // return x position of knife
    public int getX(){
@@ -26,6 +26,6 @@ public class Knife{ // why the f do i need a knife object i dont know this sucks
    
    // return frame number
    public int getFrame(){
-      return frame;
+      return frame/2;
    }
 }

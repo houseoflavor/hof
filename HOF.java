@@ -124,10 +124,21 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               p1.drop();
                            }
                         }
+                        else if(gameTiles[i][j].getName().equals("ove")){ // adding food to oven
+                           if(itemTiles[i][j] == null && p1.whatHold().oven()){ // nothing in the oven? & can be put in oven?
+                              hasP1Int = true;
+                              itemTiles[i][j] = p1.whatHold();
+                              p1.drop();
+                              loader.add(new Loader(20, p1.getFCol()*32+222, p1.getFRow()*32+178-12));
+                           }
+                        }
                      }
                      else{ //tile is already occupied
                      // test if combination is possible
-                     
+                        hasP1Int=true;
+                        if(itemTiles[i][j].combine(p1.whatHold())){
+                           p1.drop();
+                        }
                      }
                   }
                   else{ // picking up
@@ -184,6 +195,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static boolean hasP1Int = false, hasP2Int = false;
    static boolean hasP1Chop = false, hasP2Chop = false;
    static ArrayList<Knife> knives;
+   static ArrayList<Loader> loader;
    static int mouseX, mouseY;
    static int buttonTouching;
    
@@ -210,6 +222,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       itemTiles = new Item[12][20];
       
       knives = new ArrayList<Knife>();
+      loader = new ArrayList<Loader>();
       
       //mouse stuff
       addMouseListener(this);

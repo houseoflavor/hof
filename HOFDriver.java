@@ -10,7 +10,7 @@ import java.io.*;
 
 public class HOFDriver{
 
-   public static HOF window;
+   public static HOF window; 
    
    public static void main(String[] args){
       window = new HOF();

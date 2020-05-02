@@ -15,6 +15,7 @@ public class Tile {
    private int tileID;
    private boolean hitbox;
    private boolean spawner;
+   private String on;
    
    // constructor
    //           name      row    col   hitbox?    spawner?
@@ -26,6 +27,7 @@ public class Tile {
       hitbox = h;
       tileID = (20*r)+c;
       spawner = s;
+      on = "";
    }
    
    // returns the imageicon of the tile
@@ -48,9 +50,24 @@ public class Tile {
       return pic;
    }
    
+   public ImageIcon getOvePic(int t1, int t2){
+      if(t1==tileID || t2== tileID){
+         return new ImageIcon("images/tile/ove"+on+"H.gif");
+      }
+      return new ImageIcon("images/tile/ove"+on+".gif");
+   }
+   
    // returns spawner
    public boolean isSpawner(){
       return spawner;
+   }
+   
+   public void turnOn(){
+      on = "O";
+   }
+  
+   public void turnOff(){
+      on = "";
    }
    
    // returns the location of the tile represented by a single int

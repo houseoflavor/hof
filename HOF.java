@@ -128,6 +128,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                            if(itemTiles[i][j] == null && p1.whatHold().oven()){ // nothing in the oven? & can be put in oven?
                               hasP1Int = true;
                               itemTiles[i][j] = p1.whatHold();
+                              gameTiles[i][j].turnOn();
                               p1.drop();
                               loader.add(new Loader(20, p1.getFCol()*32+222, p1.getFRow()*32+178-12));
                            }

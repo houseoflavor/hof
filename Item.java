@@ -113,7 +113,7 @@ public class Item{
    // combines the other food with this
    public boolean combine(Item other){
       if(other.isFood() && (other.isChopped() || other.getName().length()!= 3) && (this.isChopped() || this.getName().length()!= 3)){
-         ArrayList<String> oList = other.getList();
+         ArrayList<String> oList = (ArrayList)(other.getList().clone());
          // are you adding something that already exists on the other item
          for(String n : ingr){ // if any item is a duplicate, can't combine
             if(oList.contains(n)){
@@ -130,6 +130,7 @@ public class Item{
          for(String n : oList){
             ret+=n;
          }
+         System.out.println(ret);
          if(!validCombo.contains(" " + ret + " ")){
             return false;
          }
@@ -138,8 +139,8 @@ public class Item{
             ingr = oList;
             name = this.getName();
             cut = "";
+            return true;
          }
-         return true;
       }
       return false;
    }

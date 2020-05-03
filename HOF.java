@@ -130,7 +130,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               itemTiles[i][j] = p1.whatHold();
                               gameTiles[i][j].turnOn();
                               p1.drop();
-                              loader.add(new Loader(20, p1.getFCol(), p1.getFRow()));
+                              loader.add(new Loader(20, p1.getFCol(), p1.getFRow(), itemTiles[i][j].getCook()));
                            }
                         }
                      }
@@ -162,8 +162,25 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         else if(!gameTiles[i][j].getName().equals("")){ // does tile exist
                            if(itemTiles[i][j]!=null){// does the tile actually have something on it
                               hasP1Int = true;
-                              p1.pickUpEmpty(itemTiles[i][j]);
-                              itemTiles[i][j] = null;
+                              if(gameTiles[i][j].getName().equals("ove")){ // taking something out of oven
+                                 p1.pickUpEmpty(itemTiles[i][j]);
+                                 p1.whatHold().takeOut();
+                                 if(itemTiles[i][j].getCook()==1121){
+                                    itemTiles[i][j].ovenCooked();
+                                 }
+                                 itemTiles[i][j] = null;
+                                 gameTiles[i][j].turnOff();
+                                 for(int k=0; k<loader.size(); k++){
+                                    if(i==loader.get(k).getRow() && j==loader.get(k).getCol()){
+                                       loader.remove(k);
+                                       break;
+                                    }
+                                 }
+                              }
+                              else{
+                                 p1.pickUpEmpty(itemTiles[i][j]);
+                                 itemTiles[i][j] = null;
+                              }
                            }
                         }
                      }

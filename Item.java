@@ -29,6 +29,7 @@ public class Item{
       dy=0;
       oven = "";
       cut = "";
+      cookLeft = 0;
    }
    public Item(){} // nothing constructor
    
@@ -107,7 +108,7 @@ public class Item{
    }
    
    public void startCook(){
-      cookLeft = 1120;
+      cookLeft = 0;
    }
    
    // combines the other food with this
@@ -130,7 +131,6 @@ public class Item{
          for(String n : oList){
             ret+=n;
          }
-         System.out.println(ret);
          if(!validCombo.contains(" " + ret + " ")){
             return false;
          }
@@ -147,11 +147,15 @@ public class Item{
    
    public boolean oven(){
       String validOven = " chedoutom ";
-      if(validOven.contains(" " + this.getName() + " ")){
+      if(validOven.contains(" " + this.getName() + " ") && oven.equals("") && cookLeft<1121){
          oven = "X"; // filler to make invisible
          return true;
       }
       return false;
+   }
+   
+   public void takeOut(){
+      oven = "";
    }
    
    public void ovenCooked(){

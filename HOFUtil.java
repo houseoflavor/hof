@@ -310,7 +310,9 @@ public class HOFUtil extends HOF{
       // loading
       for(int i=0; i<loader.size(); i++){
          Loader l = loader.get(i);
-         g.drawImage(l.getPicture().getImage(), l.getX()+7, l.getY()-8, 32, 16, null);
+         l.advance();
+         g.drawImage(l.getPicture().getImage(), l.getX()+6, l.getY()-8, 32, 16, null);
+         itemTiles[l.getRow()][l.getCol()].setCook(1120-l.getUFrame());
       }
       
       //drawBounds(g); // draw test bounds ----------------------------------------------

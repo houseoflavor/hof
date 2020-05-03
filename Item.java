@@ -10,6 +10,7 @@ public class Item{
    private boolean food;
    private boolean tool;
    private String cut;
+   private int cookLeft;
    private String oven;
    private int dx, dy;
    private ArrayList<String> ingr;
@@ -97,6 +98,17 @@ public class Item{
       return chopLeft;
    }
    
+   public void setCook(int c){
+      cookLeft = c;
+   }
+   
+   public int getCook(){
+      return cookLeft;
+   }
+   
+   public void startCook(){
+      cookLeft = 1120;
+   }
    
    // combines the other food with this
    public boolean combine(Item other){
@@ -122,9 +134,11 @@ public class Item{
             return false;
          }
          // valid! (delete other, keep this)
-         ingr = oList;
-         name = this.getName();
-         cut = "";
+         else{
+            ingr = oList;
+            name = this.getName();
+            cut = "";
+         }
          return true;
       }
       return false;

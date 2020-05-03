@@ -130,7 +130,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               itemTiles[i][j] = p1.whatHold();
                               gameTiles[i][j].turnOn();
                               p1.drop();
-                              loader.add(new Loader(20, p1.getFCol()*32+222, p1.getFRow()*32+178-12));
+                              loader.add(new Loader(20, p1.getFCol(), p1.getFRow()));
                            }
                         }
                      }
@@ -146,11 +146,18 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      if(!p1.isHold()){ // player's hand is empty
                         if(gameTiles[i][j].isSpawner()){ // is this tile a spawner
                            hasP1Int = true;
-                           // create a new food object and place it on the tile
-                           itemTiles[i][j] = new Item(gameTiles[i][j].getName(), p1, true, false);
-                           // have the player pick it up
-                           p1.pickUpEmpty(itemTiles[i][j]);
-                           itemTiles[i][j] = null;
+                           if(itemTiles[i][j]==null){ // is empty?
+                              // create a new food object and place it on the tile
+                              itemTiles[i][j] = new Item(gameTiles[i][j].getName(), p1, true, false);
+                              // have the player pick it up
+                              p1.pickUpEmpty(itemTiles[i][j]);
+                              itemTiles[i][j] = null;
+                           }
+                           else{ // already has something, pick up
+                              hasP1Int = true;
+                              p1.pickUpEmpty(itemTiles[i][j]);
+                              itemTiles[i][j] = null;
+                           }
                         }
                         else if(!gameTiles[i][j].getName().equals("")){ // does tile exist
                            if(itemTiles[i][j]!=null){// does the tile actually have something on it

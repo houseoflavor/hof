@@ -16,6 +16,7 @@ public class Tile {
    private boolean hitbox;
    private boolean spawner;
    private String on;
+   private boolean conveyer;
    
    // constructor
    //           name      row    col   hitbox?    spawner?
@@ -28,12 +29,16 @@ public class Tile {
       tileID = (20*r)+c;
       spawner = s;
       on = "";
+      conveyer = n.startsWith("co");
    }
    
    // returns the imageicon of the tile
    // if the tile can be selected, return the brighter version of the icon (append an H)
    // if the tile has an item on it, do not show knife (if cutting board)
    public ImageIcon getPicture(int t1, int t2, boolean hasItem){
+      if(conveyer){
+         return pic;
+      } // return highlighted picture
       if(t1==tileID || t2==tileID){
          if(hasItem){
             if(name.equals("cut")){
@@ -42,7 +47,7 @@ public class Tile {
          }
          return new ImageIcon("images/tile/"+name+"H.gif");
       }
-      if(hasItem){
+      if(hasItem){ // cutting board (knife)
          if(name.equals("cut")){
             return new ImageIcon("images/tile/cutN.gif");
          }
@@ -61,11 +66,11 @@ public class Tile {
    public boolean isSpawner(){
       return spawner;
    }
-   
+   // turn on the oven
    public void turnOn(){
       on = "O";
    }
-  
+  // turn off the oven
    public void turnOff(){
       on = "";
    }

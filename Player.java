@@ -13,6 +13,8 @@ public class Player{
    private List<Integer> directions;
    private String name;
    private final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4, NONE = 0;
+   private boolean onCon = false;
+   private boolean press = false;
    
    
    // CONTROL PLAYER SPEED HERE ---
@@ -72,7 +74,7 @@ public class Player{
    public ImageIcon getPicture(){
       String state;
       int ai;
-      if((((int)(dx*200)/200)==0)&&((((int)(dy*200)/200)==0))){ // if idle
+      if(!press){ // if idle
          state = "idle";
          ai = 1;
          idleFrame++;
@@ -142,7 +144,7 @@ public class Player{
    public void sety(double d){
       y=d;
    }
-   
+   // if player is holding something
    public boolean isHold(){
       return hold;
    }
@@ -205,7 +207,11 @@ public class Player{
    public void direction(List<Integer> l){
       directions = l;
       if(l.size()==0){
+         press = false;
          directions.add(direction);
+      }
+      else{
+         press = true;
       }
    }
    // tests of the bounding box of 'this' collides with 'other', whether that be a Tile or Player object (for now...)
@@ -334,6 +340,49 @@ public class Player{
       int col = getCol();
       double savedx=dx;
       double savedy=dy; 
+      
+      // conveyer
+      double conSpeed = 0.5;
+      double revSpeed = 0.3;
+      if(level[row][col].getName().startsWith("co")){
+         onCon = true;
+         if(level[row][col].getName().endsWith("l")){ // left
+            if(directions.contains(RIGHT) && press){
+               dx*=revSpeed;
+            }
+            else{
+               dx-=conSpeed;
+            }
+         }
+         if(level[row][col].getName().endsWith("r")){ // right
+            if(directions.contains(LEFT) && press){
+               dx*=revSpeed;
+            }
+            else{
+               dx+=conSpeed;
+            }
+         }
+         if(level[row][col].getName().endsWith("u")){ // up
+            if(directions.contains(DOWN) && press){
+               dy*=revSpeed;
+            }
+            else{
+               dy-=conSpeed;
+            }
+         }
+         if(level[row][col].getName().endsWith("d")){ // down
+            if(directions.contains(UP) && press){
+               dy*=revSpeed;
+            }
+            else{
+               dy+=conSpeed;
+            }
+         }
+      }
+      else{
+         onCon = false;
+      }
+      
       // colliding directly above or below
       if(collision(level[row+1][col]) || collision(level[row-1][col]) ){ // player is inside tile
          y-=savedy; // move out of tile
@@ -424,6 +473,7 @@ public class Player{
             y-=savedy;
          }
       }
+      
       // reduce change in movement by velocity (slows the speed)
       dx*=velocity;
       dy*=velocity;

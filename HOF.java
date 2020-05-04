@@ -224,13 +224,14 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static int mouseX, mouseY;
    static int buttonTouching;
    
+   static Game game;
+   
    static int transX, transition;
    
    static Tile [][] gameTiles;
    static Item [][] itemTiles;
    
    static int[] levels; // 0, 1, 2, 3 stars per level
-   static Queue<Order> orders;
    
    static Clouds cloud;
    
@@ -258,6 +259,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       transition = 0;
       transMode = "none";
       playMusic();
+      
       
       this.start();
       
@@ -304,8 +306,12 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          String [] singleLine = line.split(" ");
          for(int j=0; j<20; j++){
             // if tomato, dough, cheese, sausage spawner
-            if(singleLine[j].equals("tom")||singleLine[j].equals("dou")||singleLine[j].equals("che")||singleLine[j].equals("sau")){
+            String spawners = " tom dou che sau mus ";
+            if(spawners.contains(" "+ singleLine[j] + " ")){
                gameTiles[i][j] = new Tile(singleLine[j],i,j,true,true);
+            }
+            else if(singleLine[j].startsWith("co")){
+               gameTiles[i][j] = new Tile(singleLine[j], i, j, false, false);
             }
             else if(!singleLine[j].equals("flo")){
                gameTiles[i][j] = new Tile(singleLine[j], i, j, true,false);
@@ -383,7 +389,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                p2 = new Player("cat",500,500);
                p1.setLevel(gameTiles); // very important to have these 2 lines!!
                p2.setLevel(gameTiles);
-               orders = new PriorityQueue<Order>();
+               game = new Game();
             }
             catch(Exception ee){}
             transX=1500;            

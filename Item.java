@@ -39,6 +39,7 @@ public class Item{
    public boolean isTool(){
       return tool;
    }
+   // returns the full name of all the ingredients in the item
    public String getName(){
       Collections.sort(ingr);
       String ret = "";
@@ -47,23 +48,26 @@ public class Item{
       }
       return ret;
    }
-   
+   // returns an arraylist of all ingredients in the item
    public ArrayList getList(){
       return ingr;
    }
    
+   // returns whether an item is chopped
    public boolean isChopped(){
       return cut.equals("C");
    }
    
+   // returns an ImageIcon of the correct picture
    public ImageIcon getPicture(){
       return new ImageIcon("images/items/"+name+cut+oven+".gif");
    }
-   
+   // returns the highlighted version of an oven
    public ImageIcon getHPicture(){
       return new ImageIcon("images/items/"+name+cut+oven+"H.gif");
    }
    
+   // returns whether the item can be chopped
    public boolean canChop(){
       if(chopLeft>0){
          return true;
@@ -73,7 +77,7 @@ public class Item{
       }
       return false;
    }
-   
+   // chop
    public void chop(){
       if(chopLeft>0){
          chopLeft--;
@@ -82,7 +86,7 @@ public class Item{
          dy=(int)(Math.random()*400)-200;
       }
    }
-   
+   // x and y shaking for chop mechanic
    public int getXShake(){
       if(dx!=0){
          dx-=2*(dx/Math.abs(dx));
@@ -95,18 +99,19 @@ public class Item{
       }
       return dy/40;
    }
+   // returns chopLeft
    public int getChop(){
       return chopLeft;
    }
-   
+   // sets cookLeft to the parameter
    public void setCook(int c){
       cookLeft = c;
    }
-   
+   // accessor
    public int getCook(){
       return cookLeft;
    }
-   
+   // (unused) sets cook time to 0
    public void startCook(){
       cookLeft = 0;
    }
@@ -122,7 +127,7 @@ public class Item{
             }
          }
          // is it a valid food combination?
-         String validCombo = " doutom chedou chedoutom "; // expand as needed
+         String validCombo = " doutom chedou chedoutom chedoumustom "; // expand as needed
          for(String n : ingr){
             oList.add(n);
          }
@@ -131,6 +136,7 @@ public class Item{
          for(String n : oList){
             ret+=n;
          }
+         System.out.println(ret);
          if(!validCombo.contains(" " + ret + " ")){
             return false;
          }
@@ -144,20 +150,21 @@ public class Item{
       }
       return false;
    }
-   
+   // putting an item in the oven
+   // returns whether the item can go in the oven
    public boolean oven(){
-      String validOven = " chedoutom ";
+      String validOven = " chedoutom chedoumustom ";
       if(validOven.contains(" " + this.getName() + " ") && oven.equals("") && cookLeft<1121){
          oven = "X"; // filler to make invisible
          return true;
       }
       return false;
    }
-   
+   // take item out of oven (make visible)
    public void takeOut(){
       oven = "";
    }
-   
+   // the item is cooked (show cooked form)
    public void ovenCooked(){
       oven = "O";
    }

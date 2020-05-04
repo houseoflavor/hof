@@ -315,6 +315,18 @@ public class HOFUtil extends HOF{
          itemTiles[l.getRow()][l.getCol()].setCook(l.getUFrame());
       }
       
+      
+      // timer 
+      
+      String time = String.valueOf(game.getTime());
+      for(int i=0; i<time.length(); i++){
+         g.drawImage((new ImageIcon("images/numbers/num"+time.charAt(time.length()-i-1)+".png")).getImage(), (3-(i+2))*45+1000-15, 15, null);
+      }
+      
+      // orders
+      
+      
+      
       //drawBounds(g); // draw test bounds ----------------------------------------------
    }
    

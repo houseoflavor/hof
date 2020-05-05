@@ -125,6 +125,20 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                            }
                            // if not cooked, don't lose it
                         }
+                        else if(gameTiles[i][j].getName().equals("bur")){
+                           if(itemTiles[i][j] == null){
+                           
+                              hasP1Int = true;
+                              itemTiles[i][j] = p1.whatHold();
+                              if(p1.whatHold().getName().contains("sto")){
+                                 loader.add(new Loader(10, p1.getFCol(), p1.getFRow(), itemTiles[i][j].getPanCook()));
+                                 p1.drop();
+                              }
+                              else{
+                                 p1.drop();
+                              }
+                           }
+                        }
                         else if (!gameTiles[i][j].getName().equals("") && !gameTiles[i][j].getName().equals("ove")){// does tile exist
                            if(itemTiles[i][j]==null){// does the tile already have something on it
                               hasP1Int = true;
@@ -144,11 +158,30 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      }
                      else{ //tile is already occupied
                      // test if combination is possible
-                        if(itemTiles[i][j]!= null && itemTiles[i][j].getName().equals("pan")){ // putting something into a pan
-                           itemTiles[i][j].combine(p1.whatHold());
+                        if(itemTiles[i][j]!= null && itemTiles[i][j].getName().equals("pan")){ // putting tomato into a pan
                            hasP1Int = true;
-                           p1.drop();
-                           loader.add(new Loader(10, p1.getFCol(), p1.getFRow(), itemTiles[i][j].getPanCook()));
+                           if(itemTiles[i][j].combine(p1.whatHold())){
+                              p1.drop();
+                              loader.add(new Loader(10, p1.getFCol(), p1.getFRow(), itemTiles[i][j].getPanCook()));
+                           }
+                        }
+                        else if(itemTiles[i][j] != null && p1.whatHold().getName().contains("pan")){ // hold pan onto tomatoas
+                           if(itemTiles[i][j].getName().contains("tom")){
+                              if(itemTiles[i][j].combine(p1.whatHold())){
+                                 hasP1Int = true;
+                                 p1.drop();
+                                 loader.add(new Loader(10, p1.getFCol(), p1.getFRow(), itemTiles[i][j].getPanCook()));
+                              }
+                           }
+                           else if(itemTiles[i][j].getName().contains("dou") && !itemTiles[i][j].getName().contains("top")){ // hold pan onto something with dough
+                              hasP1Int = true;
+                              Item tempTom = new Item("top", true, false);
+                              tempTom.setChopped();
+                              itemTiles[i][j].combine(tempTom);
+                              Item tempPan = new Item("pan", false, true);
+                              p1.drop();
+                              p1.pickUpEmpty(tempPan);
+                           }
                         }
                         else{
                            hasP1Int=true;

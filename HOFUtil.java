@@ -321,9 +321,9 @@ public class HOFUtil extends HOF{
          Loader l = loader.get(i);
          l.advance();
          g.drawImage(l.getPicture().getImage(), l.getX()+6, l.getY()-8, 32, 16, null);
-         if(itemTiles[l.getRow()][l.getCol()].inPan() && gameTiles[l.getRow()][l.getCol()].getName().equals("bur")){ // there is a pan on a burner
+         if(itemTiles[l.getRow()][l.getCol()].getName().contains("pan") && gameTiles[l.getRow()][l.getCol()].getName().equals("bur")){ // there is a pan on a burner
             itemTiles[l.getRow()][l.getCol()].setPanCook(l.getUFrame());
-            if(l.getUFrame() == 561){
+            if(l.getUFrame() >= 561){
                itemTiles[l.getRow()][l.getCol()].donePan();
             }
          }

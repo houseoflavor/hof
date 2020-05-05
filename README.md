@@ -4,6 +4,10 @@ Advanced CS Final Project
 
 by Ethan, Vinhan, and An
 
+## Download Instructions
+
+https://tinyurl.com/hofdownload
+
 ## Resources
 level creator: https://forkphorus.github.io/#366957956
 

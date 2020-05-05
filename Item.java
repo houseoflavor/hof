@@ -4,7 +4,6 @@ import java.awt.Rectangle;
 import java.io.*;
 import java.util.*;
 public class Item{
-   private Player holder;
    private int chopLeft;
    private String name;
    private boolean food;
@@ -13,10 +12,11 @@ public class Item{
    private int cookLeft;
    private String oven;
    private int dx, dy;
+   private boolean plate;
+   private boolean pan;
    private ArrayList<String> ingr;
    // Item constructor
-   public Item(String name, Player h, boolean f, boolean t){
-      holder = h;
+   public Item(String name, boolean f, boolean t){
       this.name=name;
       ingr = new ArrayList<String>();
       ingr.add(name);
@@ -29,7 +29,9 @@ public class Item{
       dy=0;
       oven = "";
       cut = "";
+      plate = false;
       cookLeft = 0;
+      pan = false;
    }
    public Item(){} // nothing constructor
    
@@ -38,6 +40,12 @@ public class Item{
    }
    public boolean isTool(){
       return tool;
+   }
+   public boolean hasPlate(){
+      return plate;
+   }
+   public boolean isPlate(){
+      return name.equals("pla");
    }
    // returns the full name of all the ingredients in the item
    public String getName(){
@@ -60,10 +68,16 @@ public class Item{
    
    // returns an ImageIcon of the correct picture
    public ImageIcon getPicture(){
+      if(tool){
+         return new ImageIcon("images/items/"+name+".gif");
+      }
       return new ImageIcon("images/items/"+name+cut+oven+".gif");
    }
-   // returns the highlighted version of an oven
+   // returns the highlighted version
    public ImageIcon getHPicture(){
+      if(tool){
+         return new ImageIcon("images/items/"+name+"H.gif");
+      }
       return new ImageIcon("images/items/"+name+cut+oven+"H.gif");
    }
    
@@ -116,6 +130,13 @@ public class Item{
       cookLeft = 0;
    }
    
+   public boolean isPan(){
+      return name.equals("pan");
+   }
+   public boolean hasPan(){
+      return pan;
+   }
+   
    // combines the other food with this
    public boolean combine(Item other){
       if(other.isFood() && (other.isChopped() || other.getName().length()!= 3) && (this.isChopped() || this.getName().length()!= 3)){
@@ -148,6 +169,12 @@ public class Item{
             return true;
          }
       }
+      else if(other.isPlate()){
+         if(this.isOven()){
+            plate = true;
+            return true;
+         }
+      }
       return false;
    }
    // putting an item in the oven
@@ -167,5 +194,8 @@ public class Item{
    // the item is cooked (show cooked form)
    public void ovenCooked(){
       oven = "O";
+   }
+   public boolean isOven(){
+      return oven.equals("O");
    }
 }

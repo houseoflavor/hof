@@ -324,7 +324,12 @@ public class HOFUtil extends HOF{
       }
       
       // orders
-      
+      LinkedList<Order> thing = game.getOrders();
+      int y=15;
+      for(Order n:thing){
+         g.drawImage(n.getPicture().getImage(), 1100, y, 180, 128, null);
+         y+=140;
+      }
       
       
       //drawBounds(g); // draw test bounds ----------------------------------------------

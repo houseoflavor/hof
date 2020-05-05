@@ -117,6 +117,14 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                            p1.drop();
                            itemTiles[i][j] = null;
                         }
+                        else if(gameTiles[i][j].getName().equals("del")){ // delivery = check if valid
+                           hasP1Int = true;
+                           if(p1.whatHold().isOven() && p1.whatHold().hasPlate()){
+                              game.deliver(p1.whatHold());
+                              p1.drop(); // lose item if cooked (regardless if correct or not)
+                           }
+                           // if not cooked, don't lose it
+                        }
                         else if (!gameTiles[i][j].getName().equals("") && !gameTiles[i][j].getName().equals("ove")){// does tile exist
                            if(itemTiles[i][j]==null){// does the tile already have something on it
                               hasP1Int = true;
@@ -148,7 +156,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                            hasP1Int = true;
                            if(itemTiles[i][j]==null){ // is empty?
                               // create a new food object and place it on the tile
-                              itemTiles[i][j] = new Item(gameTiles[i][j].getName(), p1, true, false);
+                              itemTiles[i][j] = new Item(gameTiles[i][j].getName(), true, false);
                               // have the player pick it up
                               p1.pickUpEmpty(itemTiles[i][j]);
                               itemTiles[i][j] = null;
@@ -310,6 +318,10 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             if(spawners.contains(" "+ singleLine[j] + " ")){
                gameTiles[i][j] = new Tile(singleLine[j],i,j,true,true);
             }
+            else if(singleLine[j].equals("bur")){
+               itemTiles[i][j] = new Item("pan", false, true);
+               gameTiles[i][j] = new Tile(singleLine[j], i, j, true, false);
+            }
             else if(singleLine[j].startsWith("co")){
                gameTiles[i][j] = new Tile(singleLine[j], i, j, false, false);
             }
@@ -389,7 +401,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                p2 = new Player("cat",500,500);
                p1.setLevel(gameTiles); // very important to have these 2 lines!!
                p2.setLevel(gameTiles);
-               game = new Game();
+               game = new Game(buttonTouching-10);
             }
             catch(Exception ee){}
             transX=1500;            

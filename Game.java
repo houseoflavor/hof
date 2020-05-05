@@ -21,6 +21,9 @@ public class Game{
             for(int i=0; i<orders.size(); i++){
                orders.get(i).decrement();
             }
+            
+            // adding orders
+            
          
          }
       };
@@ -34,13 +37,19 @@ public class Game{
    private static LinkedList<Order> orders;
    private int timeLeftInRound;
    private int complete;
+   private int coins;
+   private int level;
    
    //constructor
-   public Game(){
+   public Game(int l){
+      this.level=l;
       orders = new LinkedList<Order>();
-      timeLeftInRound = 120;
+      timeLeftInRound = 180;
       complete = 0;
       this.start();
+      coins = 0;
+      orders.add(new Order(45, false, false));
+      orders.add(new Order(45, false, false));
    }
    
    public LinkedList getOrders(){
@@ -52,5 +61,23 @@ public class Game{
    }
    public int getTime(){
       return timeLeftInRound;
+   }
+   
+   public void deliver(Item i){
+      for(int j=0; j<orders.size(); j++){
+         if(orders.get(j).match(i)){
+            coins+=orders.get(j).getScore();
+            orders.remove(j);
+            boolean mus, sau;
+            if(level>=2){
+               mus = Math.random()>0.5 ? true : false;
+            }
+            else{
+               mus = false;
+            }
+            //if(level
+            break;
+         }
+      }
    }
 }

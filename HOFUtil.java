@@ -125,6 +125,7 @@ public class HOFUtil extends HOF{
       
       /*
       tile ordering:
+      0 - orders ;)
       1 - find tallest player (smallest row), let that be p1
       2 - do all blocks above and including p1
       3 - 
@@ -145,6 +146,14 @@ public class HOFUtil extends HOF{
       int alpha = 190; // transparency 
       Color p1blue = new Color(17, 126, 233, alpha);
       Color p2red = new Color(252, 46, 46, alpha);
+      
+      // orders
+      LinkedList<Order> thing = game.getOrders();
+      int y=15;
+      for(Order n:thing){
+         g.drawImage(n.getPicture().getImage(), 1100, y, 180, 128, null);
+         y+=140;
+      }
       
       // 1 --
       boolean tall = false; // true: p1 is tallest, false: p2 is tallest
@@ -307,12 +316,20 @@ public class HOFUtil extends HOF{
          }
       }
       
-      // loading
+      // loaders
       for(int i=0; i<loader.size(); i++){
          Loader l = loader.get(i);
          l.advance();
          g.drawImage(l.getPicture().getImage(), l.getX()+6, l.getY()-8, 32, 16, null);
-         itemTiles[l.getRow()][l.getCol()].setCook(l.getUFrame());
+         if(itemTiles[l.getRow()][l.getCol()].inPan() && gameTiles[l.getRow()][l.getCol()].getName().equals("bur")){ // there is a pan on a burner
+            itemTiles[l.getRow()][l.getCol()].setPanCook(l.getUFrame());
+            if(l.getUFrame() == 561){
+               itemTiles[l.getRow()][l.getCol()].donePan();
+            }
+         }
+         else{
+            itemTiles[l.getRow()][l.getCol()].setCook(l.getUFrame());
+         }
       }
       
       
@@ -323,15 +340,13 @@ public class HOFUtil extends HOF{
          g.drawImage((new ImageIcon("images/numbers/num"+time.charAt(time.length()-i-1)+".png")).getImage(), (3-(i+2))*45+1000-15, 15, null);
       }
       
-      // orders
-      LinkedList<Order> thing = game.getOrders();
-      int y=15;
-      for(Order n:thing){
-         g.drawImage(n.getPicture().getImage(), 1100, y, 180, 128, null);
-         y+=140;
+      // coins
+      String coins = String.valueOf(game.getCoins());
+      g.drawImage((new ImageIcon("images/game/buffer.gif")).getImage(), 0, 0, 200, 60, null);
+      g.drawImage((new ImageIcon("images/game/coin.gif")).getImage(), -6, 0, 200, 60, null);
+      for(int i=0; i<coins.length(); i++){
+         g.drawImage((new ImageIcon("images/numbers/num"+coins.charAt(coins.length()-i-1)+".png")).getImage(), (4-(i+2))*36+85, 8, 36, 44, null);
       }
-      
-      
       //drawBounds(g); // draw test bounds ----------------------------------------------
    }
    

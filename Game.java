@@ -47,7 +47,7 @@ public class Game{
       timeLeftInRound = 180;
       complete = 0;
       this.start();
-      coins = 0;
+      coins = 1234;
       orders.add(new Order(45, false, false));
       orders.add(new Order(45, false, false));
    }
@@ -61,6 +61,9 @@ public class Game{
    }
    public int getTime(){
       return timeLeftInRound;
+   }
+   public int getCoins(){
+      return coins;
    }
    
    public void deliver(Item i){

@@ -15,6 +15,8 @@ public class Item{
    private boolean plate;
    private boolean pan;
    private ArrayList<String> ingr;
+   private int panCookLeft;
+   private String panned;
    // Item constructor
    public Item(String name, boolean f, boolean t){
       this.name=name;
@@ -32,6 +34,8 @@ public class Item{
       plate = false;
       cookLeft = 0;
       pan = false;
+      panCookLeft = 0;
+      panned = "";
    }
    public Item(){} // nothing constructor
    
@@ -68,14 +72,26 @@ public class Item{
    
    // returns an ImageIcon of the correct picture
    public ImageIcon getPicture(){
+      if(panned.equals("P")){ //sauced
+         return new ImageIcon("images/items/pantomP.gif");
+      }
       if(tool){
+         return new ImageIcon("images/items/"+name+".gif");
+      }
+      if(this.inPan()){
          return new ImageIcon("images/items/"+name+".gif");
       }
       return new ImageIcon("images/items/"+name+cut+oven+".gif");
    }
    // returns the highlighted version
    public ImageIcon getHPicture(){
+      if(panned.equals("P")){ //sauced
+         return new ImageIcon("images/items/pantomPH.gif");
+      }
       if(tool){
+         return new ImageIcon("images/items/"+name+"H.gif");
+      }
+      if(this.inPan()){
          return new ImageIcon("images/items/"+name+"H.gif");
       }
       return new ImageIcon("images/items/"+name+cut+oven+"H.gif");
@@ -125,21 +141,49 @@ public class Item{
    public int getCook(){
       return cookLeft;
    }
-   // (unused) sets cook time to 0
-   public void startCook(){
-      cookLeft = 0;
+   public int getPanCook(){
+      return panCookLeft;
    }
-   
+   public void setPanCook(int c){
+      panCookLeft = c;
+   }
    public boolean isPan(){
       return name.equals("pan");
    }
-   public boolean hasPan(){
+   public boolean inPan(){
       return pan;
    }
-   
+   public void setPan(boolean t){
+      pan = t;
+   }
+   public void donePan(){
+      panned = "C";
+   }
    // combines the other food with this
-   public boolean combine(Item other){
-      if(other.isFood() && (other.isChopped() || other.getName().length()!= 3) && (this.isChopped() || this.getName().length()!= 3)){
+   public boolean combine(Item other){ // this = what is on table; other = in hand
+      if(other.isPan()){ // holding pan, drop onto tomato
+         if(other.getName().equals("pan") && this.name.equals("tom") && this.isChopped() && other.getPanCook()<561){
+            ingr.add("pan");
+            pan = true;
+            other.setPan(true);
+            Collections.sort(ingr);
+            name = this.getName();
+            cut = "";
+            return true;
+         }
+      }
+      else if(this.isPan()){ // holding tomato, drop onto pan
+         if(this.getName().equals("pan") && other.name.equals("tom") && other.isChopped() && this.getPanCook()<561){
+            ingr.add("tom");
+            pan = true;
+            other.setPan(true);
+            Collections.sort(ingr);
+            cut = "";
+            name = this.getName();
+            return true;
+         }
+      }
+      else if(other.isFood() && (other.isChopped() || other.getName().length()!= 3) && (this.isChopped() || this.getName().length()!= 3)){
          ArrayList<String> oList = (ArrayList)(other.getList().clone());
          // are you adding something that already exists on the other item
          for(String n : ingr){ // if any item is a duplicate, can't combine

@@ -144,9 +144,17 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      }
                      else{ //tile is already occupied
                      // test if combination is possible
-                        hasP1Int=true;
-                        if(itemTiles[i][j].combine(p1.whatHold())){
+                        if(itemTiles[i][j]!= null && itemTiles[i][j].getName().equals("pan")){ // putting something into a pan
+                           itemTiles[i][j].combine(p1.whatHold());
+                           hasP1Int = true;
                            p1.drop();
+                           loader.add(new Loader(10, p1.getFCol(), p1.getFRow(), itemTiles[i][j].getPanCook()));
+                        }
+                        else{
+                           hasP1Int=true;
+                           if(itemTiles[i][j].combine(p1.whatHold())){
+                              p1.drop();
+                           }
                         }
                      }
                   }
@@ -185,12 +193,26 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                     }
                                  }
                               }
+                              else if(gameTiles[i][j].getName().equals("bur")){ // picking up pan with food in it and on burner
+                                 p1.pickUpEmpty(itemTiles[i][j]);
+                                 itemTiles[i][j] = null;
+                                 for(int k=0; k<loader.size(); k++){
+                                    if(i==loader.get(k).getRow() && j==loader.get(k).getCol()){
+                                       loader.remove(k);
+                                       break;
+                                    }
+                                 }
+                              }
                               else{
                                  p1.pickUpEmpty(itemTiles[i][j]);
                                  itemTiles[i][j] = null;
                               }
                            }
                         }
+                     }
+                     else{ // p1 hand NOT empty
+                     
+                     
                      }
                   }
                }
@@ -397,7 +419,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             transMode = "game";
             try{
                readFile("maps/level"+(buttonTouching-10)+".txt"); // --------------------------------- read file
-               p1 = new Player("monkey",300,300);
+               p1 = new Player("chicken",300,300);
                p2 = new Player("cat",500,500);
                p1.setLevel(gameTiles); // very important to have these 2 lines!!
                p2.setLevel(gameTiles);

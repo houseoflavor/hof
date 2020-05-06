@@ -21,7 +21,7 @@ public class HOFDriver{
       w.setLocation(0, 0);
       HOF graphics = window;
       w.setSize(1316,789); // the window size is slightly off, pretend 1300x750
-      w.setResizable(true);
+      w.setResizable(false);
       w.setVisible(true); // show it
       
       w.addKeyListener(new listen());

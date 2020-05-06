@@ -24,7 +24,10 @@ brightness editor: https://pinetools.com/change-image-brightness (set 50%)
 pizza icon: https://imgur.com/a/892gXOK
 
 ## Credits
-- Background music: https://www.youtube.com/watch?v=xJs87FJEWQQ
+music:
+- background music: https://www.youtube.com/watch?v=xJs87FJEWQQ
+- chop: https://www.youtube.com/watch?v=RB1rZFb2gNI
+- grab: https://www.youtube.com/watch?v=qZTOiwRFCDk
 
 fonts: 
 - https://www.1001fonts.com/dpcomic-font.html

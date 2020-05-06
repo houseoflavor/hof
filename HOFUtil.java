@@ -125,6 +125,7 @@ public class HOFUtil extends HOF{
       
       /*
       tile ordering:
+      -1 - do the floor tiles + conveyers
       0 - orders ;)
       1 - find tallest player (smallest row), let that be p1
       2 - do all blocks above and including p1
@@ -147,6 +148,23 @@ public class HOFUtil extends HOF{
       Color p1blue = new Color(17, 126, 233, alpha);
       Color p2red = new Color(252, 46, 46, alpha);
       
+      // -1
+      for(int i=0; i<12; i++){
+         for(int j=0; j<20; j++){
+            ImageIcon tile;
+            try{
+               if(gameTiles[i][j].getName().startsWith("co")){
+                  tile = gameTiles[i][j].getPicture(p1.getFacing(), p2.getFacing(), false);
+                  g.drawImage(tile.getImage(),j*32+228, i*32+178-32, 32, 64, null);
+               }
+            }
+            catch(Exception eee){
+               tile = new ImageIcon("");
+            }
+         }
+      }
+   
+      
       // orders
       LinkedList<Order> thing = game.getOrders();
       int y=15;
@@ -154,6 +172,8 @@ public class HOFUtil extends HOF{
          g.drawImage(n.getPicture().getImage(), 1100, y, 180, 128, null);
          y+=140;
       }
+      
+      
       
       // 1 --
       boolean tall = false; // true: p1 is tallest, false: p2 is tallest
@@ -377,6 +397,9 @@ public class HOFUtil extends HOF{
                if(gameTiles[i][j].getName().equals("ove")){
                   tile = gameTiles[i][j].getOvePic(p1.getFacing(), p2.getFacing());
                }  
+               if(gameTiles[i][j].getName().startsWith("co")){
+                  tile = new ImageIcon("");
+               }
                else{
                   tile = gameTiles[i][j].getPicture(p1.getFacing(), p2.getFacing(), hasItem);
                }

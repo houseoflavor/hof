@@ -45,12 +45,6 @@ public class Item{
    public boolean isTool(){
       return tool;
    }
-   public boolean hasPlate(){
-      return plate;
-   }
-   public boolean isPlate(){
-      return name.equals("pla");
-   }
    // returns the full name of all the ingredients in the item
    public String getName(){
       Collections.sort(ingr);
@@ -146,6 +140,7 @@ public class Item{
    public int getCook(){
       return cookLeft;
    }
+   // i don't know which one's i'm still using but i really don't want to check so just keep all of these and it works so /shrug
    public int getPanCook(){
       return panCookLeft;
    }
@@ -160,6 +155,12 @@ public class Item{
    }
    public void setPan(boolean t){
       pan = t;
+   }
+   public boolean hasPlate(){
+      return plate;
+   }
+   public boolean isPlate(){
+      return name.equals("pla");
    }
    public void donePan(){
       panned = "P";
@@ -198,7 +199,7 @@ public class Item{
          }
          // is it a valid food combination?
          // top = tomato pan (tomato is cooked)
-         String validCombo = " doutop chedou chedoutop chedoumustop "; // expand as needed
+         String validCombo = " doutop chedou chedoutop chedoumustop doumustop chedoumus doumus "; // expand as needed
          for(String n : ingr){
             oList.add(n);
          }

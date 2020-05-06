@@ -114,10 +114,13 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         // test if trash
                         if(gameTiles[i][j].getName().equals("tra")){
                            hasP1Int = true;
-                           p1.drop();
-                           itemTiles[i][j] = null;
+                           if(p1.whatHold().isFood()){
+                              p1.drop();
+                              itemTiles[i][j] = null;
+                           }
                         }
                         else if(gameTiles[i][j].getName().equals("del")){ // delivery = check if valid
+                           sound("grab", 5);
                            hasP1Int = true;
                            if(p1.whatHold().isOven() && p1.whatHold().hasPlate()){
                               game.deliver(p1.whatHold());
@@ -127,19 +130,24 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         }
                         else if(gameTiles[i][j].getName().equals("bur")){
                            if(itemTiles[i][j] == null){
+                              sound("grab", 5);
                               hasP1Int = true;
                               itemTiles[i][j] = p1.whatHold();
                               if(p1.whatHold().getName().contains("pan") && p1.whatHold().getName().contains("tom")){
+                                 
                                  loader.add(new Loader(10, p1.getFCol(), p1.getFRow(), itemTiles[i][j].getPanCook()));
                                  p1.drop();
+                                 sound("sizz", 0);
                               }
                               else{
+                                 sound("grab", 5);
                                  p1.drop();
                               }
                            }
                         }
                         else if (!gameTiles[i][j].getName().equals("") && !gameTiles[i][j].getName().equals("ove")){// does tile exist
                            if(itemTiles[i][j]==null){// does the tile already have something on it
+                              sound("grab", 5);
                               hasP1Int = true;
                               itemTiles[i][j] = p1.whatHold();
                               p1.drop();
@@ -148,6 +156,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         else if(gameTiles[i][j].getName().equals("ove")){ // adding food to oven
                            if(itemTiles[i][j] == null && p1.whatHold().oven()){ // nothing in the oven? & can be put in oven?
                               hasP1Int = true;
+                              sound("oven", 2);
                               itemTiles[i][j] = p1.whatHold();
                               gameTiles[i][j].turnOn();
                               p1.drop();
@@ -179,6 +188,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               p1.drop();
                               if(gameTiles[i][j].getName().equals("bur")){ // only add loader if the pan is on a burner
                                  loader.add(new Loader(10, p1.getFCol(), p1.getFRow(), itemTiles[i][j].getPanCook()));
+                                 sound("sizz", 0);
                               }
                            }
                         }
@@ -189,6 +199,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                  p1.drop();
                                  if(gameTiles[i][j].getName().equals("bur")){
                                     loader.add(new Loader(10, p1.getFCol(), p1.getFRow(), itemTiles[i][j].getPanCook()));
+                                    sound("sizz", 0);
                                  }
                               }
                            }
@@ -206,7 +217,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         else{
                            hasP1Int=true;
                            if(itemTiles[i][j].combine(p1.whatHold())){
-                              p1.drop();
+                              p1.pickUpEmpty(itemTiles[i][j]);
+                              itemTiles[i][j] = null;
                            }
                         }
                      }
@@ -214,6 +226,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                   else{ // picking up
                      if(!p1.isHold()){ // player's hand is empty
                         if(gameTiles[i][j].isSpawner()){ // is this tile a spawner
+                           sound("grab", 5);
                            hasP1Int = true;
                            if(itemTiles[i][j]==null){ // is empty?
                               // create a new food object and place it on the tile
@@ -230,6 +243,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         }
                         else if(!gameTiles[i][j].getName().equals("")){ // does tile exist
                            if(itemTiles[i][j]!=null){// does the tile actually have something on it
+                              sound("grab", 5);
                               hasP1Int = true;
                               if(gameTiles[i][j].getName().equals("ove")){ // taking something out of oven
                                  p1.pickUpEmpty(itemTiles[i][j]);
@@ -247,6 +261,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                  }
                               }
                               else if(gameTiles[i][j].getName().equals("bur")){ // picking up pan with food in it and on burner
+                                 sound("grab", 5);
                                  p1.pickUpEmpty(itemTiles[i][j]);
                                  itemTiles[i][j] = null;
                                  for(int k=0; k<loader.size(); k++){
@@ -257,6 +272,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                  }
                               }
                               else{
+                                 sound("grab", 5);
                                  p1.pickUpEmpty(itemTiles[i][j]);
                                  itemTiles[i][j] = null;
                               }
@@ -280,6 +296,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      hasP1Chop = true;
                      itemTiles[p1.getFRow()][p1.getFCol()].chop();
                      knives.add(new Knife(p1.getFCol()*32+222, p1.getFRow()*32+178-12));
+                     sound("chop", 5);
                   }
                }
                catch(Exception e){} // no item here
@@ -507,7 +524,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          clip.open(stream);
          // control volume
          FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-         volume.setValue(-4);
+         volume.setValue(-6);
          clip.start();
          //loop music
          clip.loop(Clip.LOOP_CONTINUOUSLY);
@@ -515,6 +532,26 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       catch (Exception exception) {
          System.out.println("No music detected");
       }
+   }
+   public static void sound(String name, int vol){
+      try{
+         File file = new File("sounds/"+name+".wav");
+         AudioInputStream stream;
+         AudioFormat format;
+         DataLine.Info info;
+         Clip clip;
+      
+         stream = AudioSystem.getAudioInputStream(file);
+         format = stream.getFormat();
+         info = new DataLine.Info(Clip.class, format);
+         clip = (Clip) AudioSystem.getLine(info);
+         clip.open(stream);
+         // control volume
+         FloatControl volume = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+         volume.setValue(vol);
+         clip.start();
+      }
+      catch(Exception e){}
    }
    
    

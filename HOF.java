@@ -279,7 +279,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                            }
                         }
                      }
-                     else{ // p1 hand NOT empty
+                     else{ // p1 hand NOT empty (and picking up)
                      
                      
                      }

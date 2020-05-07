@@ -17,6 +17,7 @@ public class Tile {
    private boolean spawner;
    private String on;
    private boolean conveyer;
+   private int numPlates;
    
    // constructor
    //           name      row    col   hitbox?    spawner?
@@ -30,6 +31,7 @@ public class Tile {
       spawner = s;
       on = "";
       conveyer = n.startsWith("co");
+      numPlates = 0;
    }
    
    // returns the imageicon of the tile
@@ -45,7 +47,13 @@ public class Tile {
                return new ImageIcon("images/tile/cutNH.gif");
             }
          }
+         if(name.equals("pla")){
+            return new ImageIcon("images/tile/pla"+numPlates+"H.gif");
+         }
          return new ImageIcon("images/tile/"+name+"H.gif");
+      }
+      if(name.equals("pla")){
+         return new ImageIcon("images/tile/pla"+numPlates+".gif");
       }
       if(hasItem){ // cutting board (knife)
          if(name.equals("cut")){
@@ -60,6 +68,24 @@ public class Tile {
          return new ImageIcon("images/tile/ove"+on+"H.gif");
       }
       return new ImageIcon("images/tile/ove"+on+".gif");
+   }
+   
+   public boolean addPlate(){
+      if(numPlates<4){
+         numPlates++;
+         return true;
+      }
+      return false;
+   }
+   public int getPlate(){
+      return numPlates;
+   }
+   public boolean takePlate(){
+      if(numPlates>0){
+         numPlates--;
+         return true;
+      }
+      return false;
    }
    
    // returns spawner

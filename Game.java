@@ -21,7 +21,6 @@ public class Game{
             for(int i=0; i<orders.size(); i++){
                orders.get(i).decrement();
             }
-            
             // adding orders
             
          

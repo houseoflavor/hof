@@ -328,6 +328,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    
    static int transX, transition;
    
+   static int platX, platY;
+   
    static Tile [][] gameTiles;
    static Item [][] itemTiles;
    
@@ -417,6 +419,10 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             else if(singleLine[j].startsWith("co")){
                gameTiles[i][j] = new Tile(singleLine[j], i, j, false, false);
             }
+            else if(singleLine[j].equals("pla")){
+               platX = j;
+               platY = i;
+            }
             else if(!singleLine[j].equals("flo")){
                gameTiles[i][j] = new Tile(singleLine[j], i, j, true,false);
             }
@@ -490,7 +496,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             try{
                readFile("maps/level"+(buttonTouching-10)+".txt"); // --------------------------------- read file
                p1 = new Player("chicken",300,300);
-               p2 = new Player("cat",500,500);
+               p2 = new Player("mouse",500,500);
                p1.setLevel(gameTiles); // very important to have these 2 lines!!
                p2.setLevel(gameTiles);
                game = new Game(buttonTouching-10);

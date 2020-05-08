@@ -498,7 +498,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             transMode = "game";
             try{
                readFile("maps/level"+(buttonTouching-10)+".txt"); // --------------------------------- read file
-               p1 = new Player("chicken",300,300);
+               p1 = new Player("pig",300,300);
                p2 = new Player("mouse",500,500);
                p1.setLevel(gameTiles); // very important to have these 2 lines!!
                p2.setLevel(gameTiles);

@@ -110,8 +110,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                   int i = p1.getFRow();
                   int j = p1.getFCol();
                   if(p1.isHold()){ // holding something -> drop item
-                     if(gameTiles[i][j].getName().equals("wal")){
-                        // if wall tile, do nothing
+                     if(gameTiles[i][j].getName().equals("wal") || gameTiles[i][j].getName().startsWith("co") || gameTiles[i][j].getName().startsWith("si")){
+                        // these tiles are invalid to put something on
                      }
                      else if(itemTiles[i][j] == null){   // space is empty
                         // test if trash

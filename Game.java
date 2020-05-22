@@ -23,6 +23,9 @@ public class Game{
             }
             // adding orders
             
+            if(timeLeftInRound % 20 == 0){ // spawn plate every x seconds
+               spawnPlate = true;
+            }
          
          }
       };
@@ -38,9 +41,11 @@ public class Game{
    private int complete;
    private int coins;
    private int level;
+   private boolean spawnPlate;
    
    //constructor
    public Game(int l){
+      spawnPlate = true;
       this.level=l;
       orders = new LinkedList<Order>();
       timeLeftInRound = 180;
@@ -63,6 +68,14 @@ public class Game{
    }
    public int getCoins(){
       return coins;
+   }
+   
+   public void spawnPlate(){
+      spawnPlate = false;
+   }
+   
+   public boolean shouldSpawn(){
+      return spawnPlate;
    }
    
    public void deliver(Item i){

@@ -189,6 +189,12 @@ public class Item{
             return true;
          }
       }
+      else if(other.isPlate()){
+         if(this.isOven()){
+            plate = true;
+            return true;
+         }
+      }
       else if(other.isFood() && (other.isChopped() || other.getName().length()!= 3) && (this.isChopped() || this.getName().length()!= 3)){
          ArrayList<String> oList = (ArrayList)(other.getList().clone());
          // are you adding something that already exists on the other item
@@ -217,12 +223,6 @@ public class Item{
             ingr = oList;
             name = this.getName();
             cut = "";
-            return true;
-         }
-      }
-      else if(other.isPlate()){
-         if(this.isOven()){
-            plate = true;
             return true;
          }
       }

@@ -109,9 +109,20 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                if(!hasP1Int){
                   int i = p1.getFRow();
                   int j = p1.getFCol();
-                  if(p1.isHold()){ // holding something -> drop item
-                     if(gameTiles[i][j].getName().equals("wal") || gameTiles[i][j].getName().startsWith("co") || gameTiles[i][j].getName().startsWith("si")){
+                  if(p1.isHold()){ // holding something
+                     if(gameTiles[i][j].getName().equals("wal") || gameTiles[i][j].getName().startsWith("co")){
                         // these tiles are invalid to put something on
+                     }
+                     else if(gameTiles[i][j].getName().startsWith("pla")){
+                        if(gameTiles[i][j].getPlates()>0){
+                           Item tempPlate = new Item("pla", false, true);
+                           if(p1.whatHold().combine(tempPlate)){ // if successfully combine
+                              gameTiles[i][j].takePlate(); // take a plate
+                           }
+                        }
+                     }
+                     else if(gameTiles[i][j].getName().startsWith("siw") && p1.whatHold().isPlate()){ // putting in sink water plate
+                        // putting plate in water
                      }
                      else if(itemTiles[i][j] == null){   // space is empty
                         // test if trash
@@ -308,7 +319,14 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                hasP1Chop = false;
             }
             
-            
+            // plate stuff
+            try{
+               if(game!=null && game.shouldSpawn() && numPlates<4){
+                  gameTiles[platY][platX].addPlate();
+                  game.spawnPlate();
+               }
+            }
+            catch(Exception e){}
             repaint();
          }
       };
@@ -326,6 +344,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static ArrayList<Loader> loader;
    static int mouseX, mouseY;
    static int buttonTouching;
+   
+   static int numPlates;
    
    static Game game;
    
@@ -423,6 +443,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                gameTiles[i][j] = new Tile(singleLine[j], i, j, false, false);
             }
             else if(singleLine[j].equals("pla")){
+               gameTiles[i][j] = new Tile(singleLine[j], i, j, true, false);
                platX = j;
                platY = i;
             }

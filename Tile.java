@@ -71,16 +71,22 @@ public class Tile {
    }
    
    public boolean addPlate(){
+      if(!name.equals("pla")){
+         return false;
+      }
       if(numPlates<4){
          numPlates++;
          return true;
       }
       return false;
    }
-   public int getPlate(){
+   public int getPlates(){
       return numPlates;
    }
    public boolean takePlate(){
+      if(!name.equals("pla")){
+         return false;
+      }
       if(numPlates>0){
          numPlates--;
          return true;

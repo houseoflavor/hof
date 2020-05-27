@@ -106,7 +106,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             // interact
             // p1 -----
             if(keysDown.contains(KeyEvent.VK_E)){
-               if(!hasP1Int){
+               if(!hasP1Int){ // interactions? its really big idk whats what anymore
                   int i = p1.getFRow();
                   int j = p1.getFCol();
                   if(p1.isHold()){ // holding something

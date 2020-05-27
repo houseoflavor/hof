@@ -7,6 +7,7 @@ public class Order{
    private int type;
    private int ypos;
    private int ID;
+   private boolean passed = false;
    public Order(int x){
       ypos = -1;
       timeLeft = x;
@@ -62,11 +63,15 @@ public class Order{
       return type;
    }
    public int getScore(){
+      passed = true;
       return (40+timeLeft)+((sausage) ? 10 : 0)+((mushroom) ? 10 : 0); // calculates the score of (40+timeLeft) + 10 if sausage + 10 if mushroom
+   }
+   public boolean getPassed(){
+      return passed;
    }
    
    public ImageIcon getPicture(){
-      return new ImageIcon("images/game/order"+type+(timeLeft<=0 ? "F" : "")+".gif");
+      return new ImageIcon("images/game/order"+type+((timeLeft<=0 && !passed) ? "F" : "")+(passed ? "P" : "")+".gif");
    }
 
 }

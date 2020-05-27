@@ -33,6 +33,20 @@ public class Game{
                   orders.remove(i);
                }
             }
+            for(int i=0; i<rem.size(); i++){
+               if(remNums.get(i)<=0){
+                  System.out.println("removing" + rem.get(i));
+                  orders.remove((int)(rem.get(i).intValue()));
+                  rem.remove(i);
+                  remNums.remove(i);
+                  addOrder();
+                  break;
+               }
+               else{
+                  System.out.println("minus one" + remNums.get(i));
+                  remNums.set(i, remNums.get(i)-1);
+               }
+            }
             // adding orders
             if(nextOrder == 0){
                addOrder();
@@ -83,6 +97,8 @@ public class Game{
    private boolean spawnPlate2;
    private int nextOrder;
    private int nextPlate;
+   private ArrayList<Integer> rem = new ArrayList<Integer>();
+   private ArrayList<Integer> remNums = new ArrayList<Integer>();
    
    //constructor
    public Game(int l){
@@ -130,8 +146,8 @@ public class Game{
       for(int j=0; j<orders.size(); j++){
          if(orders.get(j).match(i)){
             coins+=orders.get(j).getScore();
-            orders.remove(j);
-            addOrder();
+            rem.add(j);
+            remNums.add(3);
             return true;
          }
       }

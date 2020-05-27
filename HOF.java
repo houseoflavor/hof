@@ -508,7 +508,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    public void mouseMoved(MouseEvent e){
       mouseX=e.getX();
       mouseY=e.getY();
-      System.out.println("mousex: " + mouseX + " mousey: " + mouseY); // mouse ---------
+      //System.out.println("mousex: " + mouseX + " mousey: " + mouseY); // mouse ---------
    }
    public void mouseClicked(MouseEvent e){
       mouseX=e.getX();

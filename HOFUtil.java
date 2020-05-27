@@ -67,6 +67,12 @@ public class HOFUtil extends HOF{
       g.drawImage(gradient.getImage(),0,0,null);
       g.drawImage(cloud.getPicture().getImage(),cloud.move(),0,null);
       g.drawImage((new ImageIcon("images/menus/vine-wall.png")).getImage(), 0, 0, null);
+      if(mouseX<1150 && mouseX>454 && mouseY<727 && mouseY>635){ // do stuff for mouse hovering over char select
+         g.drawImage((new ImageIcon("images/menus/charsel-click.png")).getImage(), 0, 0, null);
+      }
+      else{
+         g.drawImage((new ImageIcon("images/menus/charsel-unclicked.png")).getImage(), 0, 0, null);
+      }
       for(int i=0; i<2; i++){
          for(int j=0; j<5; j++){
             int size = 160;
@@ -453,7 +459,8 @@ public class HOFUtil extends HOF{
       // home
       ImageIcon homescreen = new ImageIcon("images/menus/wall-and-sign.png");
       g.drawImage(homescreen.getImage(),0,0,1300,750,null);
-      
+      // cardinal
+      g.drawImage((new ImageIcon("images/menus/cardinal.gif")).getImage(), 0, 0, null);
       // buttons
       ImageIcon startun = new ImageIcon("images/menus/start-unclicked.png");
       ImageIcon startcl = new ImageIcon("images/menus/start-click.png");

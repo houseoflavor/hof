@@ -2,7 +2,7 @@
 # House o' Flavor
 Advanced CS Final Project
 
-by Ethan, Vinhan, and An
+by Ethan and Vinhan
 
 ## Download Instructions
 

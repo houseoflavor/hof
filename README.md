@@ -5,7 +5,7 @@ Advanced CS Final Project
 by Ethan and Vinhan
 
 
-Website: https://preview.tinyurl.com/houseoflavor
+Website: https://tinyurl.com/houseoflavor
 ## Download Instructions
 
 https://tinyurl.com/hofdownload

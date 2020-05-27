@@ -24,7 +24,7 @@ public class Game{
                orders.get(i).decrement();
                if(orders.get(i).timeLeft()==0){
                   coins-=30;
-                  nextOrder = 10;
+                  nextOrder = 4;
                   if(coins<0){
                      coins = 0;
                   }
@@ -33,13 +33,18 @@ public class Game{
                   orders.remove(i);
                }
             }
+            if(timeLeftInRound==170){
+               spawnPlate = true;
+            }
+            if(timeLeftInRound==160){
+               spawnPlate = true;
+            }
             for(int i=0; i<rem.size(); i++){
                if(remNums.get(i)<=0){
                   System.out.println("removing" + rem.get(i));
                   orders.remove((int)(rem.get(i).intValue()));
                   rem.remove(i);
                   remNums.remove(i);
-                  addOrder();
                   break;
                }
                else{
@@ -51,14 +56,11 @@ public class Game{
             if(nextOrder == 0){
                addOrder();
             }
-            if((timeLeftInRound+10) % 30 == 0){ // spawn plate every x seconds
-               spawnPlate = true;
-            }
-            if(timeLeftInRound % 30 == 0){ // new order every x sec
+            if(timeLeftInRound % 10 == 0 && timeLeftInRound < 120){ // new order every x sec (and wait initial 1 minute)
                addOrder();
             }
             if(nextPlate == 0){
-               spawnPlate2 = true;
+               spawnPlate = true;
             }
          
          }
@@ -94,7 +96,6 @@ public class Game{
    private int coins;
    private int level;
    private boolean spawnPlate;
-   private boolean spawnPlate2;
    private int nextOrder;
    private int nextPlate;
    private ArrayList<Integer> rem = new ArrayList<Integer>();
@@ -130,16 +131,11 @@ public class Game{
    }
    
    public void spawnPlate(){
-      if(spawnPlate){
-         spawnPlate = false;
-      }
-      else if(spawnPlate2){
-         spawnPlate2 = false;
-      }
+      spawnPlate = false;
    }
    
    public boolean shouldSpawn(){
-      return spawnPlate || spawnPlate2;
+      return spawnPlate;
    }
    
    public boolean deliver(Item i){
@@ -148,10 +144,11 @@ public class Game{
             coins+=orders.get(j).getScore();
             rem.add(j);
             remNums.add(3);
+            nextPlate = 15; // 15 seconds after delivery for next plate
+            addOrder();
             return true;
          }
       }
-      nextPlate = 6;
       return false;
    }
 }

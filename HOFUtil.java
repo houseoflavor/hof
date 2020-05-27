@@ -416,9 +416,6 @@ public class HOFUtil extends HOF{
                   }
                }
                catch(Exception ee){}
-               if(gameTiles[i][j].getName().equals("ove")){
-                  tile = gameTiles[i][j].getOvePic(p1.getFacing(), p2.getFacing());
-               }  
                if(gameTiles[i][j].getName().startsWith("co")){
                   tile = new ImageIcon("");
                }

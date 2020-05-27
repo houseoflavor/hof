@@ -36,7 +36,7 @@ public class Order{
    public boolean match(Item other){
       if(mushroom == other.getList().contains("mus")){
          if(sausage == other.getList().contains("sau")){ 
-            if(other.isOven() && other.hasPlate()){
+            if(other.isOven() && other.hasPlate() && timeLeft > 0){
                return true;
             }
          }

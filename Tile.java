@@ -42,18 +42,24 @@ public class Tile {
          return pic;
       } // return highlighted picture
       if(t1==tileID || t2==tileID){
+         if(name.equals("ove")){
+            return new ImageIcon("images/tile/ove"+on+"H.gif");
+         }
+         if(name.equals("pla")){
+            return new ImageIcon("images/tile/pla"+numPlates+"H.gif");
+         }
          if(hasItem){
             if(name.equals("cut")){
                return new ImageIcon("images/tile/cutNH.gif");
             }
          }
-         if(name.equals("pla")){
-            return new ImageIcon("images/tile/pla"+numPlates+"H.gif");
-         }
          return new ImageIcon("images/tile/"+name+"H.gif");
       }
       if(name.equals("pla")){
          return new ImageIcon("images/tile/pla"+numPlates+".gif");
+      }
+      if(name.equals("ove")){
+         return new ImageIcon("images/tile/ove"+on+".gif");
       }
       if(hasItem){ // cutting board (knife)
          if(name.equals("cut")){
@@ -61,13 +67,6 @@ public class Tile {
          }
       }
       return pic;
-   }
-   
-   public ImageIcon getOvePic(int t1, int t2){
-      if(t1==tileID || t2== tileID){
-         return new ImageIcon("images/tile/ove"+on+"H.gif");
-      }
-      return new ImageIcon("images/tile/ove"+on+".gif");
    }
    
    public boolean addPlate(){

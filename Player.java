@@ -81,7 +81,12 @@ public class Player{
          if(idleFrame==((4*idleSpeed)-(int)(idleSpeed/1.2))){ // -idleSpeed/# to make the closed eye part a lot faster
             idleFrame=0;
          }
-         return frames[ai][directions.get(directions.size()-1)-1][idleFrame/idleSpeed];
+         try{
+            return frames[ai][directions.get(directions.size()-1)-1][idleFrame/idleSpeed];
+         }
+         catch(Exception e){
+            return new ImageIcon("images/characters/"+name+"/idle/"+direction+"/frame_0.gif");
+         }
       }
       else{ // moving
          state = "active";

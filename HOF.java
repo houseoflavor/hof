@@ -112,6 +112,17 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                   if(p1.isHold()){ // holding something
                      if(gameTiles[i][j].getName().equals("wal") || gameTiles[i][j].getName().startsWith("co")){
                         // these tiles are invalid to put something on
+                        hasP1Int = true;
+                     }
+                     else if(gameTiles[i][j].getName().equals("del")){ // delivering
+                        hasP1Int = true;
+                        if(p1.whatHold().isOven()){ // no consequence for uncooked items
+                           if(p1.whatHold().hasPlate()){
+                           // you do lose the item if the item is plated however
+                              game.deliver(p1.whatHold()); // returns boolean is successful, if future me wants to use
+                              p1.drop();
+                           }  
+                        }
                      }
                      else if(gameTiles[i][j].getName().equals("pla")){ // taking plate while holding something
                         if(gameTiles[i][j].getPlates()>0){
@@ -119,6 +130,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                            Item tempPlate = new Item("pla", false, true);
                            if(p1.whatHold().combine(tempPlate)){ // if successfully combine
                               gameTiles[i][j].takePlate(); // take a plate
+                              hasP1Int = true;
                            }
                         }
                      }
@@ -181,7 +193,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      }
                      else{ //tile is already occupied
                      // test if combination is possible
-                        if(itemTiles[i][j] != null && p1.whatHold().getName().contains("dou") && itemTiles[i][j].getName().contains("pan") && itemTiles[i][j].getName().contains("tom")){ // hold dough pick up tomatoes from pan
+                        if(itemTiles[i][j] != null && p1.whatHold().getName().contains("dou") && itemTiles[i][j].getName().contains("pan") && itemTiles[i][j].getName().contains("tom") && itemTiles[i][j].getPanned().equals("P")){ // hold dough pick up tomatoes from pan
                            hasP1Int = true;
                            Item tempTom = new Item("top", true, false);
                            tempTom.setChopped();
@@ -218,7 +230,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                  }
                               }
                            }
-                           else if(itemTiles[i][j].getName().contains("dou") && !itemTiles[i][j].getName().contains("top")){ // hold pan onto something with dough
+                           else if(itemTiles[i][j].getName().contains("dou") && !itemTiles[i][j].getName().contains("top") && p1.whatHold().getPanned().equals("P")){ // hold pan onto something with dough
                               hasP1Int = true;
                               Item tempTom = new Item("top", true, false);
                               tempTom.setChopped();
@@ -370,7 +382,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static Clouds cloud;
    
    //finals
-   static final int NONE = 0, START = 1, CONTROLS = 2, EXIT = 3; // 11+ is level 1, 2, 3, 4, 5 etc.
+   static final int NONE = 0, START = 1, CONTROLS = 2, EXIT = 3, CHARSEL = 4; // 11+ is level 1, 2, 3, 4, 5 etc.
    static final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
    
    public HOF(){ // constructor
@@ -536,6 +548,11 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             }
             catch(Exception ee){}
             transX=1500;            
+            transition = 1;
+         }
+         else if(buttonTouching == 4){
+            transMode = "charsel";
+            transX=1500;
             transition = 1;
          }
       }

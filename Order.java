@@ -5,13 +5,17 @@ public class Order{
    private boolean mushroom, sausage;
    private int timeLeft;
    private int type;
+   private int ypos;
+   private int ID;
    public Order(int x){
+      ypos = -1;
       timeLeft = x;
       mushroom = false;
       sausage = false;
       type = 1;
    }
-   public Order(int x, boolean m, boolean s){
+   public Order(int x, boolean m, boolean s, boolean first){
+      ypos = (first ? 900 : -1);
       timeLeft = x;
       mushroom = m;
       sausage = s;
@@ -38,7 +42,18 @@ public class Order{
       }
       return false;
    }
-   
+   public void setID(int id){
+      this.ID = id;
+   }
+   public int getID(){
+      return ID;
+   }
+   public void setYPos(int y){
+      ypos = y;
+   }   
+   public int getYPos(){
+      return ypos;
+   }
    public int timeLeft(){
       return timeLeft;
    }
@@ -47,11 +62,11 @@ public class Order{
       return type;
    }
    public int getScore(){
-      return (100-timeLeft)+((sausage) ? 0 : 10)+((mushroom) ? 0 : 10); //lmfao ternary
+      return (40+timeLeft)+((sausage) ? 10 : 0)+((mushroom) ? 10 : 0); // calculates the score of (40+timeLeft) + 10 if sausage + 10 if mushroom
    }
    
    public ImageIcon getPicture(){
-      return new ImageIcon("images/game/order"+type+".gif");
+      return new ImageIcon("images/game/order"+type+(timeLeft<=0 ? "F" : "")+".gif");
    }
 
 }

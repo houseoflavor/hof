@@ -69,6 +69,7 @@ public class HOFUtil extends HOF{
       g.drawImage((new ImageIcon("images/menus/vine-wall.png")).getImage(), 0, 0, null);
       if(mouseX<1150 && mouseX>454 && mouseY<727 && mouseY>635){ // do stuff for mouse hovering over char select
          g.drawImage((new ImageIcon("images/menus/charsel-click.png")).getImage(), 0, 0, null);
+         buttonTouching = 4;
       }
       else{
          g.drawImage((new ImageIcon("images/menus/charsel-unclicked.png")).getImage(), 0, 0, null);
@@ -173,9 +174,24 @@ public class HOFUtil extends HOF{
       
       // orders
       LinkedList<Order> thing = game.getOrders();
-      int y=15;
-      for(Order n:thing){
-         g.drawImage(n.getPicture().getImage(), 1100, y, 180, 128, null);
+      int y=16;
+      for(int i=0; i<thing.size(); i++){
+         Order n = thing.get(i);
+         if(n.getYPos()==-1){
+            n.setYPos(y);
+            n.setID(i);
+         }
+         else if(i != n.getID()){
+            n.setYPos(n.getYPos()-4);
+            n.setID(i);
+         }
+         else if(n.getYPos()>=16+(i*140)){
+            n.setYPos(n.getYPos()-(int)((n.getYPos()-(16+(i*140)))/10));
+         }
+         else{
+            n.setYPos(16+(i*140));
+         }
+         g.drawImage(n.getPicture().getImage(), 1100, n.getYPos(), 180, 128, null);
          y+=140;
       }
       

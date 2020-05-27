@@ -59,6 +59,10 @@ public class Item{
       return ingr;
    }
    
+   public void setList(ArrayList<String> other){
+      ingr = other;
+   }
+   
    // returns whether an item is chopped
    public boolean isChopped(){
       return cut.equals("C");
@@ -66,6 +70,9 @@ public class Item{
    
    // returns an ImageIcon of the correct picture
    public ImageIcon getPicture(){
+      if(plate){
+         return new ImageIcon("images/items/"+name+"pla.gif");
+      }
       if(panned.equals("P")){ //sauced
          return new ImageIcon("images/items/pantomP.gif");
       }
@@ -168,6 +175,9 @@ public class Item{
    public void donePan(){
       panned = "P";
    }
+   public String getPanned(){
+      return panned;
+   }
    public void setPlate(boolean t){
       plate = t;
    }
@@ -196,14 +206,19 @@ public class Item{
          }
       }
       else if(other.isPlate()){
-         if(this.isOven()){
+         if(this.isOven() && !plate){
             plate = true;
             return true;
          }
       }
-      else if(this.isPlate()){ // hmm
-         if(other.isOven()){
-            other.setPlate(true);
+      else if(this.isPlate()){
+         if(other.isOven() && !other.hasPlate()){
+            plate = true;
+            tool = false;
+            food = true;
+            oven = "O";
+            ingr = other.getList();
+            name = other.getName();
             return true;
          }
       }

@@ -192,6 +192,8 @@ public class HOFUtil extends HOF{
             n.setYPos(16+(i*140));
          }
          g.drawImage(n.getPicture().getImage(), 1100, n.getYPos(), 180, 128, null);
+         g.drawImage(n.getLoader().getPicture().getImage(), 1100, n.getYPos(), 180, 128, null);
+         n.getLoader().advance();
          y+=140;
       }
       

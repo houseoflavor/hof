@@ -7,14 +7,8 @@ public class Order{
    private int type;
    private int ypos;
    private int ID;
+   private LoaderV2 load;
    private boolean passed = false;
-   public Order(int x){
-      ypos = -1;
-      timeLeft = x;
-      mushroom = false;
-      sausage = false;
-      type = 1;
-   }
    public Order(int x, boolean m, boolean s, boolean first){
       ypos = (first ? 900 : -1);
       timeLeft = x;
@@ -27,9 +21,13 @@ public class Order{
       if(mushroom){
          type++;
       }
+      load = new LoaderV2(62);
    }
    public void decrement(){
       timeLeft--;
+   }
+   public LoaderV2 getLoader(){
+      return load;
    }
    
    // returns whether 'other' is a correct order

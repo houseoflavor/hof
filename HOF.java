@@ -138,6 +138,34 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      else if(gameTiles[i][j].getName().startsWith("siw") && p1.whatHold().isPlate()){ // putting in sink water plate
                         // putting plate in water
                      }
+                     else if(gameTiles[i][j].getName().equals("ove")){ // adding food to oven
+                        if(itemTiles[i][j] == null && p1.whatHold().oven()){ // nothing in the oven? & can be put in oven?
+                           sound("oven", 2);
+                           itemTiles[i][j] = p1.whatHold();
+                           gameTiles[i][j].turnOn();
+                           p1.drop();
+                           loader.add(new Loader(20, p1.getFCol(), p1.getFRow(), itemTiles[i][j].getCook()));
+                        }
+                        else if(itemTiles[i][j] != null && p1.whatHold().isPlate()){
+                           if(itemTiles[i][j].getCook()==1121){
+                              sound("grab", 5);
+                              p1.pickUpEmpty(itemTiles[i][j]);
+                              p1.whatHold().takeOut();
+                              itemTiles[i][j].ovenCooked();
+                              itemTiles[i][j] = null;
+                              gameTiles[i][j].turnOff();
+                              for(int k=0; k<loader.size(); k++){
+                                 if(i==loader.get(k).getRow() && j==loader.get(k).getCol()){
+                                    loader.remove(k);
+                                    break;
+                                 }
+                              }
+                              Item tempPlate = new Item("pla", false, true);
+                              p1.whatHold().combine(tempPlate);
+                              
+                           }
+                        }
+                     }
                      else if(itemTiles[i][j] == null){   // space is empty
                         // test if trash
                         if(gameTiles[i][j].getName().equals("tra")){
@@ -178,33 +206,6 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               sound("grab", 5);
                               itemTiles[i][j] = p1.whatHold();
                               p1.drop();
-                           }
-                        }
-                        else if(gameTiles[i][j].getName().equals("ove")){ // adding food to oven
-                           if(itemTiles[i][j] == null && p1.whatHold().oven()){ // nothing in the oven? & can be put in oven?
-                              sound("oven", 2);
-                              itemTiles[i][j] = p1.whatHold();
-                              gameTiles[i][j].turnOn();
-                              p1.drop();
-                              loader.add(new Loader(20, p1.getFCol(), p1.getFRow(), itemTiles[i][j].getCook()));
-                           }
-                           else if(itemTiles[i][j] != null && p1.whatHold().isPlate()){
-                              sound("grab", 5);
-                              p1.pickUpEmpty(itemTiles[i][j]);
-                              p1.whatHold().takeOut();
-                              if(itemTiles[i][j].getCook()==1121){
-                                 itemTiles[i][j].ovenCooked();
-                              }
-                              itemTiles[i][j] = null;
-                              gameTiles[i][j].turnOff();
-                              for(int k=0; k<loader.size(); k++){
-                                 if(i==loader.get(k).getRow() && j==loader.get(k).getCol()){
-                                    loader.remove(k);
-                                    break;
-                                 }
-                              }
-                              Item tempPlate = new Item("pla", false, true);
-                              p1.whatHold().combine(tempPlate);
                            }
                         }
                      }

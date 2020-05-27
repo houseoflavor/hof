@@ -113,8 +113,9 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      if(gameTiles[i][j].getName().equals("wal") || gameTiles[i][j].getName().startsWith("co")){
                         // these tiles are invalid to put something on
                      }
-                     else if(gameTiles[i][j].getName().startsWith("pla")){
+                     else if(gameTiles[i][j].getName().equals("pla")){ // taking plate while holding something
                         if(gameTiles[i][j].getPlates()>0){
+                           System.out.println("taking plate");
                            Item tempPlate = new Item("pla", false, true);
                            if(p1.whatHold().combine(tempPlate)){ // if successfully combine
                               gameTiles[i][j].takePlate(); // take a plate
@@ -253,6 +254,14 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               hasP1Int = true;
                               p1.pickUpEmpty(itemTiles[i][j]);
                               itemTiles[i][j] = null;
+                           }
+                        }
+                        else if(gameTiles[i][j].getName().equals("pla")){
+                           if(gameTiles[i][j].getPlates()>0){
+                              System.out.println("taking plate");
+                              Item tempPlate = new Item("pla", false, true);
+                              p1.pickUpEmpty(tempPlate);
+                              gameTiles[i][j].takePlate(); // take a plate
                            }
                         }
                         else if(!gameTiles[i][j].getName().equals("")){ // does tile exist

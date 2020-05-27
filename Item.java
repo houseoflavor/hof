@@ -79,6 +79,9 @@ public class Item{
    }
    // returns the highlighted version
    public ImageIcon getHPicture(){
+      if(plate){
+         return new ImageIcon("images/items/"+name+"plaH.gif");
+      }
       if(panned.equals("P")){ //sauced
          return new ImageIcon("images/items/pantomPH.gif");
       }
@@ -165,6 +168,9 @@ public class Item{
    public void donePan(){
       panned = "P";
    }
+   public void setPlate(boolean t){
+      plate = t;
+   }
    // combines the other food with this
    public boolean combine(Item other){ // this = what is on table; other = in hand
       if(other.isPan()){ // holding pan, drop onto tomato
@@ -195,7 +201,16 @@ public class Item{
             return true;
          }
       }
+      else if(this.isPlate()){ // hmm
+         if(other.isOven()){
+            other.setPlate(true);
+            return true;
+         }
+      }
       else if(other.isFood() && (other.isChopped() || other.getName().length()!= 3) && (this.isChopped() || this.getName().length()!= 3)){
+         if(this.isOven() || other.isOven()){
+            return false;
+         }
          ArrayList<String> oList = (ArrayList)(other.getList().clone());
          // are you adding something that already exists on the other item
          for(String n : ingr){ // if any item is a duplicate, can't combine

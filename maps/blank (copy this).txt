@@ -10,3 +10,9 @@ flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo
 flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo
 flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo
 flo flo flo tra flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo
+p1startx p1starty
+p2startx p2starty
+1starscore
+2starscore
+3starscore
+highscore

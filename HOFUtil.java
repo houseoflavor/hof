@@ -8,7 +8,19 @@ import java.util.*;
 
 public class HOFUtil extends HOF{
    static final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
-   // do everything :)
+   static Font dpcomic24, dpcomic48;
+   
+   public static void setup(){
+      try { // custom font
+      // thank you stackoverflow user Florin Virtej from https://stackoverflow.com/questions/5652344/how-can-i-use-a-custom-font-in-java
+         dpcomic24 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(24f);
+         dpcomic48 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(48f);
+         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+         ge.registerFont(dpcomic24);
+         ge.registerFont(dpcomic48);
+      } catch (Exception e) {}
+   }
+   
    public static void doEverything(Graphics g){   
       if(mode.equals("main")){
          drawMain(g);
@@ -22,8 +34,11 @@ public class HOFUtil extends HOF{
       if(mode.equals("level")){
          drawLevel(g);
       }
-      if(mode.equals("game")){
+      if(mode.equals("game") && game!=null){
          drawGame(g);
+      }
+      if(mode.equals("charsel")){
+         drawCharSel(g);
       }
    
    
@@ -51,6 +66,7 @@ public class HOFUtil extends HOF{
    
    // draws the controls screen
    public static void drawControls(Graphics g){
+      g.drawImage(cloud.getPicture().getImage(),cloud.move(),0,null);
       ImageIcon controls = new ImageIcon("images/menus/controls.png");
       ImageIcon clickX = new ImageIcon("images/menus/X.png");
       g.drawImage(controls.getImage(),0,0,null);
@@ -63,9 +79,32 @@ public class HOFUtil extends HOF{
       }
    }
    
+   // draw character selection
+   public static void drawCharSel(Graphics g){
+      g.setFont(dpcomic48);
+      g.setColor(new Color(132, 94, 49));
+   
+      ImageIcon gradient = new ImageIcon("images/menus/gradient.png");
+      g.drawImage(gradient.getImage(),0,0,null);
+      g.drawImage(cloud.getPicture().getImage(),cloud.move(),0,null);
+      g.drawImage((new ImageIcon("images/menus/charsel/bg.gif")).getImage(), 0, 0, null);
+      g.drawImage((new ImageIcon("images/menus/charsel/allbutton.gif")).getImage(), 0, 0, null);
+      
+      g.drawString("WASD / Arrow Keys to select", 135, 120);
+      g.drawString("Enter to confirm", 395, 660);
+      // other stuff
+      g.drawImage((new ImageIcon("images/menus/charsel/b"+p1Sel+".gif")).getImage(), 0, 0, null);
+      g.drawImage((new ImageIcon("images/menus/charsel/r"+p2Sel+".gif")).getImage(), 0, 0, null);
+      //end
+      g.drawImage((new ImageIcon("images/menus/charsel/chars.gif")).getImage(), 0, 0, null);
+      g.drawImage((new ImageIcon("images/menus/charsel/bird.gif")).getImage(), 0, 0, null);
+   
+   }
+   
    // draws the level select screen
    public static void drawLevel(Graphics g){
       ImageIcon gradient = new ImageIcon("images/menus/gradient.png");
+      int count = 0;
       g.drawImage(gradient.getImage(),0,0,null);
       g.drawImage(cloud.getPicture().getImage(),cloud.move(),0,null);
       g.drawImage((new ImageIcon("images/menus/vine-wall.png")).getImage(), 0, 0, null);
@@ -74,7 +113,16 @@ public class HOFUtil extends HOF{
          buttonTouching = 4;
       }
       else{
+         count++;
          g.drawImage((new ImageIcon("images/menus/charsel-unclicked.png")).getImage(), 0, 0, null);
+      }
+      if(mouseX<294 && mouseX>133 && mouseY<727 && mouseY>635){ // back button
+         g.drawImage((new ImageIcon("images/menus/back-click.png")).getImage(), 0, 0, null);
+         buttonTouching = 5;
+      }
+      else{
+         count++;
+         g.drawImage((new ImageIcon("images/menus/back-unclicked.png")).getImage(), 0, 0, null);
       }
       for(int i=0; i<2; i++){
          for(int j=0; j<5; j++){
@@ -95,8 +143,14 @@ public class HOFUtil extends HOF{
             if(high.equals("H")){
                buttonTouching = 11+i*5+j;
             }
+            else{
+               count++;
+            }
             
          }
+      }
+      if(count==12){
+         buttonTouching = NONE;
       }
    }
    
@@ -277,7 +331,7 @@ public class HOFUtil extends HOF{
          drawSomeTiles(g, p2.getRow()+2, p1.getRow()+1);
       }
       // 5 --
-      if(p1.gety()>p2.gety()){
+      if(p1.gety()>=p2.gety()){
          if(p1.getDir() == UP){
             if(p1.isHold()){
                g.drawImage(p1.whatHold().getPicture().getImage(), ((int)p1.getx())-16,((int)p1.gety())-24-p1.yChange(),32,32,null);

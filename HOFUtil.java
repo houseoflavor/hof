@@ -10,7 +10,9 @@ public class HOFUtil extends HOF{
    static final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
    // do everything :)
    public static void doEverything(Graphics g){   
-   
+      if(mode.equals("main")){
+         drawMain(g);
+      }
       if(mode.equals("menu")){
          drawMenu(g);
       }
@@ -462,6 +464,12 @@ public class HOFUtil extends HOF{
          }   
       }
       
+   }
+   
+   public static void drawMain(Graphics g){
+      ImageIcon back = new ImageIcon("images/menus/hofscreenfinal.gif");
+      g.drawImage(back.getImage(), 0, 0, 1100, 825, null);
+      g.drawImage((new ImageIcon("images/menus/words.gif")).getImage(), 5, 5, 250, 19, null);
    }
    
    public static void drawMenu(Graphics g){

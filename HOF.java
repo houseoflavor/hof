@@ -406,7 +406,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    public HOF(){ // constructor
       keysDown = new ArrayList<Integer>();
       dirKeys = new ArrayList<Integer>();
-      mode = "menu";
+      mode = "main";
       
       gameTiles = new Tile[12][20];
       itemTiles = new Item[12][20];
@@ -531,6 +531,11 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    public void mouseClicked(MouseEvent e){
       mouseX=e.getX();
       mouseY=e.getY();
+      if(mode.equals("main") && transMode.equals("none")){
+         transMode = "menu";
+         transX = 1500;
+         transition = 1;
+      }
       if(mode.equals("menu") && transMode.equals("none")){
          if(buttonTouching == START){ // clicking start button (from menu)
             transMode = "level";

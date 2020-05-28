@@ -112,7 +112,7 @@ public class Game{
       complete = 0;
       this.start();
       coins = 0;
-      orders.add(new Order(60, true, false, false));
+      orders.add(new Order(60, false, false, false));
       orders.add(new Order(60, false, false, false));
    }
    

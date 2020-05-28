@@ -1,4 +1,4 @@
-![Pizza](https://i.imgur.com/6okhz9Y.png)
+![splash](https://i.imgur.com/xk8pmfz.png)
 # House o' Flavor
 Advanced CS Final Project
 
@@ -6,9 +6,6 @@ by Ethan and Vinhan
 
 
 Website: https://tinyurl.com/houseoflavor
-## Download Instructions
-
-https://tinyurl.com/hofdownload
 
 ## Resources
 level creator: https://forkphorus.github.io/#366957956

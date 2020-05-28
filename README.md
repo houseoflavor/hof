@@ -1,4 +1,4 @@
-![splash](https://imgur.com/a/ZpAvOgv)
+![splash](https://i.imgur.com/xk8pmfz.png)
 # House o' Flavor
 Advanced CS Final Project
 

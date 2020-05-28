@@ -6,9 +6,6 @@ by Ethan and Vinhan
 
 
 Website: https://tinyurl.com/houseoflavor
-## Download Instructions
-
-https://tinyurl.com/hofdownload
 
 ## Resources
 level creator: https://forkphorus.github.io/#366957956

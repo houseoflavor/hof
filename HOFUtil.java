@@ -8,16 +8,19 @@ import java.util.*;
 
 public class HOFUtil extends HOF{
    static final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
-   static Font dpcomic24, dpcomic48;
+   static Font dpcomic24, dpcomic48, dpcomic60;
+   static String[][] hoverTiles = new String[12][20];
    
    public static void setup(){
       try { // custom font
       // thank you stackoverflow user Florin Virtej from https://stackoverflow.com/questions/5652344/how-can-i-use-a-custom-font-in-java
          dpcomic24 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(24f);
          dpcomic48 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(48f);
+         dpcomic60 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(60f);
          GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
          ge.registerFont(dpcomic24);
          ge.registerFont(dpcomic48);
+         ge.registerFont(dpcomic60);
       } catch (Exception e) {}
    }
    
@@ -152,12 +155,89 @@ public class HOFUtil extends HOF{
       if(count==12){
          buttonTouching = NONE;
       }
+      if(buttonTouching>10){
+         g.setColor(new Color(152,148,143,150));
+         g.fillRect(mouseX, mouseY-230, 170, 230);
+         try{
+            readFileHover("maps/level"+(buttonTouching-10)+".txt");
+         }
+         catch(Exception e){
+         }
+         for(int i=0; i<20; i++){
+            for(int j=0; j<12; j++){
+               ImageIcon floor;
+               if(j%2==0){ // alternate between tile types
+                  if(i%2==0){
+                     floor = new ImageIcon("images/tile/floor1.gif");
+                  }
+                  else{
+                     floor = new ImageIcon("images/tile/floor2.gif");
+                  }
+               }
+               else{ // new row starts on other tile type
+                  if(i%2==0){
+                     floor = new ImageIcon("images/tile/floor2.gif");
+                  }
+                  else{
+                     floor = new ImageIcon("images/tile/floor1.gif");
+                  }
+               }
+               g.drawImage(floor.getImage(), (i*8)+mouseX+5, (j*8)+mouseY-275+50, 8, 8, null);
+               try{
+                  if(hoverTiles[j][i].startsWith("co") || hoverTiles[j][i].startsWith("de")){
+                     g.drawImage((new ImageIcon("images/tile/"+hoverTiles[j][i]+".png")).getImage(), (i*8)+mouseX+5, (j*8)+mouseY-275-8+50, 8, 16, null);
+                  }
+                  else{
+                     g.drawImage((new ImageIcon("images/tile/"+hoverTiles[j][i]+".gif")).getImage(), (i*8)+mouseX+5, (j*8)+mouseY-275-8+50, 8, 16, null);
+                  }
+               }
+               catch(Exception e){}
+            }
+         }
+         g.setFont(dpcomic24);
+         g.setColor(new Color(0,0,0,180));
+         g.drawString("Highscore: "+highscore, mouseX+5, mouseY-110);
+         g.setFont(dpcomic48);
+         g.drawString(""+star1, mouseX+50, mouseY-70);
+         g.drawString(""+star2, mouseX+50, mouseY-40);
+         g.drawString(""+star3, mouseX+50, mouseY-10);
+         g.drawImage((new ImageIcon("images/menus/level/1star.png")).getImage(), mouseX+5, mouseY-100, 32, 32, null);
+         g.drawImage((new ImageIcon("images/menus/level/2star.png")).getImage(), mouseX+5, mouseY-70, 32, 32, null);
+         g.drawImage((new ImageIcon("images/menus/level/3star.png")).getImage(), mouseX+5, mouseY-40, 32, 32, null);
+      }
    }
    
    public static int distance(int mx, int my, int cx, int cy){
       return (int)(Math.sqrt(Math.pow(cx-mx,2)+Math.pow(cy-my,2)));
    }
-   
+   public static void readFileHover(String fileName)throws IOException{
+      Scanner input = new Scanner(new FileReader(fileName));
+      String line;
+      for(int i=0; i<12; i++){
+         line = input.nextLine();
+         String [] singleLine = line.split(" ");
+         for(int j=0; j<20; j++){
+            hoverTiles[i][j] = singleLine[j];
+         }
+      }
+      line = input.nextLine();
+      String [] singleLine = line.split(" ");
+      start1x = Integer.valueOf(singleLine[0]);
+      start1y = Integer.valueOf(singleLine[1]);
+      line = input.nextLine();
+      singleLine = line.split(" ");
+      start2x = Integer.valueOf(singleLine[0]);
+      start2y = Integer.valueOf(singleLine[1]);
+      line = input.nextLine();
+      star1 = Integer.valueOf(line);
+      line = input.nextLine();
+      star2 = Integer.valueOf(line);
+      line = input.nextLine();
+      star3 = Integer.valueOf(line);
+      line = input.nextLine();
+      highscore = Integer.valueOf(line);
+      input.close();
+   }
    public static void drawGame(Graphics g){
       // background image (TEMPORARY ONE IS USED)
       g.drawImage((new ImageIcon("images/menus/tempbg.png")).getImage(),0,0,null);
@@ -249,7 +329,9 @@ public class HOFUtil extends HOF{
          }
          g.drawImage(n.getPicture().getImage(), 1100, n.getYPos(), 180, 128, null);
          g.drawImage(n.getLoader().getPicture().getImage(), 1100, n.getYPos(), 180, 128, null);
-         n.getLoader().advance();
+         if(game.ready() && !n.getPassed()){
+            n.advance();
+         }
          y+=140;
       }
       
@@ -435,7 +517,7 @@ public class HOFUtil extends HOF{
       
       // timer 
       
-      String time = String.valueOf(game.getTime());
+      String time = (game.ready()) ? String.valueOf(game.getTime()) : "180";
       for(int i=0; i<time.length(); i++){
          g.drawImage((new ImageIcon("images/numbers/num"+time.charAt(time.length()-i-1)+".png")).getImage(), (3-(i+2))*45+1000-15, 15, null);
       }
@@ -447,6 +529,20 @@ public class HOFUtil extends HOF{
       for(int i=0; i<coins.length(); i++){
          g.drawImage((new ImageIcon("images/numbers/num"+coins.charAt(coins.length()-i-1)+".png")).getImage(), (4-(i+2))*36+85, 8, 36, 44, null);
       }
+      
+      // first 3 sec countdown
+      if(game.getTime()<=183 && game.getTime()>=179){
+         g.setColor(new Color(163,229,226,100));
+         if(Math.abs(game.getTime()-181) == (game.getTime()-181)){
+            g.fillRect(505, 550, 90, 100);
+            g.drawImage((new ImageIcon("images/numbers/num"+(game.getTime()-180)+".png")).getImage(), 514, 556, 72, 88, null);
+         }
+         else{
+            g.fillRect(450, 550, 200, 100);
+            g.drawImage((new ImageIcon("images/numbers/go.png")).getImage(), 458, 556, 184, 88, null);
+         }
+      }
+      
       //drawBounds(g); // draw test bounds ----------------------------------------------
    }
    

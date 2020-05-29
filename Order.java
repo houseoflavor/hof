@@ -10,7 +10,7 @@ public class Order{
    private LoaderV2 load;
    private boolean passed = false;
    public Order(int x, boolean m, boolean s, boolean first){
-      ypos = (first ? 900 : -1);
+      ypos = (first ? 900 : 10000);
       timeLeft = x;
       mushroom = m;
       sausage = s;
@@ -35,6 +35,7 @@ public class Order{
       if(mushroom == other.getList().contains("mus")){
          if(sausage == other.getList().contains("sau")){ 
             if(other.isOven() && other.hasPlate() && timeLeft > 0){
+               passed = true;
                return true;
             }
          }
@@ -68,6 +69,11 @@ public class Order{
       return passed;
    }
    
+   public void advance(){
+      if(!passed){
+         load.advance();
+      }
+   }
    public ImageIcon getPicture(){
       return new ImageIcon("images/game/order"+type+((timeLeft<=0 && !passed) ? "F" : "")+(passed ? "P" : "")+".gif");
    }

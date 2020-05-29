@@ -18,58 +18,58 @@ public class Game{
             if(timeLeftInRound==0){
                timer2.cancel();
             }
-            nextOrder--;
-            nextPlate--;
-            for(int i=0; i<orders.size(); i++){
-               orders.get(i).decrement();
-               if(orders.get(i).timeLeft()==0){
-                  coins-=30;
-                  nextOrder = 4;
-                  if(coins<0){
-                     coins = 0;
+            if(timeLeftInRound<=180){
+               nextOrder--;
+               nextPlate--;
+               for(int i=0; i<orders.size(); i++){
+                  orders.get(i).decrement();
+                  if(orders.get(i).timeLeft()==0){
+                     coins-=30;
+                     nextOrder = 4;
+                     if(coins<0){
+                        coins = 0;
+                     }
+                  }
+                  if(orders.get(i).timeLeft()<=-3){
+                     orders.remove(i);
                   }
                }
-               if(orders.get(i).timeLeft()<=-3){
-                  orders.remove(i);
+               if(timeLeftInRound==170){
+                  spawnPlate = true;
                }
-            }
-            if(timeLeftInRound==170){
-               spawnPlate = true;
-            }
-            if(timeLeftInRound==160){
-               spawnPlate = true;
-            }
-            for(int i=0; i<rem.size(); i++){
-               if(remNums.get(i)<=0){
-                  System.out.println("removing" + rem.get(i));
-                  orders.remove((int)(rem.get(i).intValue()));
-                  rem.remove(i);
-                  remNums.remove(i);
-                  break;
+               if(timeLeftInRound==160){
+                  spawnPlate = true;
                }
-               else{
-                  System.out.println("minus one" + remNums.get(i));
-                  remNums.set(i, remNums.get(i)-1);
+               for(int i=0; i<rem.size(); i++){
+                  if(remNums.get(i)<=0){
+                     System.out.println("removing" + rem.get(i));
+                     orders.remove((int)(rem.get(i).intValue()));
+                     rem.remove(i);
+                     remNums.remove(i);
+                     break;
+                  }
+                  else{
+                     System.out.println("minus one" + remNums.get(i));
+                     remNums.set(i, remNums.get(i)-1);
+                  }
                }
-            }
             // adding orders
-            if(nextOrder == 0){
-               addOrder();
-            }
-            if(timeLeftInRound % 10 == 0 && timeLeftInRound < 120){ // new order every x sec (and wait initial 1 minute)
-               addOrder();
-            }
-            if(nextPlate == 0){
-               spawnPlate = true;
+               if(nextOrder == 0){
+                  addOrder();
+               }
+               if(timeLeftInRound % 15 == 0 && timeLeftInRound < 120){ // new order every x sec (and wait initial 1 minute)
+                  addOrder();
+               }
+               if(nextPlate == 0){
+                  spawnPlate = true;
+               }
             }
          
          }
       };
+      
    public void start(){
       timer2.scheduleAtFixedRate(task2,0,1000); // 1s
-   }
-   public void countdown(){
-      //timer3.scheduleAtFixedRate(task2, 0, 1000); // 3s countdown
    }
    public void addOrder(){
       boolean mus, sau;
@@ -108,7 +108,7 @@ public class Game{
       spawnPlate = true;
       this.level=l;
       orders = new LinkedList<Order>();
-      timeLeftInRound = 180;
+      timeLeftInRound = 185;
       complete = 0;
       this.start();
       coins = 0;
@@ -132,6 +132,10 @@ public class Game{
    
    public void spawnPlate(){
       spawnPlate = false;
+   }
+   
+   public boolean ready(){
+      return timeLeftInRound <= 180;
    }
    
    public boolean shouldSpawn(){

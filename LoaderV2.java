@@ -4,7 +4,7 @@ public class LoaderV2{ // loader for orders
    private int mult;
    public LoaderV2(int mult){ // 94 frames
       this.mult=mult;
-      frame = mult*94;
+      frame = mult*94-1;
    }
    public void advance(){
       if(frame>0){

@@ -68,6 +68,12 @@ public class Game{
          }
       };
       
+   public void pause(){
+      timer2.cancel();
+   }
+   public void resume(){
+      start();
+   }
    public void start(){
       timer2.scheduleAtFixedRate(task2,0,1000); // 1s
    }

@@ -10,8 +10,8 @@ wal flo flo cou tab tab tab tab tab flo flo tab tab tab tab tab cod flo flo bur
 wal flo flo cou col col col col col col col col col col col col col flo flo wal
 wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo wal
 wal tra wal wal wal wal wal wal pla del del wal wal wal wal cut cut wal wal wal
-388 370
-708 370
+100 370
+800 370
 100
 200
 300

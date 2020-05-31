@@ -1,0 +1,18 @@
+wal flo flo ove ove flo flo flo flo flo flo flo flo flo flo flo flo flo flo tab
+wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo tab
+wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo tab
+wal flo flo flo flo flo flo flo tab flo flo tab tab tab tab tab flo flo flo bur
+wal flo flo flo tab tab tab tab tab flo flo tab wal wal wal tab flo flo flo tab
+wal flo flo flo tab wal wal wal tab flo flo tab wal wal wal tab flo flo flo wal
+wal flo flo flo tab wal wal wal tab flo flo tab wal wal wal tab flo flo flo wal
+wal flo flo flo tab wal wal wal tab flo flo tab wal wal wal tab flo flo flo tab
+wal flo flo flo tab tab tab tab tab flo flo tab tab tab tab tab flo flo flo bur
+wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo tab
+wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo tab
+wal flo flo tra flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo tab
+p1startx p1starty
+p2startx p2starty
+1starscore
+2starscore
+3starscore
+highscore

@@ -1,13 +1,13 @@
 flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo
 flo cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cod flo
-flo cou tab tab bur tab bur tab tab flo flo tab tab tab flo flo tab tab cod flo
-flo cou tab flo flo flo flo flo tab flo flo tab flo flo flo flo flo tab cod flo
-flo cou tab flo flo tab tab tab tab flo flo tab cut tab cut tab cut tab cod flo
-del cou flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo cod flo
-del cou flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo cod flo
-pla cou tab tab tab tab flo flo tab flo flo tab siw sid tab tab tab tab cod flo
-flo cou tab flo flo flo flo flo tab flo flo tab flo flo flo flo flo flo cod flo
-flo cou tab mus sau che dou tom tab flo flo tab tab tab tra tab tab flo cod flo
+flo cou tab tab bur tab bur tab tab cod cou tab tab tab flo flo tab tab cod flo
+flo cou tab flo flo flo flo flo tab cod cou tab flo flo flo flo flo tab cod flo
+flo cou tab flo flo tab tab tab tab cod cou tab cut tab cut tab cut tab cod flo
+del cou cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cod flo
+del cou col col col col col col col col col col col col col col col col cod flo
+pla cou tab tab tab tab flo flo tab cou cod tab siw sid tab tab tab tab cod flo
+flo cou tab flo flo flo flo flo tab cou cod tab flo flo flo flo flo flo cod flo
+flo cou tab mus sau che dou tom tab cou cod tab tab tab tra tab tab flo cod flo
 flo cou col col col col col col col col col col col col col col col col cod flo
 flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo
 p1startx p1starty

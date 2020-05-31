@@ -1,15 +1,15 @@
-wal wal wal ove ove wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal
+wal wal wal ove ove wal wal wal wal wal wal wal wal wal wal sid siw wal wal wal
 wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo wal
-wal flo flo flo cor cor cor cor cor cor cor cor cor cor cor cor flo flo flo wal
-wal flo flo flo tab tab tab tab tab flo flo tab tab tab tab tab flo flo flo bur
-wal flo flo flo tab wal wal wal tab flo flo tab wal wal wal tab flo flo flo tab
-wal flo flo flo tab wal wal wal tab flo flo tab wal wal wal tab flo flo flo tab
-wal flo flo flo tab wal wal wal tab flo flo tab wal wal wal tab flo flo flo tab
-wal flo flo flo tab wal wal wal tab flo flo tab wal wal wal tab flo flo flo tab
-wal flo flo flo tab tab tab tab tab flo flo tab tab tab tab tab flo flo flo bur
-wal flo flo flo col col col col col col col col col col col col flo flo flo wal
+wal flo flo cor cor cor cor cor cor cor cor cor cor cor cor cor cod flo flo wal
+wal flo flo cou tab tab tab tab tab flo flo tab tab tab tab tab cod flo flo bur
+wal flo flo cou tab wal wal wal tab flo flo tab wal wal wal tab cod flo flo tab
+dou flo flo cou tab wal wal wal mus flo flo sau wal wal wal tab cod flo flo tab
+dou flo flo cou tab wal wal wal che flo flo tom wal wal wal tab cod flo flo tab
+wal flo flo cou tab wal wal wal tab flo flo tab wal wal wal tab cod flo flo tab
+wal flo flo cou tab tab tab tab tab flo flo tab tab tab tab tab cod flo flo bur
+wal flo flo cou cou col col col col col col col col col col col col flo flo wal
 wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo wal
-wal tra wal wal wal wal wal wal pla del del wal wal wal wal sin sin wal wal wal
+wal tra wal wal wal wal wal wal pla del del wal wal wal wal cut cut wal wal wal
 p1startx p1starty
 p2startx p2starty
 100

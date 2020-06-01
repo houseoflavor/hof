@@ -10,8 +10,8 @@ flo cou tab flo flo flo flo flo tab cou cod tab flo flo flo flo flo flo cod flo
 flo cou tab mus sau che dou tom tab cou cod tab tab tab tra tab tab flo cod flo
 flo cou col col col col col col col col col col col col col col col col cod flo
 flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo
-p1startx p1starty
-p2startx p2starty
+450 435
+708 273
 100
 200
 300

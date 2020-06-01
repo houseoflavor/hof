@@ -622,6 +622,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    
    //file reading
    public static void readFile(String fileName)throws IOException{
+      gameTiles = new Tile[12][20];
+      itemTiles = new Item[12][20];
       Scanner input = new Scanner(new FileReader(fileName));
       String line;
       for(int i=0; i<12; i++){

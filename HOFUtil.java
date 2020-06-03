@@ -8,7 +8,7 @@ import java.util.*;
 
 public class HOFUtil extends HOF{
    static final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
-   static Font dpcomic24, dpcomic48, dpcomic60;
+   static Font dpcomic24, dpcomic48, dpcomic60, pixellari24, dpcomic36,dpcomic72;
    static String[][] hoverTiles = new String[12][20];
    
    public static void setup(){
@@ -17,11 +17,49 @@ public class HOFUtil extends HOF{
          dpcomic24 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(24f);
          dpcomic48 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(48f);
          dpcomic60 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(60f);
+         dpcomic72 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(72f);
+         pixellari24 = Font.createFont(Font.TRUETYPE_FONT, new File("pixellari.ttf")).deriveFont(24f);
+         dpcomic36 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(36f);
          GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
          ge.registerFont(dpcomic24);
          ge.registerFont(dpcomic48);
          ge.registerFont(dpcomic60);
+         ge.registerFont(pixellari24);
+         ge.registerFont(dpcomic36);
+         ge.registerFont(dpcomic72);
       } catch (Exception e) {}
+   }
+   public static void drawString(Graphics g, String s, int x, int y, int width)
+   { // https://stackoverflow.com/questions/400566/full-justification-with-a-java-graphics-drawstring-replacement
+   // drawString with word wrapping
+    // FontMetrics gives us information about the width,
+    // height, etc. of the current Graphics object's Font.
+      FontMetrics fm = g.getFontMetrics();
+   
+      int lineHeight = fm.getHeight();
+   
+      int curX = x;
+      int curY = y;
+   
+      String[] words = s.split(" ");
+   
+      for (String word : words)
+      {
+        // Find out thw width of the word.
+         int wordWidth = fm.stringWidth(word + " ");
+      
+        // If text exceeds the width, then move to next line.
+         if (curX + wordWidth >= x + width)
+         {
+            curY += lineHeight-5;
+            curX = x;
+         }
+      
+         g.drawString(word, curX, curY);
+      
+        // Move over to the right for next word.
+         curX += wordWidth;
+      }
    }
    
    public static void doEverything(Graphics g){   
@@ -43,6 +81,12 @@ public class HOFUtil extends HOF{
       if(mode.equals("charsel")){
          drawCharSel(g);
       }
+      if(game!= null&&game.isPaused()){
+         drawPause(g);
+      }
+      if(mode.equals("score")){
+         drawScore(g);
+      }
    
    
       // final thing to draw is transition
@@ -52,9 +96,38 @@ public class HOFUtil extends HOF{
         
    }
    
+   public static void drawScore(Graphics g){
+   
+   }
+   
+   
+   public static void drawPause(Graphics g){
+      g.drawImage((new ImageIcon("images/menus/pause"+buttonTouching+".gif")).getImage(), 0, 0, null);
+      g.setColor(Color.WHITE);
+      g.setFont(dpcomic72);
+      g.drawString("Level "+game.getLevel(), 50, 105);
+      if(mouseX<750 && mouseX>472){
+         if(mouseY<510 && mouseY>435){
+            buttonTouching = 3;
+         }
+         else if(mouseY<390 && mouseY>317){
+            buttonTouching = 2;
+         }
+         else if(mouseY<274 && mouseY>200){
+            buttonTouching = 1;
+         }
+         else{
+            buttonTouching = 0;
+         }
+      }
+      else{
+         buttonTouching = 0;
+      }
+   }
+   
    // draws the black transition that appears when switching menus
    public static void drawTransition(Graphics g){
-      transX+=((Math.abs(transX))*(-0.07)-1);
+      transX+=((Math.abs(transX))*(-0.06)-1);
       ImageIcon black = new ImageIcon("images/menus/black.png");
       g.drawImage(black.getImage(),transX,0,1300,750,null);
       if(transX<0){
@@ -69,6 +142,8 @@ public class HOFUtil extends HOF{
    
    // draws the controls screen
    public static void drawControls(Graphics g){
+      ImageIcon gradient = new ImageIcon("images/menus/gradient.png");
+      g.drawImage(gradient.getImage(),0,0,null);
       g.drawImage(cloud.getPicture().getImage(),cloud.move(),0,null);
       ImageIcon controls = new ImageIcon("images/menus/controls.png");
       ImageIcon clickX = new ImageIcon("images/menus/X.png");
@@ -98,6 +173,22 @@ public class HOFUtil extends HOF{
       // other stuff
       g.drawImage((new ImageIcon("images/menus/charsel/b"+p1Sel+".gif")).getImage(), 0, 0, null);
       g.drawImage((new ImageIcon("images/menus/charsel/r"+p2Sel+".gif")).getImage(), 0, 0, null);
+      
+      String [] names = {"Chimp Carrey", "Chikira", "Jennifur Lopez", "Julius Cheeser", "Piggy Azalea", "Harry Pawter"};
+      String [] captions = {  "He finds bananas quite appeeling",
+                              "Oh baby when you bawk like that...",
+                              "Purrhaps you know her for her singing",
+                              "You'll find him Rome-ing around cheese",
+                              "What's shakin bacon?",
+                              "The bun who lived"};
+      g.setColor(Color.BLACK);
+      g.setFont(dpcomic48);
+      g.drawString(names[p1Sel], 155, 188);
+      g.drawString(names[p2Sel], 155, 428);
+      g.setFont(dpcomic36);
+      drawString(g, captions[p1Sel] , 155, 230, 270);
+      drawString(g, captions[p2Sel] , 155, 470, 270);
+      
       //end
       g.drawImage((new ImageIcon("images/menus/charsel/chars.gif")).getImage(), 0, 0, null);
       g.drawImage((new ImageIcon("images/menus/charsel/bird.gif")).getImage(), 0, 0, null);
@@ -291,6 +382,10 @@ public class HOFUtil extends HOF{
       Color p1blue = new Color(17, 126, 233, alpha);
       Color p2red = new Color(252, 46, 46, alpha);
       
+      if(!game.isPaused() && game.ready() && game.getTime()>0){
+         p1.advance();
+         p2.advance();
+      }
       // -1
       for(int i=0; i<12; i++){
          for(int j=0; j<20; j++){
@@ -329,7 +424,7 @@ public class HOFUtil extends HOF{
          }
          g.drawImage(n.getPicture().getImage(), 1100, n.getYPos(), 180, 128, null);
          g.drawImage(n.getLoader().getPicture().getImage(), 1100, n.getYPos(), 180, 128, null);
-         if(game.ready() && !n.getPassed()){
+         if(game.ready() && !n.getPassed() && !game.isPaused()&&game.getTime()>0){
             n.advance();
          }
          y+=140;
@@ -501,7 +596,9 @@ public class HOFUtil extends HOF{
       // loaders
       for(int i=0; i<loader.size(); i++){
          Loader l = loader.get(i);
-         l.advance();
+         if(game.ready() && !game.isPaused()&&game.getTime()>0){
+            l.advance();
+         }
          g.drawImage(l.getPicture().getImage(), l.getX()+6, l.getY()-8, 32, 16, null);
          if(itemTiles[l.getRow()][l.getCol()].getName().contains("pan") && gameTiles[l.getRow()][l.getCol()].getName().equals("bur")){ // there is a pan on a burner
             itemTiles[l.getRow()][l.getCol()].setPanCook(l.getUFrame());
@@ -517,17 +614,17 @@ public class HOFUtil extends HOF{
       
       // timer 
       
-      String time = (game.ready()) ? String.valueOf(game.getTime()) : "180";
+      String time = (game.ready()) ? (game.getTime()<0 ? "0" : String.valueOf(game.getTime())) : "180"; 
       for(int i=0; i<time.length(); i++){
-         g.drawImage((new ImageIcon("images/numbers/num"+time.charAt(time.length()-i-1)+".png")).getImage(), (3-(i+2))*45+1000-15, 15, null);
+         g.drawImage((new ImageIcon("images/numbers/num"+time.charAt(time.length()-i-1)+".png")).getImage(), (3-(i+2))*45+1025-15, 700, null);
       }
       
       // coins
       String coins = String.valueOf(game.getCoins());
-      g.drawImage((new ImageIcon("images/game/buffer.gif")).getImage(), 0, 0, 200, 60, null);
-      g.drawImage((new ImageIcon("images/game/coin.gif")).getImage(), -6, 0, 200, 60, null);
+      g.drawImage((new ImageIcon("images/game/buffer.gif")).getImage(), 0, 690, 200, 60, null);
+      g.drawImage((new ImageIcon("images/game/coin.gif")).getImage(), -6, 690, 200, 60, null);
       for(int i=0; i<coins.length(); i++){
-         g.drawImage((new ImageIcon("images/numbers/num"+coins.charAt(coins.length()-i-1)+".png")).getImage(), (4-(i+2))*36+85, 8, 36, 44, null);
+         g.drawImage((new ImageIcon("images/numbers/num"+coins.charAt(coins.length()-i-1)+".png")).getImage(), (4-(i+2))*36+85, 698, 36, 44, null);
       }
       
       // first 3 sec countdown

@@ -16,12 +16,16 @@ public class Item{
    private boolean pan;
    private ArrayList<String> ingr;
    private int panCookLeft;
+   private boolean obstacle;
    private String panned;
    // Item constructor
    public Item(String name, boolean f, boolean t){
       this.name=name;
       ingr = new ArrayList<String>();
       ingr.add(name);
+      if(f && t){
+         obstacle = true;
+      }
       food = f;
       tool = t;
       if(food){
@@ -54,6 +58,7 @@ public class Item{
       }
       return ret;
    }
+   
    // returns an arraylist of all ingredients in the item
    public ArrayList getList(){
       return ingr;
@@ -70,6 +75,9 @@ public class Item{
    
    // returns an ImageIcon of the correct picture
    public ImageIcon getPicture(){
+      if(obstacle){
+         return new ImageIcon("images/obstacles/"+name+".gif");
+      }
       if(plate){
          return new ImageIcon("images/items/"+name+"pla.gif");
       }
@@ -86,6 +94,9 @@ public class Item{
    }
    // returns the highlighted version
    public ImageIcon getHPicture(){
+      if(obstacle){
+         return new ImageIcon("images/obstacles/"+name+"H.gif");
+      }
       if(plate){
          return new ImageIcon("images/items/"+name+"plaH.gif");
       }
@@ -103,6 +114,9 @@ public class Item{
    
    // returns whether the item can be chopped
    public boolean canChop(){
+      if(tool || obstacle){
+         return false;
+      }
       if(chopLeft>0){
          return true;
       }
@@ -181,8 +195,14 @@ public class Item{
    public void setPlate(boolean t){
       plate = t;
    }
+   public boolean isObstacle(){
+      return obstacle;
+   }
    // combines the other food with this
    public boolean combine(Item other){ // this = what is on table; other = in hand
+      if(this.isObstacle() || other.isObstacle()){
+         return false;
+      }
       if(other.isPan()){ // holding pan, drop onto tomato
          if(other.getName().equals("pan") && this.name.equals("tom") && this.isChopped() && other.getPanCook()<561){
             ingr.add("pan");

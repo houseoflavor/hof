@@ -33,7 +33,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    TimerTask task1 = 
       new TimerTask(){
          public void run(){
-            if(mode.equals("game")){
+            if(mode.equals("game") && game != null && !game.isPaused() && game.getTime()>0){
             // dashing
                try{
                   boolean p1Boost = false;
@@ -369,6 +369,11 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                   }
                }
                catch(Exception e){}
+               
+               if(keysDown.contains(KeyEvent.VK_ESCAPE) && game.ready()){ // pause
+                  game.pause();
+               }
+               
             }
             else if(mode.equals("charsel") && transX==1500){
                if(keysDown.contains(KeyEvent.VK_W)){
@@ -507,6 +512,27 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                   name2 = chars[p2Sel];
                }
             }
+            if(mode.equals("restart")){
+               p1 = null;
+               p2 = null;
+               int curLevel = game.getLevel();
+               gameTiles = new Tile[12][20];
+               itemTiles = new Item[12][20];
+               knives = new ArrayList<Knife>();
+               loader = new ArrayList<Loader>();
+               game = null;
+               try{
+                  readFile("maps/level"+curLevel+".txt");
+               }
+               catch(Exception e){}
+               p1 = new Player(name1,start1x,start1y);
+               p2 = new Player(name2,start2x,start2y);
+               p1.setLevel(gameTiles);
+               p2.setLevel(gameTiles);
+               game = new Game(buttonTouching-10);
+               mode = "game";
+               transMode = "game";
+            }
             
             repaint();
          }
@@ -636,6 +662,10 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             if(spawners.contains(" "+ singleLine[j] + " ")){
                gameTiles[i][j] = new Tile(singleLine[j],i,j,true,true);
             }
+            else if(singleLine[j].startsWith("ot") || singleLine[j].startsWith("of")){// obstacle
+               itemTiles[i][j] = new Item(singleLine[j], true, true);
+               gameTiles[i][j] = new Tile("tab", i, j, true, false);
+            }
             else if(singleLine[j].equals("bur")){
                itemTiles[i][j] = new Item("pan", false, true);
                gameTiles[i][j] = new Tile(singleLine[j], i, j, true, false);
@@ -658,23 +688,23 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          }
       }
       try{
-      line = input.nextLine();
-      String [] singleLine = line.split(" ");
-      start1x = Integer.valueOf(singleLine[0]);
-      start1y = Integer.valueOf(singleLine[1]);
-      line = input.nextLine();
-      singleLine = line.split(" ");
-      start2x = Integer.valueOf(singleLine[0]);
-      start2y = Integer.valueOf(singleLine[1]);
-      line = input.nextLine();
-      star1 = Integer.valueOf(line);
-      line = input.nextLine();
-      star2 = Integer.valueOf(line);
-      line = input.nextLine();
-      star3 = Integer.valueOf(line);
-      line = input.nextLine();
-      highscore = Integer.valueOf(line);
-      input.close();
+         line = input.nextLine();
+         String [] singleLine = line.split(" ");
+         start1x = Integer.valueOf(singleLine[0]);
+         start1y = Integer.valueOf(singleLine[1]);
+         line = input.nextLine();
+         singleLine = line.split(" ");
+         start2x = Integer.valueOf(singleLine[0]);
+         start2y = Integer.valueOf(singleLine[1]);
+         line = input.nextLine();
+         star1 = Integer.valueOf(line);
+         line = input.nextLine();
+         star2 = Integer.valueOf(line);
+         line = input.nextLine();
+         star3 = Integer.valueOf(line);
+         line = input.nextLine();
+         highscore = Integer.valueOf(line);
+         input.close();
       }
       catch(Exception e){
          start1x = 388;
@@ -725,7 +755,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          transX = 1500;
          transition = 1;
       }
-      if(mode.equals("menu") && transMode.equals("none")){
+      else if(mode.equals("menu") && transMode.equals("none")){
          if(buttonTouching == START){ // clicking start button (from menu)
             transMode = "level";
             transX=1500;            
@@ -739,7 +769,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          }
       }
       
-      if(mode.equals("controls") && transMode.equals("none")){
+      else if(mode.equals("controls") && transMode.equals("none")){
          if(buttonTouching == EXIT){ // clicking X button (from controls)
             transMode = "menu";
             transX=1500;
@@ -747,7 +777,22 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          }
       }
       
-      if(mode.equals("level") && transMode.equals("none")){
+      else if(mode.equals("game") && transMode.equals("none")){
+         if(buttonTouching == 1){
+            game.resume();
+         }
+         if(buttonTouching == 2){
+            transMode = "restart";
+            transition = 1;
+         }
+         if(buttonTouching == 3){
+            transMode = "level";
+            transition = 1;
+            game.resume();
+         }
+      }
+      
+      else if(mode.equals("level") && transMode.equals("none")){
          if(buttonTouching >10){ // level select
             transMode = "game";
             try{

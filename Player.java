@@ -15,7 +15,7 @@ public class Player{
    private final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4, NONE = 0;
    private boolean onCon = false;
    private boolean press = false;
-   
+   private int ai = 0;
    
    // CONTROL PLAYER SPEED HERE ---
    private final double speed = 0.3;    // 0 < speed                                   recommended:   0.3
@@ -72,15 +72,7 @@ public class Player{
    // returns an ImageIcon of the current frame to show
    // also advances animation by 1 frame
    public ImageIcon getPicture(){
-      String state;
-      int ai;
       if(!press){ // if idle
-         state = "idle";
-         ai = 1;
-         idleFrame++;
-         if(idleFrame==((4*idleSpeed)-(int)(idleSpeed/1.2))){ // -idleSpeed/# to make the closed eye part a lot faster
-            idleFrame=0;
-         }
          try{
             return frames[ai][directions.get(directions.size()-1)-1][idleFrame/idleSpeed];
          }
@@ -89,13 +81,24 @@ public class Player{
          }
       }
       else{ // moving
-         state = "active";
+         return frames[ai][directions.get(directions.size()-1)-1][activeFrame/activeSpeed];
+      }
+   }
+   
+   public void advance(){
+      if(!press){ // if idle
+         ai = 1;
+         idleFrame++;
+         if(idleFrame==((4*idleSpeed)-(int)(idleSpeed/1.2))){ // -idleSpeed/# to make the closed eye part a lot faster
+            idleFrame=0;
+         }
+      }
+      else{ // moving
          ai = 0;
          activeFrame++;
          if(activeFrame==(4*activeSpeed)){
             activeFrame=0;
          }
-         return frames[ai][directions.get(directions.size()-1)-1][activeFrame/activeSpeed];
       }
    }
    
@@ -345,7 +348,97 @@ public class Player{
       int col = getCol();
       double savedx=dx;
       double savedy=dy; 
-      
+      // colliding directly above or below
+      if(collision(level[row+1][col]) || collision(level[row-1][col]) ){ // player is inside tile
+         y-=savedy; // move out of tile
+         if(collision(level[row+1][col]) || collision(level[row-1][col])){ // check when was this a bad decision (am i still colliding?)
+            y+=savedy; // if still colliding, move back to original position
+         }
+         else{
+            dy=0;
+         }
+      }
+      // colliding directly left or right
+      if(collision(level[row][col+1]) || collision(level[row][col-1])){ // player is inside tile
+         x-=savedx; // move out
+         if(collision(level[row][col+1]) || collision(level[row][col-1])){
+            x+=savedx;
+         }
+         else{
+            dx=0;
+         }
+      }  
+      // bottom right
+      if(collision(level[row+1][col+1])){
+         // am i moving upright or downleft?
+         //lowest priority > UP, RIGHT, DOWN, LEFT > highest priority
+         if(directions.contains(RIGHT) && directions.contains(DOWN)){ // trying to clip in
+            dx=0;
+            dy=0;
+            x-=savedx;
+            y-=savedy;
+         }
+         else if(directions.contains(RIGHT) || directions.contains(UP)){
+            dx=0;
+            x-=savedx;
+         }
+         else{ // down or left
+            dy=0;
+            y-=savedy;
+         }
+      }
+      // bottom left
+      if(collision(level[row+1][col-1])){
+         if(directions.contains(DOWN) && directions.contains(LEFT)){ // clipping
+            dx=0;
+            dy=0;
+            x-=savedx;
+            y-=savedy;
+         }
+         else if(directions.contains(LEFT) || directions.contains(UP)){
+            dx=0;
+            x-=savedx;
+         }
+         else{ // down or right
+            dy=0;
+            y-=savedy;
+         }
+      }
+      // top right
+      if(collision(level[row-1][col+1])){
+         if(directions.contains(RIGHT) && directions.contains(UP)){ // clipping
+            dx=0;
+            dy=0;
+            x-=savedx;
+            y-=savedy;
+         }
+         else if(directions.contains(RIGHT) || directions.contains(DOWN)){
+            dx=0;
+            x-=savedx;
+         }
+         else{ // left or up
+            dy=0;
+            y-=savedy;
+         }
+      }
+      // top left
+      if(collision(level[row-1][col-1])){
+         if(directions.contains(LEFT) && directions.contains(UP)){ // clipping
+            dx=0;
+            dy=0;
+            x-=savedx;
+            y-=savedy;
+         }
+         else if(directions.contains(LEFT) || directions.contains(DOWN)){
+            dx=0;
+            x-=savedx;
+         }
+         else{ // right or up
+            dy=0;
+            y-=savedy;
+         }
+      }
+   
       // conveyer
       double conSpeed = 0.5;
       double revSpeed = 0.3;

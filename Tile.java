@@ -40,7 +40,12 @@ public class Tile {
    public ImageIcon getPicture(int t1, int t2, boolean hasItem){
       if(conveyer){
          return pic;
-      } // return highlighted picture
+      } 
+      if(name.equals("wal")){
+         return pic;
+      }
+      
+      // return highlighted picture
       if(t1==tileID || t2==tileID){
          if(name.equals("ove")){
             return new ImageIcon("images/tile/ove"+on+"H.gif");

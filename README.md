@@ -5,7 +5,7 @@ Advanced CS Final Project
 by Ethan and Vinhan
 
 
-Website: https://tinyurl.com/houseoflavor
+Website (and journal): https://tinyurl.com/houseoflavor
 
 ## Resources
 level creator: https://forkphorus.github.io/#366957956

@@ -1,13 +1,13 @@
-wal ove ove ove ove dir del del tab wal flo flo flo flo flo flo flo flo flo flo
+wal ove ove ove ove dir deu deu otc wal flo flo flo flo flo flo flo flo flo flo
 wal flo flo flo flo flo flo flo flo wal flo flo flo flo flo flo flo flo flo flo
 wal flo flo flo flo flo flo flo flo wal flo flo flo flo flo flo flo flo flo flo
-wal flo dou tab tab tab tab mus tab wal flo flo flo flo flo flo flo flo flo flo
+wal flo dou ota ota tab tab mus otj wal flo flo flo flo flo flo flo flo flo flo
 wal flo flo flo flo flo flo flo flo wal wal wal wal wal wal wal wal wal wal wal
 wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo ord
-tab flo flo flo tab tab flo flo flo flo flo flo flo flo tab flo flo flo flo tab
+tab flo flo flo otj tab flo flo flo flo flo flo flo flo otb flo flo flo flo tab
 bur flo flo flo flo flo flo flo flo flo flo flo flo flo che flo flo flo flo bur
 tab flo flo flo flo flo flo flo flo flo flo flo flo flo tom flo flo flo flo tab
-bur flo flo flo flo flo sau tab tab tab tab tab tab tab tab flo flo flo flo bur
+bur flo flo flo flo flo sau otk otl tab otm otd tab tab tab flo flo flo flo bur
 wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo tab
 wal tab tab tab tra tab cut tab cut tab tab sid siw tab tab cut tab cut tab tab
 483 240
@@ -15,4 +15,4 @@ wal tab tab tab tra tab cut tab cut tab tab sid siw tab tab cut tab cut tab tab
 100
 200
 300
-250
+0

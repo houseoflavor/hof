@@ -18,10 +18,11 @@ public class Tile {
    private String on;
    private boolean conveyer;
    private int numPlates;
-   
+   private boolean obs;
    // constructor
    //           name      row    col   hitbox?    spawner?
    public Tile(String n, int r, int c, boolean h, boolean s){
+      obs = n.startsWith("z");
       this.pic = new ImageIcon("images/tile/"+n+".gif");
       name = n;
       row=r;
@@ -38,6 +39,9 @@ public class Tile {
    // if the tile can be selected, return the brighter version of the icon (append an H)
    // if the tile has an item on it, do not show knife (if cutting board)
    public ImageIcon getPicture(int t1, int t2, boolean hasItem){
+      if(obs){
+         return new ImageIcon("images/obstacles/"+name+".gif");
+      }
       if(conveyer){
          return pic;
       } 

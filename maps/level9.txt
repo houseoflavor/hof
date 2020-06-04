@@ -6,7 +6,13 @@ tab cor col cou cor cou cod cor cod cou tom cor cod cou cor cod cou col flo bur
 tab col cod col cor col cod col cou cor cod col cod cor cor col cod cor cou tab
 tab cod cou cor cod col cou cod cor cor col cod cou cou sau cor cou col flo dir
 tab cor cod col cod cod dou col cor cou cor cou col cor cou cou cod cor flo tab
-tra col cou cor col col col cor col cod cor cod cor cod cor cod col cor flo del
-tab cou col cou cod cou col col cod col cou col cou cor cou col cod col flo del
+tra col cou cor col col col cor col cod cor cod cor cod cor cod col cor flo der
+tab cou col cou cod cou col col cod col cou col cou cor cou col cod col flo der
 tab cou cor flo col cor cod cod col flo flo cor cod cor cou col flo cor flo ord
 tab tab tab cut tab tab tab tab tab cut cut tab tab tab tab tab cut tab tab tab
+450 435
+708 273
+100
+200
+300
+0

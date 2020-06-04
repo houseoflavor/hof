@@ -115,7 +115,7 @@ public class Game{
    private ArrayList<Integer> remNums = new ArrayList<Integer>();
    
    //info
-   private int numDeliv=0, numFail=0;
+   private int numDeliv=3, numFail=2;
    
    // tip = coins - (numDeliv*40)
    
@@ -126,14 +126,23 @@ public class Game{
       spawnPlate = true;
       this.level=l;
       orders = new LinkedList<Order>();
-      timeLeftInRound = 185; // 185
+      timeLeftInRound = 4; // 185
       complete = 0;
       this.start();
-      coins = 0;
+      coins = 223;
       orders.add(new Order(60, false, false, false));
       orders.add(new Order(60, false, false, false));
    }
    
+   public int numDel(){
+      return numDeliv;
+   }
+   public int numFail(){
+      return numFail;
+   }
+   public int getCoins(){
+      return coins;
+   }
    public LinkedList getOrders(){
       return orders;
    }
@@ -143,9 +152,6 @@ public class Game{
    }
    public int getTime(){
       return timeLeftInRound;
-   }
-   public int getCoins(){
-      return coins;
    }
    
    public void spawnPlate(){

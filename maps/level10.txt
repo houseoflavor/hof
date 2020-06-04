@@ -7,6 +7,12 @@ cut flo wal cou wal wal cod tab flo flo tab flo tab cou wal wal cod wal flo bur
 cut flo wal cou wal wal cod tab flo tab flo flo tab cou wal wal cod wal flo bur
 cut flo wal cou wal wal cod tab flo tab flo che tab cou siw sid cod wal flo bur
 tab flo wal cou wal wal cod tab flo tab flo dou tab flo flo flo flo wal flo ord
-tab flo wal cou wal wal cod tab flo tab flo mus tab tab tab tab tab wal flo del
-dir flo cor cou wal wal cor cor flo tra flo cor cor cor cor cor cor cor cor del
+tab flo wal cou wal wal cod tab flo tab flo mus tab tab tab tab tab wal flo der
+dir flo cor cou wal wal cor cor flo tra flo cor cor cor cor cor cor cor cor der
 wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal
+450 435
+708 273
+100
+200
+300
+0

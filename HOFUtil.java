@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.io.*;
 import java.util.Arrays.*;
 import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 public class HOFUtil extends HOF{
    static final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
@@ -97,8 +99,94 @@ public class HOFUtil extends HOF{
    }
    
    public static void drawScore(Graphics g){
-   
+      ImageIcon gradient = new ImageIcon("images/menus/gradient.png");
+      g.drawImage(gradient.getImage(),0,0,null);
+      g.drawImage(cloud.getPicture().getImage(),cloud.move(),0,null);
+      g.drawImage((new ImageIcon("images/menus/score.png")).getImage(),0,0,null);
+      g.setFont(dpcomic72);
+      g.setColor(new Color(132, 94, 49));
+      g.drawString("Score Overview", 400, 150);
+      g.setFont(dpcomic48);
+      if(scoreStage>=0){ // why do i abuse ternaries like this
+         g.drawString("Orders Delivered x"+game.numDel()+ "                  "+(scoreStage==0 ? (countScore>0 ? countScore : "0") : game.numDel()*40), 100, 250);
+         if(countScore==game.numDel()*40 && scoreStage==0){
+            scoreStage=1;
+            countScore=-100;
+         }
+         if(scoreStage>0){
+            g.drawString("Orders Failed x"+game.numFail()+ "                      " + (scoreStage==1 ? (countScore>0 ? "-"+countScore : "0") : "-"+game.numFail()*30), 100, 300);
+            if(countScore==game.numFail()*30 && scoreStage==1){
+               scoreStage=2;
+               countScore=-100;
+            }
+            if(scoreStage>1){
+               g.drawString("Tips:                                   " + (scoreStage==2 ? (countScore>0 ? countScore : "0") : (game.getCoins()+(game.numFail()*30) - (game.numDel()*40))), 100, 350);
+               if(countScore == (game.getCoins()+(game.numFail()*30) - (game.numDel()*40)) && scoreStage==2){
+                  scoreStage=3;
+                  countScore=-100;
+               }
+               if(scoreStage>2){
+                  g.setFont(dpcomic60);
+                  g.drawString("Total:                         " + (scoreStage==3 ? (countScore>0 ? countScore : "0") : (game.getCoins())), 100, 450);
+                  if(countScore == game.getCoins() && scoreStage==3){
+                     scoreStage=4;
+                     countScore=-100;
+                  }
+                  if(scoreStage>3 && countScore>0){
+                     g.setFont(dpcomic24);
+                     if(highscore<game.getCoins() && !newhs){
+                        highscore = game.getCoins();
+                        replaceSelected(18, ""+highscore, game.getLevel());
+                        newhs = true;
+                     }
+                     g.drawImage((new ImageIcon("images/menus/level/"+((game.getCoins()<star1) ? "0" : ((game.getCoins()<star2) ? "1" : ((game.getCoins()<star3) ? "2" : "3")))+"star.png")).getImage(), 900,450,null);
+                     g.drawString(""+star1, 964+95, 514+65);
+                     g.drawString(""+star2, 964-95, 514+65);
+                     g.drawString(""+star3, 964, 514-64);
+                     g.setFont(dpcomic60);
+                     if(newhs){
+                        g.drawString("New highscore!", 100, 550);
+                     }
+                     ImageIcon clickX = new ImageIcon("images/menus/X.png");
+                     if(mouseX<1161 && mouseX>1136 && mouseY<151 && mouseY>113){
+                        g.drawImage(clickX.getImage(),0,0,null);
+                        buttonTouching = EXIT;
+                     }
+                     else{
+                        buttonTouching = NONE;
+                     }
+                  }
+               }
+            }
+         }
+      }
    }
+   
+   public static void replaceSelected(int index, String content, int lvl) { // thanks stack overflow <3 https://stackoverflow.com/questions/20039980/java-replace-line-in-text-file
+      try {
+        // input the (modified) file content to the StringBuffer "input"
+         BufferedReader file = new BufferedReader(new FileReader("maps/level"+lvl+".txt"));
+         StringBuffer inputBuffer = new StringBuffer();
+         String line;
+         int count=0;
+         while ((line = file.readLine()) != null) {
+            count++;
+            if(index==count){
+               line = content;
+            }
+            inputBuffer.append(line);
+            inputBuffer.append('\n');
+         }
+         file.close();
+      
+        // write the new string with the replaced line OVER the same file
+         FileOutputStream fileOut = new FileOutputStream("maps/level"+lvl+".txt");
+         fileOut.write(inputBuffer.toString().getBytes());
+         fileOut.close();
+      
+      } catch (Exception e) {
+         System.out.println("Problem reading file.");
+      }   }
    
    
    public static void drawPause(Graphics g){
@@ -382,7 +470,7 @@ public class HOFUtil extends HOF{
       Color p1blue = new Color(17, 126, 233, alpha);
       Color p2red = new Color(252, 46, 46, alpha);
       
-      if(!game.isPaused() && game.ready() && game.getTime()>0){
+      if(!game.isPaused() && game.getTime()>0){
          p1.advance();
          p2.advance();
       }

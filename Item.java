@@ -95,7 +95,7 @@ public class Item{
    // returns the highlighted version
    public ImageIcon getHPicture(){
       if(obstacle){
-         return new ImageIcon("images/obstacles/"+name+"H.gif");
+         return new ImageIcon("images/obstacles/"+name+".gif");
       }
       if(plate){
          return new ImageIcon("images/items/"+name+"plaH.gif");

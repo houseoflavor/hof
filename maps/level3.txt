@@ -1,11 +1,11 @@
-flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo tab tab del del wal
+flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo tab tab deu deu wal
 flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo tab flo flo flo wal
 wal wal wal wal wal wal wal tab tom tom tab tab tab tab pla tab flo flo flo wal
 wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo wal
 wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo wal
 wal flo flo flo flo tab bur bur tab dou dou tab cut cut tab flo flo flo flo wal
-wal flo flo flo ofb ofa ofb ofb flo flo flo flo flo flo tab flo flo flo flo wal
-wal flo flo flo ofb tab cut cut tab dou dou tab ove ove tab flo flo flo flo wal
+wal flo flo flo flo tab flo flo flo flo flo flo flo flo tab flo flo flo flo wal
+wal flo flo flo flo tab cut cut tab dou dou tab ove ove tab flo flo flo flo wal
 wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo wal
 wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo wal
 wal flo flo flo tab ord tab tab tab tab che che tab tab ota tab otb tab tab wal
@@ -15,4 +15,4 @@ wal tab otb tab tab flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo
 100
 200
 300
-200
+0

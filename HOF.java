@@ -34,76 +34,77 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       new TimerTask(){
          public void run(){
             if(mode.equals("game") && game != null && !game.isPaused() && game.getTime()>0){
-            // dashing
-               try{
-                  boolean p1Boost = false;
-                  boolean p2Boost = false;
-               //p1 dash
-                  if(keysDown.contains(KeyEvent.VK_CONTROL) && dirKeys.contains(KeyEvent.KEY_LOCATION_LEFT)){
-                     if(!hasP1Boost){ // prevents players from holding dash
-                        p1Boost = true;
-                        hasP1Boost = true;
+               //if(game.getTime()<=180){
+               // dashing
+                  try{
+                     boolean p1Boost = false;
+                     boolean p2Boost = false;
+                  //p1 dash
+                     if(keysDown.contains(KeyEvent.VK_CONTROL) && dirKeys.contains(KeyEvent.KEY_LOCATION_LEFT)){
+                        if(!hasP1Boost){ // prevents players from holding dash
+                           p1Boost = true;
+                           hasP1Boost = true;
+                        }
                      }
-                  }
-                  else{
-                     hasP1Boost = false;
-                  }
-               //p2 dash
-                  if(keysDown.contains(KeyEvent.VK_CONTROL) && dirKeys.contains(KeyEvent.KEY_LOCATION_RIGHT)){
-                     if(!hasP2Boost){
-                        p2Boost = true;
-                        hasP2Boost = true;
+                     else{
+                        hasP1Boost = false;
                      }
-                  }
-                  else{
-                     hasP2Boost = false;
-                  }
-                  java.util.List<Integer> p1d = new ArrayList<Integer>(); // refer to java.util.List not java.awt.List
-                  java.util.List<Integer> p2d = new ArrayList<Integer>();
+                  //p2 dash
+                     if(keysDown.contains(KeyEvent.VK_CONTROL) && dirKeys.contains(KeyEvent.KEY_LOCATION_RIGHT)){
+                        if(!hasP2Boost){
+                           p2Boost = true;
+                           hasP2Boost = true;
+                        }
+                     }
+                     else{
+                        hasP2Boost = false;
+                     }
+                     java.util.List<Integer> p1d = new ArrayList<Integer>(); // refer to java.util.List not java.awt.List
+                     java.util.List<Integer> p2d = new ArrayList<Integer>();
                   //player 1
-                  if(keysDown.contains(KeyEvent.VK_W)){//up
-                     p1.input(UP, p1Boost);
-                     p1d.add(UP);
-                  }
-                  if(keysDown.contains(KeyEvent.VK_D)){ //right
-                     p1.input(RIGHT, p1Boost);
-                     p1d.add(RIGHT);
-                  }
-                  if(keysDown.contains(KeyEvent.VK_S)){ //down
-                     p1.input(DOWN, p1Boost);
-                     p1d.add(DOWN);
-                  }
-                  if(keysDown.contains(KeyEvent.VK_A)){ //left
-                     p1.input(LEFT, p1Boost);
-                     p1d.add(LEFT);
-                  }
+                     if(keysDown.contains(KeyEvent.VK_W)){//up
+                        p1.input(UP, p1Boost);
+                        p1d.add(UP);
+                     }
+                     if(keysDown.contains(KeyEvent.VK_D)){ //right
+                        p1.input(RIGHT, p1Boost);
+                        p1d.add(RIGHT);
+                     }
+                     if(keysDown.contains(KeyEvent.VK_S)){ //down
+                        p1.input(DOWN, p1Boost);
+                        p1d.add(DOWN);
+                     }
+                     if(keysDown.contains(KeyEvent.VK_A)){ //left
+                        p1.input(LEFT, p1Boost);
+                        p1d.add(LEFT);
+                     }
                   //player 2
-                  if(keysDown.contains(KeyEvent.VK_UP)){ //up
-                     p2.input(UP, p2Boost);
-                     p2d.add(UP);
-                  }
-                  if(keysDown.contains(KeyEvent.VK_RIGHT)){ //right
-                     p2.input(RIGHT, p2Boost);
-                     p2d.add(RIGHT);
-                  }
-                  if(keysDown.contains(KeyEvent.VK_DOWN)){ //down
-                     p2.input(DOWN, p2Boost);
-                     p2d.add(DOWN);
-                  }
-                  if(keysDown.contains(KeyEvent.VK_LEFT)){ //left
-                     p2.input(LEFT, p2Boost);
-                     p2d.add(LEFT);
-                  }
-                  p1.direction(p1d);
-                  p2.direction(p2d);
+                     if(keysDown.contains(KeyEvent.VK_UP)){ //up
+                        p2.input(UP, p2Boost);
+                        p2d.add(UP);
+                     }
+                     if(keysDown.contains(KeyEvent.VK_RIGHT)){ //right
+                        p2.input(RIGHT, p2Boost);
+                        p2d.add(RIGHT);
+                     }
+                     if(keysDown.contains(KeyEvent.VK_DOWN)){ //down
+                        p2.input(DOWN, p2Boost);
+                        p2d.add(DOWN);
+                     }
+                     if(keysDown.contains(KeyEvent.VK_LEFT)){ //left
+                        p2.input(LEFT, p2Boost);
+                        p2d.add(LEFT);
+                     }
+                     p1.direction(p1d);
+                     p2.direction(p2d);
                   
                   
                   //physics
-                  p1.move(p2);
-                  p2.move(p1);
-               
-               }
-               catch(Exception e){}
+                     p1.move(p2);
+                     p2.move(p1);
+                  }
+                  catch(Exception e){}
+               //}
                if(game.ready()){
                // interact
                // p1 -----
@@ -117,7 +118,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                            // these tiles are invalid to put something on
                            
                            }
-                           else if(gameTiles[i][j].getName().equals("del")){ // delivering
+                           else if(gameTiles[i][j].getName().startsWith("de")){ // delivering
                            
                               if(p1.whatHold().isOven()){ // no consequence for uncooked items
                                  if(p1.whatHold().hasPlate()){
@@ -129,7 +130,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                            }
                            else if(gameTiles[i][j].getName().equals("pla")){ // taking plate while holding something
                               if(gameTiles[i][j].getPlates()>0){
-                                 System.out.println("taking plate");
+                                 //System.out.println("taking plate");
                                  Item tempPlate = new Item("pla", false, true);
                                  if(p1.whatHold().combine(tempPlate)){ // if successfully combine
                                     gameTiles[i][j].takePlate(); // take a plate
@@ -177,7 +178,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                     itemTiles[i][j] = null;
                                  }
                               }
-                              else if(gameTiles[i][j].getName().equals("del")){ // delivery = check if valid
+                              else if(gameTiles[i][j].getName().startsWith("de")){ // delivery = check if valid
                                  sound("grab", 5);
                               
                                  if(p1.whatHold().isOven() && p1.whatHold().hasPlate()){
@@ -271,7 +272,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         }
                         else{ // picking up
                            if(!p1.isHold()){ // player's hand is empty
-                              if(gameTiles[i][j].isSpawner()){ // is this tile a spawner
+                              if(gameTiles[i][j].getName().startsWith("z")){} // obstacle can't be picked up
+                              else if(gameTiles[i][j].isSpawner()){ // is this tile a spawner
                                  sound("grab", 5);
                               
                                  if(itemTiles[i][j]==null){ // is empty?
@@ -290,7 +292,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               else if(gameTiles[i][j].getName().equals("pla")){
                                  if(gameTiles[i][j].getPlates()>0){
                                  
-                                    System.out.println("taking plate");
+                                    //System.out.println("taking plate");
                                     Item tempPlate = new Item("pla", false, true);
                                     p1.pickUpEmpty(tempPlate);
                                     gameTiles[i][j].takePlate(); // take a plate
@@ -533,6 +535,15 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                mode = "game";
                transMode = "game";
             }
+            if(game!= null && game.getTime()==-3 && !transMode.equals("score")){
+               transMode = "score";
+               transition = 1;
+               countScore = -120;
+               scoreStage = 0;
+            }
+            if(mode.equals("score")){
+               countScore++;
+            }
             
             repaint();
          }
@@ -543,6 +554,9 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static ArrayList<Integer> keysDown;
    static ArrayList<Integer> dirKeys;
    static Player p1, p2;
+   
+   static int countScore;
+   static int scoreStage;
 
    static boolean hasP1Boost = false, hasP2Boost = false;
    static boolean hasP1Int = false, hasP2Int = false;
@@ -560,6 +574,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static boolean hasP2W=false,hasP2A=false,hasP2S=false,hasP2D=false;
    
    static int numPlates;
+   static boolean newhs = false;
    
    static Game game;
    
@@ -603,19 +618,11 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       
       this.start();
       
-      levels = new int[10]; // change for num of levels
-      
       cloud = new Clouds();
       
       HOFUtil.setup();
       
-      for(int i=0; i<10; i++){
-         try{
-            readFile("maps/level"+(i+1)+".txt");
-            levels[i] = (highscore<star1) ? 0 : ((highscore<star2) ? 1 : ((highscore<star3) ? 2 : 3)); // we love nested ternaries
-         }
-         catch(Exception e){}
-      }
+      updateLevel();
       
    }
    // stars the timer, 10ms refresh
@@ -623,8 +630,19 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       timer1.scheduleAtFixedRate(task1,1,10);
    }
    
+   public static void updateLevel(){
+      levels = new int[10]; // change for num of levels
+      for(int i=0; i<10; i++){
+         try{
+            readFile("maps/level"+(i+1)+".txt");
+            levels[i] = (highscore<star1) ? 0 : ((highscore<star2) ? 1 : ((highscore<star3) ? 2 : 3)); // we love nested ternaries
+         }
+         catch(Exception e){}
+      }
+   }
+   
    //returns the index of the level that is next to beat
-   public int lastBeat(){ 
+   public static int lastBeat(){ 
       for(int i=0; i<levels.length; i++){
          if(levels[i]==-1){
             return i;
@@ -662,9 +680,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             if(spawners.contains(" "+ singleLine[j] + " ")){
                gameTiles[i][j] = new Tile(singleLine[j],i,j,true,true);
             }
-            else if(singleLine[j].startsWith("ot") || singleLine[j].startsWith("of")){// obstacle
-               itemTiles[i][j] = new Item(singleLine[j], true, true);
-               gameTiles[i][j] = new Tile("tab", i, j, true, false);
+            else if(singleLine[j].startsWith("z")){// obstacle
+               gameTiles[i][j] = new Tile(singleLine[i], i, j, true, false);
             }
             else if(singleLine[j].equals("bur")){
                itemTiles[i][j] = new Item("pan", false, true);
@@ -787,11 +804,20 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          }
          if(buttonTouching == 3){
             transMode = "level";
+            updateLevel();
             transition = 1;
             game.resume();
          }
       }
-      
+      else if(mode.equals("score") && transMode.equals("none")){
+         if(buttonTouching == EXIT){
+            transMode = "level";
+            transX=1500;
+            transition = 1;
+            newhs= false;
+            updateLevel();
+         }
+      }
       else if(mode.equals("level") && transMode.equals("none")){
          if(buttonTouching >10){ // level select
             transMode = "game";
@@ -801,6 +827,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                p2 = new Player(name2,start2x,start2y);
                p1.setLevel(gameTiles); // very important to have these 2 lines!!
                p2.setLevel(gameTiles);
+               countScore=0;
+               scoreStage=0;
                game = new Game(buttonTouching-10);
             }
             catch(Exception ee){

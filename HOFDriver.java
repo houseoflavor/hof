@@ -21,7 +21,7 @@ public class HOFDriver{
       w.setContentPane(window);
       w.setLocation(0, 0);
       HOF graphics = window;
-      w.setSize(1300,750); // 1300x750 / 1316x789
+      w.setSize(1316,789); // 1300x750 / 1316x789
       w.setResizable(false);
       w.setVisible(true); // show it
       

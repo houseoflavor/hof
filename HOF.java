@@ -582,7 +582,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      }
                   }
                   else{
-                     hasP1Int = false;
+                     hasP2Int = false;
                   }
                // chopping
                   if(keysDown.contains(KeyEvent.VK_SHIFT) && dirKeys.contains(KeyEvent.KEY_LOCATION_LEFT)){
@@ -614,7 +614,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      hasP2Chop = false;
                   }
                   
-
+               
                }
             
             // plate stuff

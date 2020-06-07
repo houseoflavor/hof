@@ -267,7 +267,7 @@ public class HOFUtil extends HOF{
                               "Oh baby when you bawk like that...",
                               "Purrhaps you know her for her singing",
                               "You'll find him Rome-ing around cheese",
-                              "What's shakin bacon?",
+                              "I'm so hammy, you already know",
                               "The bun who lived"};
       g.setColor(Color.BLACK);
       g.setFont(dpcomic48);

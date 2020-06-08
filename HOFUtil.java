@@ -267,7 +267,7 @@ public class HOFUtil extends HOF{
                               "Oh baby when you bawk like that...",
                               "Purrhaps you know her for her singing",
                               "You'll find him Rome-ing around cheese",
-                              "What's shakin bacon?",
+                              "I'm so hammy, you already know",
                               "The bun who lived"};
       g.setColor(Color.BLACK);
       g.setFont(dpcomic48);
@@ -588,10 +588,10 @@ public class HOFUtil extends HOF{
          drawSomeTiles(g, p2.getRow()+1, p2.getRow()+2);
          if(p2.isHold()){
             if(p2.getDir()==LEFT){
-               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-30,((int)p1.gety())-20-p2.yChange(),32,32,null);
+               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-30,((int)p2.gety())-20-p2.yChange(),32,32,null);
             }
             if(p2.getDir()==RIGHT){
-               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-3,((int)p1.gety())-20-p2.yChange(),32,32,null);
+               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-3,((int)p2.gety())-20-p2.yChange(),32,32,null);
             }
          }
          //}
@@ -651,10 +651,10 @@ public class HOFUtil extends HOF{
          drawSomeTiles(g, p2.getRow()+1, p2.getRow()+2);
          if(p2.isHold()){
             if(p2.getDir()==LEFT){
-               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-30,((int)p1.gety())-20-p2.yChange(),32,32,null);
+               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-30,((int)p2.gety())-20-p2.yChange(),32,32,null);
             }
             if(p2.getDir()==RIGHT){
-               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-3,((int)p1.gety())-20-p2.yChange(),32,32,null);
+               g.drawImage(p2.whatHold().getPicture().getImage(), ((int)p2.getx())-3,((int)p2.gety())-20-p2.yChange(),32,32,null);
             }
          }
          //}

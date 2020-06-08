@@ -121,7 +121,7 @@ public class Game{
    private ArrayList<Integer> remNums = new ArrayList<Integer>();
    
    //info
-   private int numDeliv=3, numFail=2;
+   private int numDeliv=0, numFail=0;
    
    // tip = coins - (numDeliv*40)
    

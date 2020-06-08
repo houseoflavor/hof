@@ -42,6 +42,9 @@ public class Tile {
       if(obs){
          return new ImageIcon("images/obstacles/"+name+".gif");
       }
+      if(name.startsWith("de")){
+         return pic;
+      }
       if(conveyer){
          return pic;
       } 

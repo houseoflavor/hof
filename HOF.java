@@ -120,31 +120,34 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         int j = p1.getFCol();
                         hasP1Int = true;
                         if(p1.isHold()){ // holding something
-                           if(gameTiles[i][j].getName().equals("wal") || gameTiles[i][j].getName().startsWith("co")){
+                           if(gameTiles[i][j].getName().equals("wal") || gameTiles[i][j].getName().startsWith("co") || gameTiles[i][j].getName().startsWith("z")){
                            // these tiles are invalid to put something on
                            
                            }
                            else if(gameTiles[i][j].getName().startsWith("de")){ // delivering
-                           
-                              if(p1.whatHold().isOven()){ // no consequence for uncooked items
+                              if(p1.whatHold().isTool()){
+                                 error = 4;
+                                 errorTimer=180;
+                              }
+                              else if(p1.whatHold().isOven()){ // no consequence for uncooked items
                                  if(p1.whatHold().hasPlate()){
                                  // you do lose the item if the item is plated however
                                     if(game.deliver(p1.whatHold())){ // returns boolean is successful, if future me wants to use
                                     }
                                     else{
                                        error = 3;
-                                       errorTimer = 120;
+                                       errorTimer = 180;
                                     }
                                     p1.drop();
                                  } 
                                  else{
                                     error = 1;
-                                    errorTimer = 120;
+                                    errorTimer = 180;
                                  } 
                               }
                               else{
                                  error = 2;
-                                 errorTimer = 120;
+                                 errorTimer = 180;
                               }
                            }
                            else if(gameTiles[i][j].getName().equals("pla")){ // taking plate while holding something
@@ -371,7 +374,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         int j = p2.getFCol();
                         hasP2Int = true;
                         if(p2.isHold()){ // holding something
-                           if(gameTiles[i][j].getName().equals("wal") || gameTiles[i][j].getName().startsWith("co")){
+                           if(gameTiles[i][j].getName().equals("wal") || gameTiles[i][j].getName().startsWith("co")|| gameTiles[i][j].getName().startsWith("z")){
                            // these tiles are invalid to put something on
                            
                            }

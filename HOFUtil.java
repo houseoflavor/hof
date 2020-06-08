@@ -30,7 +30,7 @@ public class HOFUtil extends HOF{
          ge.registerFont(pixellari24);
          ge.registerFont(dpcomic36);
          ge.registerFont(dpcomic72);
-         ge.registerFont(dpcomic60);
+         ge.registerFont(pixellari60);
       } catch (Exception e) {}
    }
    public static void drawString(Graphics g, String s, int x, int y, int width)
@@ -737,18 +737,22 @@ public class HOFUtil extends HOF{
             error=-1;
          }
          g.setColor(Color.BLACK);
-         g.setFont(pixellari60);
+         g.setFont(dpcomic60);
+         System.out.println("error code" + error);
          if(error==1){ // needs plate
-            g.drawString("Needs plate", 50, 50);
+            g.drawString("Needs plate", 25, 50);
             errorTimer--;
          }
          if(error==2){ // uncooked
-            g.drawString("Needs to be cooked", 50, 50);
+            g.drawString("Needs to be cooked", 25, 50);
             errorTimer--;
          }
          if(error==3){
-            g.drawString("Incorrect order", 50, 50);
+            g.drawString("Incorrect order", 25, 50);
             errorTimer--;
+         }
+         if(error==4){
+            g.drawString("Cannot be delivered", 25, 50);
          }
       
       

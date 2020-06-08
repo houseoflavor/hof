@@ -53,7 +53,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      hasP1Boost = false;
                   }
                   //p2 dash
-                  if(keysDown.contains(KeyEvent.VK_CONTROL) && dirKeys.contains(KeyEvent.KEY_LOCATION_RIGHT)){
+                  if(keysDown.contains(KeyEvent.VK_B)){
                      if(!hasP2Boost){
                         p2Boost = true;
                         hasP2Boost = true;
@@ -85,19 +85,19 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      p1d.add(LEFT);
                   }
                   //player 2
-                  if(keysDown.contains(KeyEvent.VK_UP)){ //up
+                  if(keysDown.contains(KeyEvent.VK_I)){ //up
                      p2.input(UP, p2Boost);
                      p2d.add(UP);
                   }
-                  if(keysDown.contains(KeyEvent.VK_RIGHT)){ //right
+                  if(keysDown.contains(KeyEvent.VK_L)){ //right
                      p2.input(RIGHT, p2Boost);
                      p2d.add(RIGHT);
                   }
-                  if(keysDown.contains(KeyEvent.VK_DOWN)){ //down
+                  if(keysDown.contains(KeyEvent.VK_K)){ //down
                      p2.input(DOWN, p2Boost);
                      p2d.add(DOWN);
                   }
-                  if(keysDown.contains(KeyEvent.VK_LEFT)){ //left
+                  if(keysDown.contains(KeyEvent.VK_J)){ //left
                      p2.input(LEFT, p2Boost);
                      p2d.add(LEFT);
                   }
@@ -368,7 +368,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                   else{
                      hasP1Int = false;
                   }
-                  if(keysDown.contains(KeyEvent.VK_COMMA)){
+                  if(keysDown.contains(KeyEvent.VK_O)){
                      if(!hasP2Int){
                         int i = p2.getFRow();
                         int j = p2.getFCol();
@@ -637,7 +637,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                   else{
                      hasP1Chop = false;
                   }
-                  if(keysDown.contains(KeyEvent.VK_SHIFT) && dirKeys.contains(KeyEvent.KEY_LOCATION_RIGHT)){
+                  if(keysDown.contains(KeyEvent.VK_V) || keysDown.contains(KeyEvent.VK_OPEN_BRACKET)){
                      try{ // try to access a chop, if not then go to catch
                         if(itemTiles[p2.getFRow()][p2.getFCol()].canChop() && !hasP2Chop && gameTiles[p2.getFRow()][p2.getFCol()].getName().equals("cut")){
                            hasP2Chop = true;
@@ -734,7 +734,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                else{
                   hasP1D = false;
                }
-               if(keysDown.contains(KeyEvent.VK_UP)){
+               if(keysDown.contains(KeyEvent.VK_I)){
                   if(!hasP2W){
                      hasP2W = true;
                      if(p2Sel<3){
@@ -750,7 +750,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                else{
                   hasP2W = false;
                }
-               if(keysDown.contains(KeyEvent.VK_LEFT)){
+               if(keysDown.contains(KeyEvent.VK_J)){
                   if(!hasP2A){
                      hasP2A = true;
                      if(p2Sel%3==0){
@@ -766,7 +766,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                else{
                   hasP2A = false;
                }
-               if(keysDown.contains(KeyEvent.VK_DOWN)){
+               if(keysDown.contains(KeyEvent.VK_K)){
                   if(!hasP2S){
                      hasP2S = true;
                      if(p2Sel>2){
@@ -782,7 +782,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                else{
                   hasP2S = false;
                }
-               if(keysDown.contains(KeyEvent.VK_RIGHT)){
+               if(keysDown.contains(KeyEvent.VK_L)){
                   if(!hasP2D){
                      hasP2D = true;
                      if(p2Sel%3==2){

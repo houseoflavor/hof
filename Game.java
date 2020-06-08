@@ -88,17 +88,20 @@ public class Game{
    }
    public void addOrder(){
       boolean mus, sau;
-      if(level>=2){
+         mus=false;
+         sau=false;
+      if(level==4){
          mus = Math.random()>0.5 ? true : false;
       }
       else{
-         mus = false;
-      }
-      if(level>=3){ // change to whatever level first has sausage
-         sau = Math.random()>0.5 ? true : false;
-      }
-      else{
-         sau = false;
+         if(level>=5){
+            if(Math.random()>0.5){
+               sau = Math.random()>0.4 ? true : false;
+            }
+            else{
+               mus = Math.random()>0.4 ? true : false;
+            }
+         }
       }
       if(orders.size()<5){
          orders.add(new Order(60, mus, sau, true));

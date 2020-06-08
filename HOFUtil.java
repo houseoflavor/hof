@@ -258,7 +258,7 @@ public class HOFUtil extends HOF{
       g.drawImage((new ImageIcon("images/menus/charsel/bg.gif")).getImage(), 0, 0, null);
       g.drawImage((new ImageIcon("images/menus/charsel/allbutton.gif")).getImage(), 0, 0, null);
       
-      g.drawString("WASD / Arrow Keys to select", 135, 120);
+      g.drawString("WASD / IJKL to select", 135, 120);
       g.drawString("Enter to confirm", 395, 660);
       // other stuff
       g.drawImage((new ImageIcon("images/menus/charsel/b"+p1Sel+".gif")).getImage(), 0, 0, null);
@@ -758,7 +758,7 @@ public class HOFUtil extends HOF{
       
       }
       
-      drawBounds(g); // draw test bounds ----------------------------------------------
+      //drawBounds(g); // draw test bounds ----------------------------------------------
    }
    
    // draw a thicc circle at x, y

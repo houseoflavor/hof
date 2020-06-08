@@ -42,6 +42,12 @@ public class Game{
                   if(timeLeftInRound==160){
                      spawnPlate = true;
                   }
+                  if(timeLeftInRound==100){
+                     spawnPlate = true;
+                  }
+                  if(timeLeftInRound==50){
+                     spawnPlate = true;
+                  }
                   for(int i=0; i<rem.size(); i++){
                      if(remNums.get(i)<=0){
                         System.out.println("removing" + rem.get(i));
@@ -181,7 +187,7 @@ public class Game{
             rem.add(j);
             numDeliv++;
             remNums.add(3);
-            nextPlate = 15; // 15 seconds after delivery for next plate
+            nextPlate = 5;
             addOrder();
             return true;
          }

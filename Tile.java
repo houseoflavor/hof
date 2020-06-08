@@ -60,6 +60,15 @@ public class Tile {
          if(name.equals("pla")){
             return new ImageIcon("images/tile/pla"+numPlates+"H.gif");
          }
+         if(name.equals("pld")){
+         return new ImageIcon("images/tile/pld"+numPlates+"H.gif");
+         }
+         if(name.equals("siw")){
+         return new ImageIcon("images/tile/siw"+numPlates+"H.gif");
+         }
+         if(name.equals("sid")){
+         return new ImageIcon("images/tile/sid"+numPlates+"H.gif");
+         }
          if(hasItem){
             if(name.equals("cut")){
                return new ImageIcon("images/tile/cutNH.gif");
@@ -69,6 +78,15 @@ public class Tile {
       }
       if(name.equals("pla")){
          return new ImageIcon("images/tile/pla"+numPlates+".gif");
+      }
+      if(name.equals("pld")){
+         return new ImageIcon("images/tile/pld"+numPlates+".gif");
+      }
+      if(name.equals("siw")){
+         return new ImageIcon("images/tile/siw"+numPlates+".gif");
+      }
+      if(name.equals("sid")){
+         return new ImageIcon("images/tile/sid"+numPlates+".gif");
       }
       if(name.equals("ove")){
          return new ImageIcon("images/tile/ove"+on+".gif");
@@ -82,7 +100,7 @@ public class Tile {
    }
    
    public boolean addPlate(){
-      if(!name.equals("pla")){
+      if(!name.startsWith("pl") && !name.startsWith("si")){
          return false;
       }
       if(numPlates<4){
@@ -95,7 +113,7 @@ public class Tile {
       return numPlates;
    }
    public boolean takePlate(){
-      if(!name.equals("pla")){
+      if(!name.startsWith("pl") && !name.startsWith("si")){
          return false;
       }
       if(numPlates>0){
@@ -126,6 +144,9 @@ public class Tile {
    
    // returns the 3 letter name of the tile
    public String getName(){
+      if(name.equals("sid")){
+         return "pla"; // bypass...
+      }
       return name;
    }
    

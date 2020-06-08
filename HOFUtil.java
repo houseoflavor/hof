@@ -111,26 +111,26 @@ public class HOFUtil extends HOF{
       g.setFont(dpcomic48);
       if(scoreStage>=0){ // why do i abuse ternaries like this
          g.drawString("Orders Delivered x"+game.numDel()+ "                  "+(scoreStage==0 ? (countScore>0 ? countScore : "0") : game.numDel()*40), 100, 250);
-         if(countScore==game.numDel()*40 && scoreStage==0){
+         if(countScore>game.numDel()*40 && scoreStage==0){
             scoreStage=1;
             countScore=-100;
          }
          if(scoreStage>0){
             g.drawString("Orders Failed x"+game.numFail()+ "                      " + (scoreStage==1 ? (countScore>0 ? "-"+countScore : "0") : "-"+game.numFail()*30), 100, 300);
-            if(countScore==game.numFail()*30 && scoreStage==1){
+            if(countScore>game.numFail()*30 && scoreStage==1){
                scoreStage=2;
                countScore=-100;
             }
             if(scoreStage>1){
                g.drawString("Tips:                                   " + (scoreStage==2 ? (countScore>0 ? countScore : "0") : (game.getCoins()+(game.numFail()*30) - (game.numDel()*40))), 100, 350);
-               if(countScore == (game.getCoins()+(game.numFail()*30) - (game.numDel()*40)) && scoreStage==2){
+               if(countScore > (game.getCoins()+(game.numFail()*30) - (game.numDel()*40)) && scoreStage==2){
                   scoreStage=3;
                   countScore=-100;
                }
                if(scoreStage>2){
                   g.setFont(dpcomic60);
                   g.drawString("Total:                         " + (scoreStage==3 ? (countScore>0 ? countScore : "0") : (game.getCoins())), 100, 450);
-                  if(countScore == game.getCoins() && scoreStage==3){
+                  if(countScore > game.getCoins() && scoreStage==3){
                      scoreStage=4;
                      countScore=-100;
                   }

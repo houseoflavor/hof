@@ -429,7 +429,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                }
                catch(Exception e){}
                
-               if(keysDown.contains(KeyEvent.VK_ESCAPE) && game.ready()){ // pause
+               if(keysDown.contains(KeyEvent.VK_ESCAPE) && game.ready() && game.getTime()<180){ // pause
                   game.pause();
                }
                
@@ -579,6 +579,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                itemTiles = new Item[12][20];
                knives = new ArrayList<Particle>();
                loader = new ArrayList<Loader>();
+               game.cancel();
                game = null;
                try{
                   readFile("maps/level"+curLevel+".txt");
@@ -588,8 +589,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                p2 = new Player(name2,start2x,start2y);
                p1.setLevel(gameTiles);
                p2.setLevel(gameTiles);
-               game.cancel();
-               game = new Game(buttonTouching-10);
+               game = new Game(curLevel);
                mode = "game";
                transMode = "game";
             }

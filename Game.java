@@ -66,6 +66,21 @@ public class Game{
                      spawnPlate = true;
                   }
                }
+               
+               if(Math.random()>0.2){ // chance of spawning a npc
+                  npcs.add(new NPC((int)(Math.random()*6), (int)(Math.random()*18)+1)); // sort based on y value
+                  for(int i=0; i<npcs.size(); i++){
+                     for(int j = npcs.size() - 1; j > i; j--){
+                        if(npcs.get(i).gety() > npcs.get(j).gety()){
+                           NPC tmp = npcs.get(i);
+                           npcs.set(i,npcs.get(j));
+                           npcs.set(j,tmp);
+                        }
+                     }
+                  
+                  }
+               }
+               
             }
          
          }
@@ -88,8 +103,8 @@ public class Game{
    }
    public void addOrder(){
       boolean mus, sau;
-         mus=false;
-         sau=false;
+      mus=false;
+      sau=false;
       if(level==4){
          mus = Math.random()>0.5 ? true : false;
       }
@@ -119,6 +134,7 @@ public class Game{
    private boolean pause = false;
    private ArrayList<Integer> rem = new ArrayList<Integer>();
    private ArrayList<Integer> remNums = new ArrayList<Integer>();
+   private ArrayList<NPC> npcs = new ArrayList<NPC>();
    
    //info
    private int numDeliv=0, numFail=0;
@@ -132,14 +148,16 @@ public class Game{
       spawnPlate = true;
       this.level=l;
       orders = new LinkedList<Order>();
-      timeLeftInRound = 185; // 185
+      timeLeftInRound = 18005; // 185
       complete = 0;
       this.start();
       coins = 0;
       orders.add(new Order(60, false, false, false));
       orders.add(new Order(60, false, false, false));
    }
-   
+   public ArrayList<NPC> getList(){
+      return npcs;
+   }
    public int numDel(){
       return numDeliv;
    }

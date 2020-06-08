@@ -451,7 +451,6 @@ public class HOFUtil extends HOF{
       /*
       tile ordering:
       -1 - do the floor tiles + conveyers
-      0 - orders ;)
       1 - find tallest player (smallest row), let that be p1
       2 - do all blocks above and including p1
       3 - 
@@ -491,34 +490,6 @@ public class HOFUtil extends HOF{
                tile = new ImageIcon("");
             }
          }
-      }
-   
-      
-      // orders
-      LinkedList<Order> thing = game.getOrders();
-      int y=16;
-      for(int i=0; i<thing.size(); i++){
-         Order n = thing.get(i);
-         if(n.getYPos()==-1){
-            n.setYPos(y);
-            n.setID(i);
-         }
-         else if(i != n.getID()){
-            n.setYPos(n.getYPos()-4);
-            n.setID(i);
-         }
-         else if(n.getYPos()>=16+(i*140)){
-            n.setYPos(n.getYPos()-(int)((n.getYPos()-(16+(i*140)))/10));
-         }
-         else{
-            n.setYPos(16+(i*140));
-         }
-         g.drawImage(n.getPicture().getImage(), 1100, n.getYPos(), 180, 128, null);
-         g.drawImage(n.getLoader().getPicture().getImage(), 1100, n.getYPos(), 180, 128, null);
-         if(game.ready() && !n.getPassed() && !game.isPaused()&&game.getTime()>0){
-            n.advance();
-         }
-         y+=140;
       }
       
       // particles
@@ -687,7 +658,15 @@ public class HOFUtil extends HOF{
             g.drawImage(k.getPicture().getImage(), k.getX(), k.getY(), 40, 40, null);
          }
       }
-      
+      ArrayList<NPC> list = game.getList();
+      for(int i=0; i<list.size(); i++){
+         NPC temp = list.get(i);
+         temp.advance();
+         g.drawImage(temp.getPicture().getImage(), ((int)temp.getx())-aspect/2,((int)temp.gety())-aspect/2-yoffset,aspect,aspect,null);
+         if(temp.delete()){
+            game.getList().remove(temp);
+         }
+      }
       // loaders
       for(int i=0; i<loader.size(); i++){
          Loader l = loader.get(i);
@@ -705,7 +684,36 @@ public class HOFUtil extends HOF{
             itemTiles[l.getRow()][l.getCol()].setCook(l.getUFrame());
          }
       }
+      g.setColor(new Color(243, 243, 243));
+      g.fillRect(1100, 0, 200, 750);
       
+      // orders
+      LinkedList<Order> thing = game.getOrders();
+      int y=16;
+      for(int i=0; i<thing.size(); i++){
+         Order n = thing.get(i);
+         if(n.getYPos()==-1){
+            n.setYPos(y);
+            n.setID(i);
+         }
+         else if(i != n.getID()){
+            n.setYPos(n.getYPos()-4);
+            n.setID(i);
+         }
+         else if(n.getYPos()>=16+(i*140)){
+            n.setYPos(n.getYPos()-(int)((n.getYPos()-(16+(i*140)))/10));
+         }
+         else{
+            n.setYPos(16+(i*140));
+         }
+         g.drawImage(n.getPicture().getImage(), 1100, n.getYPos(), 180, 128, null);
+         g.drawImage(n.getLoader().getPicture().getImage(), 1100, n.getYPos(), 180, 128, null);
+         if(game.ready() && !n.getPassed() && !game.isPaused()&&game.getTime()>0){
+            n.advance();
+         }
+         y+=140;
+      }
+   
       // timer 
       
       String time = (game.ready()) ? (game.getTime()<0 ? "0" : String.valueOf(game.getTime())) : "180"; 

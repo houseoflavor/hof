@@ -1,17 +1,17 @@
-zar zav zac siw sid zaw zag zaa zas zad zaf zak zal zap zao zai pla zau zao zaj
-bur flo flo flo flo zan flo flo zbe tab flo zbg flo flo flo flo flo flo flo cut
-bur flo zbf zbe flo flo zab flo flo flo flo flo flo tab zaw zav flo zac flo cut
-zav zat flo flo zag flo tab flo zah flo flo flo zbh flo flo flo zad zae flo cut
-zax flo flo zbc flo flo flo flo flo zbf flo flo flo flo zbb flo flo zbf flo cut
-zaa zba flo flo flo zbg flo zay zaz flo zay flo flo flo flo zaz zas flo zbg zaw
-mus flo flo zbc zbh flo flo flo flo flo flo zaz flo flo flo zay flo flo flo zaf
-sau flo zaq flo flo flo zao flo zba flo flo flo flo flo flo flo flo tab zbh zar
-zai zaf zar flo zam flo flo flo flo zao flo flo flo tab zau zab flo flo flo zab
-che flo zac zbd flo flo zbe flo tab flo flo zbg flo flo flo flo zag zbi flo dou
-tom flo flo flo flo zai flo flo flo flo zbb flo flo flo zan flo flo flo flo dou
-zaq zaw zae ded ded zar zat zau zah zaj zab zag zav zam zak zac zai zao zap zag
-p1startx p1starty
-p2startx p2starty
+zar zav zac siw sid zaw zag zaa zas zad zaf zak zal zap zam zai pla zau zao zaj
+bur flo flo flo flo zan flo flo zbd tab flo zbg flo flo flo flo flo flo flo cut
+bur flo zbf zbe flo flo zab flo flo flo flo flo flo tab zax zat flo zar flo cut
+zas zat flo flo zae flo tab flo zah flo zap flo zbh flo flo flo zad zae flo cut
+zax flo flo zbb flo flo flo flo flo zbi flo flo flo flo zbb flo flo zbf flo cut
+zaa zba flo flo flo zbi flo tab tab flo zay flo flo zba flo zaz zas flo zbg zax
+mus flo flo zbc zbh flo flo flo flo flo flo zaz zbe zad flo zay flo flo flo zaf
+sau flo zaq flo flo flo zao flo zba flo flo flo flo flo flo flo flo tab zbh zal
+zai zaf zan flo tab flo flo flo flo zal flo flo flo tab zau zab flo flo flo zab
+che flo zac zbd flo flo zbe flo tab flo flo zbg flo flo flo flo zae zbi flo dou
+tom flo flo flo flo zah flo flo flo flo zbb flo flo flo zan flo flo flo flo dou
+zaq zaw zae ded ded zar zat zau zah zaj zaa zag zav zam zak zac zai zal zap zag
+402 402
+688 387
 100
 200
 300

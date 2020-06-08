@@ -109,6 +109,11 @@ public class HOFUtil extends HOF{
       g.setColor(new Color(132, 94, 49));
       g.drawString("Score Overview", 400, 150);
       g.setFont(dpcomic48);
+      if(highscore<game.getCoins() && !newhs){
+         highscore = game.getCoins();
+         replaceSelected(18, ""+highscore, game.getLevel());
+         newhs = true;
+      }
       if(scoreStage>=0){ // why do i abuse ternaries like this
          g.drawString("Orders Delivered x"+game.numDel()+ "                  "+(scoreStage==0 ? (countScore>0 ? countScore : "0") : game.numDel()*40), 100, 250);
          if(countScore>game.numDel()*40 && scoreStage==0){
@@ -136,11 +141,6 @@ public class HOFUtil extends HOF{
                   }
                   if(scoreStage>3 && countScore>0){
                      g.setFont(dpcomic24);
-                     if(highscore<game.getCoins() && !newhs){
-                        highscore = game.getCoins();
-                        replaceSelected(18, ""+highscore, game.getLevel());
-                        newhs = true;
-                     }
                      g.drawImage((new ImageIcon("images/menus/level/"+((game.getCoins()<star1) ? "0" : ((game.getCoins()<star2) ? "1" : ((game.getCoins()<star3) ? "2" : "3")))+"star.png")).getImage(), 900,450,null);
                      g.drawString(""+star1, 964+95, 514+65);
                      g.drawString(""+star2, 964-95, 514+65);
@@ -149,18 +149,18 @@ public class HOFUtil extends HOF{
                      if(newhs){
                         g.drawString("New highscore!", 100, 550);
                      }
-                     ImageIcon clickX = new ImageIcon("images/menus/X.png");
-                     if(mouseX<1161 && mouseX>1136 && mouseY<151 && mouseY>113){
-                        g.drawImage(clickX.getImage(),0,0,null);
-                        buttonTouching = EXIT;
-                     }
-                     else{
-                        buttonTouching = NONE;
-                     }
                   }
                }
             }
          }
+      }
+      ImageIcon clickX = new ImageIcon("images/menus/X.png");
+      if(mouseX<1161 && mouseX>1136 && mouseY<151 && mouseY>113){
+         g.drawImage(clickX.getImage(),0,0,null);
+         buttonTouching = EXIT;
+      }
+      else{
+         buttonTouching = NONE;
       }
    }
    
@@ -269,7 +269,7 @@ public class HOFUtil extends HOF{
                               "Oh baby when you bawk like that...",
                               "Purrhaps you know her for her singing",
                               "You'll find him Rome-ing around cheese",
-                              "I'm so hammy, you already know",
+                              "First things first, I'm the squealist",
                               "The bun who lived"};
       g.setColor(Color.BLACK);
       g.setFont(dpcomic48);

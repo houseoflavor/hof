@@ -46,6 +46,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         hasP1Boost = true;
                         if(p1.isMoving() && (keysDown.contains(KeyEvent.VK_A) ||keysDown.contains(KeyEvent.VK_S) ||keysDown.contains(KeyEvent.VK_D) ||keysDown.contains(KeyEvent.VK_W))){
                            boost.add(new Particle((int)p1.getx()-15, (int)p1.gety()-15, "boost"));
+                           sound("dash", -10);
                         }
                      }
                   }
@@ -59,6 +60,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         hasP2Boost = true;
                         if(p2.isMoving() && (keysDown.contains(KeyEvent.VK_UP) ||keysDown.contains(KeyEvent.VK_RIGHT) ||keysDown.contains(KeyEvent.VK_DOWN) ||keysDown.contains(KeyEvent.VK_LEFT))){
                            boost.add(new Particle((int)p2.getx()-15, (int)p2.gety()-15, "boost"));
+                           sound("dash", -10);
                         }
                      }
                   }

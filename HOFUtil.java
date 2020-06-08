@@ -518,7 +518,16 @@ public class HOFUtil extends HOF{
          y+=140;
       }
       
-      
+      // particles
+      for(int i=0; i<boost.size(); i++){
+         Particle b = boost.get(i);
+         if(b.getFrame()==8){
+            boost.remove(b);
+         }
+         else{
+            g.drawImage(b.getPicture().getImage(), b.getX(), b.getY(), 30, 30, null);
+         }
+      }
       
       // 1 --
       boolean tall = false; // true: p1 is tallest, false: p2 is tallest
@@ -672,7 +681,7 @@ public class HOFUtil extends HOF{
       }
       // draw knives, remove knife if done animating
       for(int i=0; i<knives.size(); i++){
-         Knife k = knives.get(i);
+         Particle k = knives.get(i);
          if(k.getFrame()==10){
             knives.remove(k);
          }
@@ -698,7 +707,6 @@ public class HOFUtil extends HOF{
             itemTiles[l.getRow()][l.getCol()].setCook(l.getUFrame());
          }
       }
-      
       
       // timer 
       

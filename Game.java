@@ -83,6 +83,9 @@ public class Game{
    public void start(){
       timer2.scheduleAtFixedRate(task2,0,1000); // 1s
    }
+   public void cancel(){
+      timer2.cancel();
+   }
    public void addOrder(){
       boolean mus, sau;
       if(level>=2){

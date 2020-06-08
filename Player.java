@@ -172,6 +172,9 @@ public class Player{
       return holding;
    }
    
+   public boolean isMoving(){
+      return ((int)(Math.abs(dx)*1000)>0)||((int)(Math.abs(dy)*1000)>0);
+   }
    
    // calculate max speed: https://www.desmos.com/calculator/vcbpsjishq
    // moving
@@ -270,7 +273,7 @@ public class Player{
          return getRow();
       }
    }
-   // returns the column value of the tiel the player is looking at
+   // returns the column value of the tile the player is looking at
    public int getFCol(){
       if(directions.get(directions.size()-1)==UP){
          return getCol();

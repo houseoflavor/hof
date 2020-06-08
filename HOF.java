@@ -36,74 +36,80 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             if(mode.equals("game") && game != null && !game.isPaused() && game.getTime()>0){
                //if(game.getTime()<=180){
                // dashing
-                  try{
-                     boolean p1Boost = false;
-                     boolean p2Boost = false;
+               try{
+                  boolean p1Boost = false;
+                  boolean p2Boost = false;
                   //p1 dash
-                     if(keysDown.contains(KeyEvent.VK_CONTROL) && dirKeys.contains(KeyEvent.KEY_LOCATION_LEFT)){
-                        if(!hasP1Boost){ // prevents players from holding dash
-                           p1Boost = true;
-                           hasP1Boost = true;
+                  if(keysDown.contains(KeyEvent.VK_CONTROL) && dirKeys.contains(KeyEvent.KEY_LOCATION_LEFT)){
+                     if(!hasP1Boost){ // prevents players from holding dash
+                        p1Boost = true;
+                        hasP1Boost = true;
+                        if(p1.isMoving() && (keysDown.contains(KeyEvent.VK_A) ||keysDown.contains(KeyEvent.VK_S) ||keysDown.contains(KeyEvent.VK_D) ||keysDown.contains(KeyEvent.VK_W))){
+                           boost.add(new Particle((int)p1.getx()-15, (int)p1.gety()-15, "boost"));
                         }
                      }
-                     else{
-                        hasP1Boost = false;
-                     }
+                  }
+                  else{
+                     hasP1Boost = false;
+                  }
                   //p2 dash
-                     if(keysDown.contains(KeyEvent.VK_CONTROL) && dirKeys.contains(KeyEvent.KEY_LOCATION_RIGHT)){
-                        if(!hasP2Boost){
-                           p2Boost = true;
-                           hasP2Boost = true;
+                  if(keysDown.contains(KeyEvent.VK_CONTROL) && dirKeys.contains(KeyEvent.KEY_LOCATION_RIGHT)){
+                     if(!hasP2Boost){
+                        p2Boost = true;
+                        hasP2Boost = true;
+                        if(p2.isMoving() && (keysDown.contains(KeyEvent.VK_UP) ||keysDown.contains(KeyEvent.VK_RIGHT) ||keysDown.contains(KeyEvent.VK_DOWN) ||keysDown.contains(KeyEvent.VK_LEFT))){
+                           boost.add(new Particle((int)p2.getx()-15, (int)p2.gety()-15, "boost"));
                         }
                      }
-                     else{
-                        hasP2Boost = false;
-                     }
-                     java.util.List<Integer> p1d = new ArrayList<Integer>(); // refer to java.util.List not java.awt.List
-                     java.util.List<Integer> p2d = new ArrayList<Integer>();
+                  }
+                  else{
+                     hasP2Boost = false;
+                  }
+                  java.util.List<Integer> p1d = new ArrayList<Integer>(); // refer to java.util.List not java.awt.List
+                  java.util.List<Integer> p2d = new ArrayList<Integer>();
                   //player 1
-                     if(keysDown.contains(KeyEvent.VK_W)){//up
-                        p1.input(UP, p1Boost);
-                        p1d.add(UP);
-                     }
-                     if(keysDown.contains(KeyEvent.VK_D)){ //right
-                        p1.input(RIGHT, p1Boost);
-                        p1d.add(RIGHT);
-                     }
-                     if(keysDown.contains(KeyEvent.VK_S)){ //down
-                        p1.input(DOWN, p1Boost);
-                        p1d.add(DOWN);
-                     }
-                     if(keysDown.contains(KeyEvent.VK_A)){ //left
-                        p1.input(LEFT, p1Boost);
-                        p1d.add(LEFT);
-                     }
+                  if(keysDown.contains(KeyEvent.VK_W)){//up
+                     p1.input(UP, p1Boost);
+                     p1d.add(UP);
+                  }
+                  if(keysDown.contains(KeyEvent.VK_D)){ //right
+                     p1.input(RIGHT, p1Boost);
+                     p1d.add(RIGHT);
+                  }
+                  if(keysDown.contains(KeyEvent.VK_S)){ //down
+                     p1.input(DOWN, p1Boost);
+                     p1d.add(DOWN);
+                  }
+                  if(keysDown.contains(KeyEvent.VK_A)){ //left
+                     p1.input(LEFT, p1Boost);
+                     p1d.add(LEFT);
+                  }
                   //player 2
-                     if(keysDown.contains(KeyEvent.VK_UP)){ //up
-                        p2.input(UP, p2Boost);
-                        p2d.add(UP);
-                     }
-                     if(keysDown.contains(KeyEvent.VK_RIGHT)){ //right
-                        p2.input(RIGHT, p2Boost);
-                        p2d.add(RIGHT);
-                     }
-                     if(keysDown.contains(KeyEvent.VK_DOWN)){ //down
-                        p2.input(DOWN, p2Boost);
-                        p2d.add(DOWN);
-                     }
-                     if(keysDown.contains(KeyEvent.VK_LEFT)){ //left
-                        p2.input(LEFT, p2Boost);
-                        p2d.add(LEFT);
-                     }
-                     p1.direction(p1d);
-                     p2.direction(p2d);
+                  if(keysDown.contains(KeyEvent.VK_UP)){ //up
+                     p2.input(UP, p2Boost);
+                     p2d.add(UP);
+                  }
+                  if(keysDown.contains(KeyEvent.VK_RIGHT)){ //right
+                     p2.input(RIGHT, p2Boost);
+                     p2d.add(RIGHT);
+                  }
+                  if(keysDown.contains(KeyEvent.VK_DOWN)){ //down
+                     p2.input(DOWN, p2Boost);
+                     p2d.add(DOWN);
+                  }
+                  if(keysDown.contains(KeyEvent.VK_LEFT)){ //left
+                     p2.input(LEFT, p2Boost);
+                     p2d.add(LEFT);
+                  }
+                  p1.direction(p1d);
+                  p2.direction(p2d);
                   
                   
                   //physics
-                     p1.move(p2);
-                     p2.move(p1);
-                  }
-                  catch(Exception e){}
+                  p1.move(p2);
+                  p2.move(p1);
+               }
+               catch(Exception e){}
                //}
                if(game.ready()){
                // interact
@@ -352,7 +358,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         if(itemTiles[p1.getFRow()][p1.getFCol()].canChop() && !hasP1Chop && gameTiles[p1.getFRow()][p1.getFCol()].getName().equals("cut")){
                            hasP1Chop = true;
                            itemTiles[p1.getFRow()][p1.getFCol()].chop();
-                           knives.add(new Knife(p1.getFCol()*32+222, p1.getFRow()*32+178-12));
+                           knives.add(new Particle(p1.getFCol()*32+222, p1.getFRow()*32+178-12, "knife"));
                            sound("chop", 5);
                         }
                      }
@@ -520,7 +526,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                int curLevel = game.getLevel();
                gameTiles = new Tile[12][20];
                itemTiles = new Item[12][20];
-               knives = new ArrayList<Knife>();
+               knives = new ArrayList<Particle>();
                loader = new ArrayList<Loader>();
                game = null;
                try{
@@ -531,6 +537,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                p2 = new Player(name2,start2x,start2y);
                p1.setLevel(gameTiles);
                p2.setLevel(gameTiles);
+               game.cancel();
                game = new Game(buttonTouching-10);
                mode = "game";
                transMode = "game";
@@ -561,8 +568,9 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static boolean hasP1Boost = false, hasP2Boost = false;
    static boolean hasP1Int = false, hasP2Int = false;
    static boolean hasP1Chop = false, hasP2Chop = false;
-   static ArrayList<Knife> knives;
+   static ArrayList<Particle> knives;
    static ArrayList<Loader> loader;
+   static ArrayList<Particle> boost;
    static int mouseX, mouseY;
    static int buttonTouching;
    
@@ -602,8 +610,9 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       gameTiles = new Tile[12][20];
       itemTiles = new Item[12][20];
       
-      knives = new ArrayList<Knife>();
+      knives = new ArrayList<Particle>();
       loader = new ArrayList<Loader>();
+      boost = new ArrayList<Particle>();
       
       //mouse stuff
       addMouseListener(this);
@@ -802,11 +811,11 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             transMode = "restart";
             transition = 1;
          }
-         if(buttonTouching == 3){
+         if(buttonTouching == 3){ // quit
             transMode = "level";
-            updateLevel();
             transition = 1;
             game.resume();
+            game.cancel();
          }
       }
       else if(mode.equals("score") && transMode.equals("none")){

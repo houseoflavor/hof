@@ -255,7 +255,7 @@ public class Item{
          }
          // is it a valid food combination?
          // top = tomato pan (tomato is cooked)
-         String validCombo = " doutop chedou chedoutop chedoumustop doumustop chedoumus doumus "; // expand as needed
+         String validCombo = " chedou chedoumus chedoumustop chedousau chedoutop doummus doumustop dousau dousautop doutop "; // expand as needed
          for(String n : ingr){
             oList.add(n);
          }
@@ -281,7 +281,7 @@ public class Item{
    // putting an item in the oven
    // returns whether the item can go in the oven
    public boolean oven(){
-      String validOven = " chedoutop chedoumustop ";
+      String validOven = " chedoutop chedoumustop chedoumus chedousau doumustop dousautop ";
       if(validOven.contains(" " + this.getName() + " ") && oven.equals("") && cookLeft<1121){
          oven = "X"; // filler to make invisible
          return true;

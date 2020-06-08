@@ -610,7 +610,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         if(itemTiles[p2.getFRow()][p2.getFCol()].canChop() && !hasP2Chop && gameTiles[p2.getFRow()][p2.getFCol()].getName().equals("cut")){
                            hasP2Chop = true;
                            itemTiles[p2.getFRow()][p2.getFCol()].chop();
-                           knives.add(new Knife(p2.getFCol()*32+222, p2.getFRow()*32+178-12));
+                           knives.add(new Particle(p2.getFCol()*32+222, p2.getFRow()*32+178-12, "knife"));
                            sound("chop", 5);
                         }
                      }
@@ -940,11 +940,11 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          for(int j=0; j<20; j++){
             // if tomato, dough, cheese, sausage spawner
             String spawners = " tom dou che sau mus ";
-            if(spawners.contains(" "+ singleLine[j] + " ")){
-               gameTiles[i][j] = new Tile(singleLine[j],i,j,true,true);
+            if(singleLine[j].startsWith("z")){// obstacle
+               gameTiles[i][j] = new Tile(singleLine[j], i, j, true, false);
             }
-            else if(singleLine[j].startsWith("z")){// obstacle
-               gameTiles[i][j] = new Tile(singleLine[i], i, j, true, false);
+            else if(spawners.contains(" "+ singleLine[j] + " ")){
+               gameTiles[i][j] = new Tile(singleLine[j],i,j,true,true);
             }
             else if(singleLine[j].equals("bur")){
                itemTiles[i][j] = new Item("pan", false, true);

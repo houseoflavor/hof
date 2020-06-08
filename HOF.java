@@ -120,7 +120,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         int j = p1.getFCol();
                         hasP1Int = true;
                         if(p1.isHold()){ // holding something
-                           if(gameTiles[i][j].getName().equals("wal") || gameTiles[i][j].getName().startsWith("co") || gameTiles[i][j].getName().startsWith("z")){
+                           if(gameTiles[i][j].getName().equals("wal") || gameTiles[i][j].getName().startsWith("co") || gameTiles[i][j].getName().startsWith("z") || gameTiles[i][j].getName().equals("pld")){
                            // these tiles are invalid to put something on
                            
                            }
@@ -160,8 +160,11 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                  }
                               }
                            }
-                           else if(gameTiles[i][j].getName().startsWith("siw") && p1.whatHold().isPlate()){ // putting in sink water plate
-                           // putting plate in water
+                           else if(gameTiles[i][j].getName().startsWith("siw") && p1.whatHold().getName().equals("pld")){ // putting in sink water plate
+                              gameTiles[i][j].addPlate();
+                              p1.drop();
+                           }
+                           else if(gameTiles[i][j].getName().startsWith("siw")){
                            }
                            else if(gameTiles[i][j].getName().equals("ove")){ // adding food to oven
                               if(itemTiles[i][j] == null && p1.whatHold().oven()){ // nothing in the oven? & can be put in oven?
@@ -311,6 +314,15 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                     itemTiles[i][j] = null;
                                  }
                               }
+                              else if(gameTiles[i][j].getName().equals("pld")){
+                                 if(gameTiles[i][j].getPlates()>0){
+                                 //System.out.println("taking plate");
+                                    Item tempPlate = new Item("pld", false, true);
+                                    p1.pickUpEmpty(tempPlate);
+                                    gameTiles[i][j].takePlate();
+                                 
+                                 }
+                              }
                               else if(gameTiles[i][j].getName().equals("pla")){
                                  if(gameTiles[i][j].getPlates()>0){
                                  
@@ -369,284 +381,43 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      hasP1Int = false;
                   }
                   if(keysDown.contains(KeyEvent.VK_O)){
-                     if(!hasP2Int){
-                        int i = p2.getFRow();
-                        int j = p2.getFCol();
-                        hasP2Int = true;
-                        if(p2.isHold()){ // holding something
-                           if(gameTiles[i][j].getName().equals("wal") || gameTiles[i][j].getName().startsWith("co")|| gameTiles[i][j].getName().startsWith("z")){
-                           // these tiles are invalid to put something on
-                           
-                           }
-                           else if(gameTiles[i][j].getName().startsWith("de")){ // delivering
-                              if(p2.whatHold().isTool()){
-                                 error = 4;
-                                 errorTimer=180;
-                              }
-                              else if(p2.whatHold().isOven()){ // no consequence for uncooked items
-                                 if(p2.whatHold().hasPlate()){
-                                 // you do lose the item if the item is plated however
-                                    if(game.deliver(p2.whatHold())){ // returns boolean is successful, if future me wants to use
-                                    }
-                                    else{
-                                       error = 3;
-                                       errorTimer = 180;
-                                    }
-                                    p1.drop();
-                                 } 
-                                 else{
-                                    error = 1;
-                                    errorTimer = 180;
-                                 } 
-                              }
-                              else{
-                                 error = 2;
-                                 errorTimer = 180;
-                              }
-                           }
-                           else if(gameTiles[i][j].getName().equals("pla")){ // taking plate while holding something
-                              if(gameTiles[i][j].getPlates()>0){
-                                 //System.out.println("taking plate");
-                                 Item tempPlate = new Item("pla", false, true);
-                                 if(p2.whatHold().combine(tempPlate)){ // if successfully combine
-                                    gameTiles[i][j].takePlate(); // take a plate
-                                 
-                                 }
-                              }
-                           }
-                           else if(gameTiles[i][j].getName().startsWith("siw") && p2.whatHold().isPlate()){ // putting in sink water plate
-                           // putting plate in water
-                           }
-                           else if(gameTiles[i][j].getName().equals("ove")){ // adding food to oven
-                              if(itemTiles[i][j] == null && p2.whatHold().oven()){ // nothing in the oven? & can be put in oven?
-                                 sound("oven", 2);
-                                 itemTiles[i][j] = p2.whatHold();
-                                 gameTiles[i][j].turnOn();
-                                 p2.drop();
-                                 loader.add(new Loader(20, p2.getFCol(), p2.getFRow(), itemTiles[i][j].getCook()));
-                              }
-                              else if(itemTiles[i][j] != null && p2.whatHold().isPlate()){
-                                 if(itemTiles[i][j].getCook()==1121){
-                                    sound("grab", 5);
-                                    p2.pickUpEmpty(itemTiles[i][j]);
-                                    p2.whatHold().takeOut();
-                                    itemTiles[i][j].ovenCooked();
-                                    itemTiles[i][j] = null;
-                                    gameTiles[i][j].turnOff();
-                                    for(int k=0; k<loader.size(); k++){
-                                       if(i==loader.get(k).getRow() && j==loader.get(k).getCol()){
-                                          loader.remove(k);
-                                          break;
-                                       }
-                                    }
-                                    Item tempPlate = new Item("pla", false, true);
-                                    p2.whatHold().combine(tempPlate);
-                                 
-                                 }
-                              }
-                           }
-                           else if(itemTiles[i][j] == null){   // space is empty
-                           // test if trash
-                              if(gameTiles[i][j].getName().equals("tra")){
-                              
-                                 if(p2.whatHold().isFood()){
-                                    p2.drop();
-                                    itemTiles[i][j] = null;
-                                 }
-                              }
-                              else if(gameTiles[i][j].getName().startsWith("de")){ // delivery = check if valid
-                                 sound("grab", 5);
-                              
-                                 if(p2.whatHold().isOven() && p2.whatHold().hasPlate()){
-                                    game.deliver(p2.whatHold());
-                                    p2.drop(); // lose item if cooked (regardless if correct or not)
-                                 }
-                              // if not cooked, don't lose it
-                              }
-                              else if(gameTiles[i][j].getName().equals("bur")){
-                                 if(itemTiles[i][j] == null){
-                                    sound("grab", 5);
-                                 
-                                    itemTiles[i][j] = p2.whatHold();
-                                    if(p2.whatHold().getName().contains("pan") && p2.whatHold().getName().contains("tom")){
-                                    
-                                       loader.add(new Loader(10, p2.getFCol(), p2.getFRow(), itemTiles[i][j].getPanCook()));
-                                       p2.drop();
-                                       sound("sizz", 0);
-                                    }
-                                    else{
-                                       sound("grab", 5);
-                                       p2.drop();
-                                    }
-                                 }
-                              }
-                              else if (!gameTiles[i][j].getName().equals("") && !gameTiles[i][j].getName().equals("ove")){// does tile exist
-                                 if(itemTiles[i][j]==null){// does the tile already have something on it
-                                    sound("grab", 5);
-                                    itemTiles[i][j] = p2.whatHold();
-                                    p2.drop();
-                                 }
-                              }
-                           }
-                           else{ //tile is already occupied
-                           // test if combination is possible
-                              if(itemTiles[i][j] != null && p2.whatHold().getName().contains("dou") && itemTiles[i][j].getName().contains("pan") && itemTiles[i][j].getName().contains("tom") && itemTiles[i][j].getPanned().equals("P")){ // hold dough pick up tomatoes from pan
-                                 Item tempTom = new Item("top", true, false);
-                                 tempTom.setChopped();
-                                 if(p2.whatHold().combine(tempTom)){
-                                    Item tempPan = new Item("pan", false, true);
-                                    itemTiles[i][j] = null;
-                                    itemTiles[i][j] = tempPan;
-                                    for(int k=0; k<loader.size(); k++){
-                                       if(i==loader.get(k).getRow() && j==loader.get(k).getCol()){
-                                          loader.remove(k);
-                                          break;
-                                       }
-                                    }
-                                 }
-                              }
-                              else if(itemTiles[i][j]!= null && itemTiles[i][j].getName().equals("pan")){ // putting tomato into a pan
-                              
-                                 if(itemTiles[i][j].combine(p2.whatHold())){
-                                    p2.drop();
-                                    if(gameTiles[i][j].getName().equals("bur")){ // only add loader if the pan is on a burner
-                                       loader.add(new Loader(10, p2.getFCol(), p2.getFRow(), itemTiles[i][j].getPanCook()));
-                                       sound("sizz", 0);
-                                    }
-                                 }
-                              }
-                              else if(itemTiles[i][j] != null && p2.whatHold().getName().contains("pan")){ // hold pan onto tomatoas
-                                 if(itemTiles[i][j].getName().contains("tom")){
-                                    if(itemTiles[i][j].combine(p2.whatHold())){
-                                    
-                                       p2.drop();
-                                       if(gameTiles[i][j].getName().equals("bur")){
-                                          loader.add(new Loader(10, p2.getFCol(), p2.getFRow(), itemTiles[i][j].getPanCook()));
-                                          sound("sizz", 0);
-                                       }
-                                    }
-                                 }
-                                 else if(itemTiles[i][j].getName().contains("dou") && !itemTiles[i][j].getName().contains("top") && p2.whatHold().getPanned().equals("P")){ // hold pan onto something with dough
-                                 
-                                    Item tempTom = new Item("top", true, false);
-                                    tempTom.setChopped();
-                                    if(itemTiles[i][j].combine(tempTom)){
-                                       Item tempPan = new Item("pan", false, true);
-                                       p2.drop();
-                                       p2.pickUpEmpty(tempPan);
-                                    }
-                                 }
-                              }
-                              else{
-                              
-                                 if(itemTiles[i][j].combine(p2.whatHold())){
-                                    p2.pickUpEmpty(itemTiles[i][j]);
-                                    itemTiles[i][j] = null;
-                                 }
-                              }
-                           }
-                        }
-                        else{ // picking up
-                           if(!p2.isHold()){ // player's hand is empty
-                              if(gameTiles[i][j].getName().startsWith("z")){} // obstacle can't be picked up
-                              else if(gameTiles[i][j].isSpawner()){ // is this tile a spawner
-                                 sound("grab", 5);
-                              
-                                 if(itemTiles[i][j]==null){ // is empty?
-                                 // create a new food object and place it on the tile
-                                    itemTiles[i][j] = new Item(gameTiles[i][j].getName(), true, false);
-                                 // have the player pick it up
-                                    p2.pickUpEmpty(itemTiles[i][j]);
-                                    itemTiles[i][j] = null;
-                                 }
-                                 else{ // already has something, pick up
-                                 
-                                    p2.pickUpEmpty(itemTiles[i][j]);
-                                    itemTiles[i][j] = null;
-                                 }
-                              }
-                              else if(gameTiles[i][j].getName().equals("pla")){
-                                 if(gameTiles[i][j].getPlates()>0){
-                                 
-                                    //System.out.println("taking plate");
-                                    Item tempPlate = new Item("pla", false, true);
-                                    p2.pickUpEmpty(tempPlate);
-                                    gameTiles[i][j].takePlate(); // take a plate
-                                 }
-                              }
-                              else if(!gameTiles[i][j].getName().equals("")){ // does tile exist
-                                 if(itemTiles[i][j]!=null){// does the tile actually have something on it
-                                    sound("grab", 5);
-                                 
-                                    if(gameTiles[i][j].getName().equals("ove")){ // taking something out of oven
-                                       p2.pickUpEmpty(itemTiles[i][j]);
-                                       p2.whatHold().takeOut();
-                                       if(itemTiles[i][j].getCook()==1121){
-                                          itemTiles[i][j].ovenCooked();
-                                       }
-                                       itemTiles[i][j] = null;
-                                       gameTiles[i][j].turnOff();
-                                       for(int k=0; k<loader.size(); k++){
-                                          if(i==loader.get(k).getRow() && j==loader.get(k).getCol()){
-                                             loader.remove(k);
-                                             break;
-                                          }
-                                       }
-                                    }
-                                    else if(gameTiles[i][j].getName().equals("bur")){ // picking up pan with food in it and on burner
-                                       sound("grab", 5);
-                                       p2.pickUpEmpty(itemTiles[i][j]);
-                                       itemTiles[i][j] = null;
-                                       for(int k=0; k<loader.size(); k++){
-                                          if(i==loader.get(k).getRow() && j==loader.get(k).getCol()){
-                                             loader.remove(k);
-                                             break;
-                                          }
-                                       }
-                                    }
-                                    else{
-                                       sound("grab", 5);
-                                       p2.pickUpEmpty(itemTiles[i][j]);
-                                       itemTiles[i][j] = null;
-                                    }
-                                 }
-                              }
-                           }
-                           else{ // p2 hand NOT empty (and picking up)
-                           
-                           
-                           }
-                        }
-                     }
+                  
+                  
+                   // RECOPY EVERYTHING HERE
+                   
+                   
                   }
                   else{
                      hasP2Int = false;
                   }
                // chopping
-                  if(keysDown.contains(KeyEvent.VK_SHIFT) && dirKeys.contains(KeyEvent.KEY_LOCATION_LEFT)){
-                     try{ // try to access a chop, if not then go to catch
-                        if(itemTiles[p1.getFRow()][p1.getFCol()].canChop() && !hasP1Chop && gameTiles[p1.getFRow()][p1.getFCol()].getName().equals("cut")){
+                  if(keysDown.contains(KeyEvent.VK_SHIFT) && dirKeys.contains(KeyEvent.KEY_LOCATION_LEFT) && !p1.isHold()){
+                     int i=p1.getFRow();
+                     int j=p1.getFCol();
+                     if(gameTiles[i][j].getName().equals("cut")){
+                        try{ // try to access a chop, if not then go to catch
+                           if(itemTiles[p1.getFRow()][p1.getFCol()].canChop() && !hasP1Chop && gameTiles[p1.getFRow()][p1.getFCol()].getName().equals("cut")){
+                              hasP1Chop = true;
+                              itemTiles[p1.getFRow()][p1.getFCol()].chop();
+                              knives.add(new Particle(p1.getFCol()*32+222, p1.getFRow()*32+178-12, "knife"));
+                              sound("chop", 5);
+                           }
+                        }
+                        catch(Exception e){} // no item here
+                     }
+                     else if(gameTiles[i][j].getName().equals("siw") && !hasP1Chop){
+                        if(gameTiles[i][j].getPlates()>0){
                            hasP1Chop = true;
-                           itemTiles[p1.getFRow()][p1.getFCol()].chop();
-                           knives.add(new Particle(p1.getFCol()*32+222, p1.getFRow()*32+178-12, "knife"));
-                           sound("chop", 5);
+                           gameTiles[i][j].takePlate();
+                           gameTiles[sidX][sidY].addPlate();
                         }
                      }
-                     catch(Exception e){} // no item here
                   }
                   else{
                      hasP1Chop = false;
                   }
-                  if(keysDown.contains(KeyEvent.VK_V) || keysDown.contains(KeyEvent.VK_OPEN_BRACKET)){
-                     try{ // try to access a chop, if not then go to catch
-                        if(itemTiles[p2.getFRow()][p2.getFCol()].canChop() && !hasP2Chop && gameTiles[p2.getFRow()][p2.getFCol()].getName().equals("cut")){
-                           hasP2Chop = true;
-                           itemTiles[p2.getFRow()][p2.getFCol()].chop();
-                           knives.add(new Particle(p2.getFCol()*32+222, p2.getFRow()*32+178-12, "knife"));
-                           sound("chop", 5);
-                        }
-                     }
-                     catch(Exception e){} // no item here
+                  if(keysDown.contains(KeyEvent.VK_V) || keysDown.contains(KeyEvent.VK_OPEN_BRACKET) && !p2.isHold()){
+                     //RECOPY CHOP
                   }
                   else{
                      hasP2Chop = false;
@@ -880,6 +651,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static int transX, transition;
    
    static int platX, platY;
+   static int sidX, sidY;
    
    static Tile [][] gameTiles;
    static Item [][] itemTiles;
@@ -990,10 +762,15 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             else if(singleLine[j].startsWith("co")){
                gameTiles[i][j] = new Tile(singleLine[j], i, j, false, false);
             }
-            else if(singleLine[j].equals("pla")){
+            else if(singleLine[j].startsWith("pl")){
                gameTiles[i][j] = new Tile(singleLine[j], i, j, true, false);
                platX = j;
                platY = i;
+            }
+            else if(singleLine[j].equals("sid")){
+               gameTiles[i][j] = new Tile(singleLine[j], i, j, true, false);
+               sidX = j;
+               sidY = i;
             }
             else if(!singleLine[j].equals("flo")){
                gameTiles[i][j] = new Tile(singleLine[j], i, j, true,false);

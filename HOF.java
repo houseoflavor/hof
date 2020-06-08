@@ -129,9 +129,22 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               if(p1.whatHold().isOven()){ // no consequence for uncooked items
                                  if(p1.whatHold().hasPlate()){
                                  // you do lose the item if the item is plated however
-                                    game.deliver(p1.whatHold()); // returns boolean is successful, if future me wants to use
+                                    if(game.deliver(p1.whatHold())){ // returns boolean is successful, if future me wants to use
+                                    }
+                                    else{
+                                       error = 3;
+                                       errorTimer = 120;
+                                    }
                                     p1.drop();
-                                 }  
+                                 } 
+                                 else{
+                                    error = 1;
+                                    errorTimer = 120;
+                                 } 
+                              }
+                              else{
+                                 error = 2;
+                                 errorTimer = 120;
                               }
                            }
                            else if(gameTiles[i][j].getName().equals("pla")){ // taking plate while holding something
@@ -828,6 +841,11 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static int mouseX, mouseY;
    static int buttonTouching;
    
+   static int error=-1;
+   static int errorTimer=0;
+   
+   static int shift;
+   
    static String name1="monkey", name2="chicken";   
    static int start1x, start1y, start2x, start2y, star1, star2, star3, highscore;
    static int p1Sel=0, p2Sel=1;
@@ -1019,6 +1037,16 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       Integer loc = new Integer(e.getKeyLocation());
       keysDown.remove(key);
       dirKeys.remove(loc);
+      if(key==45){ // minus
+         if(shift>0){
+         shift-=5;
+         }
+      }
+      else if(key==61){
+         if(shift<100){
+         shift+=5;
+         }
+      }
    }
    
    // mouse stuff

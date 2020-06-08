@@ -22,6 +22,7 @@ public class HOFDriver{
       w.setLocation(0, 0);
       HOF graphics = window;
       w.setSize(1316,789); // 1300x750 / 1316x789
+      w.setExtendedState(JFrame.NORMAL);
       w.setResizable(false);
       w.setVisible(true); // show it
       

@@ -10,7 +10,7 @@ import java.nio.file.Path;
 
 public class HOFUtil extends HOF{
    static final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
-   static Font dpcomic24, dpcomic48, dpcomic60, pixellari24, dpcomic36,dpcomic72;
+   static Font dpcomic24, dpcomic48, dpcomic60, pixellari24, dpcomic36,dpcomic72, pixellari60;
    static String[][] hoverTiles = new String[12][20];
    
    public static void setup(){
@@ -21,6 +21,7 @@ public class HOFUtil extends HOF{
          dpcomic60 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(60f);
          dpcomic72 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(72f);
          pixellari24 = Font.createFont(Font.TRUETYPE_FONT, new File("pixellari.ttf")).deriveFont(24f);
+         pixellari60 = Font.createFont(Font.TRUETYPE_FONT, new File("pixellari.ttf")).deriveFont(60);
          dpcomic36 = Font.createFont(Font.TRUETYPE_FONT, new File("dpcomic.ttf")).deriveFont(36f);
          GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
          ge.registerFont(dpcomic24);
@@ -29,6 +30,7 @@ public class HOFUtil extends HOF{
          ge.registerFont(pixellari24);
          ge.registerFont(dpcomic36);
          ge.registerFont(dpcomic72);
+         ge.registerFont(dpcomic60);
       } catch (Exception e) {}
    }
    public static void drawString(Graphics g, String s, int x, int y, int width)
@@ -707,15 +709,15 @@ public class HOFUtil extends HOF{
       
       String time = (game.ready()) ? (game.getTime()<0 ? "0" : String.valueOf(game.getTime())) : "180"; 
       for(int i=0; i<time.length(); i++){
-         g.drawImage((new ImageIcon("images/numbers/num"+time.charAt(time.length()-i-1)+".png")).getImage(), (3-(i+2))*45+1025-15, 700, null);
+         g.drawImage((new ImageIcon("images/numbers/num"+time.charAt(time.length()-i-1)+".png")).getImage(), (3-(i+2))*45+1025-15, 700-shift, null);
       }
       
       // coins
       String coins = String.valueOf(game.getCoins());
-      g.drawImage((new ImageIcon("images/game/buffer.gif")).getImage(), 0, 690, 200, 60, null);
-      g.drawImage((new ImageIcon("images/game/coin.gif")).getImage(), -6, 690, 200, 60, null);
+      g.drawImage((new ImageIcon("images/game/buffer.gif")).getImage(), 0, 690-shift, 200, 60, null);
+      g.drawImage((new ImageIcon("images/game/coin.gif")).getImage(), -6, 690-shift, 200, 60, null);
       for(int i=0; i<coins.length(); i++){
-         g.drawImage((new ImageIcon("images/numbers/num"+coins.charAt(coins.length()-i-1)+".png")).getImage(), (4-(i+2))*36+85, 698, 36, 44, null);
+         g.drawImage((new ImageIcon("images/numbers/num"+coins.charAt(coins.length()-i-1)+".png")).getImage(), (4-(i+2))*36+85, 698-shift, 36, 44, null);
       }
       
       // first 3 sec countdown
@@ -730,8 +732,29 @@ public class HOFUtil extends HOF{
             g.drawImage((new ImageIcon("images/numbers/go.png")).getImage(), 458, 556, 184, 88, null);
          }
       }
+      if(error!=-1){ // error in delivery
+         if(errorTimer<0){
+            error=-1;
+         }
+         g.setColor(Color.BLACK);
+         g.setFont(pixellari60);
+         if(error==1){ // needs plate
+            g.drawString("Needs plate", 50, 50);
+            errorTimer--;
+         }
+         if(error==2){ // uncooked
+            g.drawString("Needs to be cooked", 50, 50);
+            errorTimer--;
+         }
+         if(error==3){
+            g.drawString("Incorrect order", 50, 50);
+            errorTimer--;
+         }
       
-      //drawBounds(g); // draw test bounds ----------------------------------------------
+      
+      }
+      
+      drawBounds(g); // draw test bounds ----------------------------------------------
    }
    
    // draw a thicc circle at x, y

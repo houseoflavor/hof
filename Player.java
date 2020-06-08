@@ -351,6 +351,7 @@ public class Player{
       int col = getCol();
       double savedx=dx;
       double savedy=dy; 
+      try{
       // colliding directly above or below
       if(collision(level[row+1][col]) || collision(level[row-1][col]) ){ // player is inside tile
          y-=savedy; // move out of tile
@@ -574,6 +575,8 @@ public class Player{
             y-=savedy;
          }
       }
+      }
+      catch(Exception e){} // out of bounds
       
       // reduce change in movement by velocity (slows the speed)
       dx*=velocity;

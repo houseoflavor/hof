@@ -416,8 +416,9 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                   else{
                      hasP1Chop = false;
                   }
-                  if(keysDown.contains(KeyEvent.VK_V) || keysDown.contains(KeyEvent.VK_OPEN_BRACKET) && !p2.isHold()){
-                     //RECOPY CHOP
+                  
+                  if((keysDown.contains(KeyEvent.VK_V) || keysDown.contains(KeyEvent.VK_OPEN_BRACKET)) && !p2.isHold()){
+                     //RECOPY CHOP FOR P2
                   }
                   else{
                      hasP2Chop = false;

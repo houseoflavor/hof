@@ -127,7 +127,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                            else if(gameTiles[i][j].getName().startsWith("de")){ // delivering
                               if(p1.whatHold().isTool()){
                                  error = 4;
-                                 errorTimer=180;
+                                 errorTimer=300;
                               }
                               else if(p1.whatHold().isOven()){ // no consequence for uncooked items
                                  if(p1.whatHold().hasPlate()){
@@ -136,18 +136,18 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                     }
                                     else{
                                        error = 3;
-                                       errorTimer = 180;
+                                       errorTimer = 300;
                                     }
                                     p1.drop();
                                  } 
                                  else{
                                     error = 1;
-                                    errorTimer = 180;
+                                    errorTimer = 300;
                                  } 
                               }
                               else{
                                  error = 2;
-                                 errorTimer = 180;
+                                 errorTimer = 300;
                               }
                            }
                            else if(gameTiles[i][j].getName().equals("pla")){ // taking plate while holding something

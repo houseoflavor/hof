@@ -599,7 +599,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                   else{
                      hasP1Chop = false;
                   }
-                  if(keysDown.contains(KeyEvent.VK_SHIFT) && dirKeys.contains(KeyEvent.KEY_LOCATION_LEFT)){
+                  if(keysDown.contains(KeyEvent.VK_SHIFT) && dirKeys.contains(KeyEvent.KEY_LOCATION_RIGHT)){
                      try{ // try to access a chop, if not then go to catch
                         if(itemTiles[p2.getFRow()][p2.getFCol()].canChop() && !hasP2Chop && gameTiles[p2.getFRow()][p2.getFCol()].getName().equals("cut")){
                            hasP2Chop = true;

@@ -8,8 +8,8 @@ wal flo flo flo flo tab flo flo flo flo flo flo flo flo tab flo flo flo flo wal
 wal flo flo flo flo tab cut cut tab dou dou tab ove ove tab flo flo flo flo wal
 wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo wal
 wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo wal
-wal flo flo flo otq otb otd otg tab tab che che tab tab ota oth otb oti oto wal
-wal otj otc otw otr flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo
+wal flo flo flo zaq zab zad zag tab tab che che tab tab zaa zah zab zai zao wal
+wal zaj zac zaw zar flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo
 786 289
 307 385
 100

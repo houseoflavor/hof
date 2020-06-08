@@ -738,7 +738,7 @@ public class HOFUtil extends HOF{
          }
          g.setColor(Color.BLACK);
          g.setFont(dpcomic60);
-         System.out.println("error code" + error);
+         System.out.println("timer" + errorTimer);
          if(error==1){ // needs plate
             g.drawString("Needs plate", 25, 50);
             errorTimer--;
@@ -753,6 +753,7 @@ public class HOFUtil extends HOF{
          }
          if(error==4){
             g.drawString("Cannot be delivered", 25, 50);
+            errorTimer--;
          }
       
       

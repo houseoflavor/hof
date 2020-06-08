@@ -1,4 +1,4 @@
-wal ove ove ove ove dir deu deu zac wal flo flo flo flo flo flo flo flo flo flo
+wal ove ove ove ove pld deu deu zac wal flo flo flo flo flo flo flo flo flo flo
 wal flo flo flo flo flo flo flo flo wal flo flo flo flo flo flo flo flo flo flo
 wal flo flo flo flo flo flo flo flo wal flo flo flo flo flo flo flo flo flo flo
 wal flo dou tab zai zag tab mus zaj wal flo flo flo flo flo flo flo flo flo flo
@@ -9,7 +9,7 @@ bur flo flo flo flo flo flo zba flo flo flo flo flo flo che flo flo zbc flo bur
 tab flo zbd flo flo flo flo flo flo flo flo flo flo flo tom flo flo flo flo tab
 bur flo flo flo flo flo sau zak zal tab zam zad tab tab tab flo flo flo flo bur
 wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo tab
-wal zae zac zab tra tab cut tab cut tab pld sid siw tab tab cut tab cut tab tab
+wal zae zac zab tra tab cut tab cut tab tab sid siw tab tab cut tab cut tab tab
 483 240
 738 433
 100

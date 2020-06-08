@@ -127,7 +127,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                            else if(gameTiles[i][j].getName().startsWith("de")){ // delivering
                               if(p1.whatHold().isTool()){
                                  error = 4;
-                                 errorTimer=300;
+                                 errorTimer=240;
                               }
                               else if(p1.whatHold().isOven()){ // no consequence for uncooked items
                                  if(p1.whatHold().hasPlate()){
@@ -136,18 +136,18 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                     }
                                     else{
                                        error = 3;
-                                       errorTimer = 300;
+                                       errorTimer = 240;
                                     }
                                     p1.drop();
                                  } 
                                  else{
                                     error = 1;
-                                    errorTimer = 300;
+                                    errorTimer = 240;
                                  } 
                               }
                               else{
                                  error = 2;
-                                 errorTimer = 300;
+                                 errorTimer = 240;
                               }
                            }
                            else if(gameTiles[i][j].getName().equals("pla")){ // taking plate while holding something
@@ -202,15 +202,6 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                     p1.drop();
                                     itemTiles[i][j] = null;
                                  }
-                              }
-                              else if(gameTiles[i][j].getName().startsWith("de")){ // delivery = check if valid
-                                 sound("grab", 5);
-                              
-                                 if(p1.whatHold().isOven() && p1.whatHold().hasPlate()){
-                                    game.deliver(p1.whatHold());
-                                    p1.drop(); // lose item if cooked (regardless if correct or not)
-                                 }
-                              // if not cooked, don't lose it
                               }
                               else if(gameTiles[i][j].getName().equals("bur")){
                                  if(itemTiles[i][j] == null){

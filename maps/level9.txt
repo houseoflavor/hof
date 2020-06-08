@@ -1,17 +1,17 @@
-tab tab tab ove tab tab tab tab tab ove ove tab tab tab tab tab ove tab tab tab
-tab col cor cor cor cou cod col col cor cod cor cod cou cod col flo cor flo bur
-sid flo cor cor col cor cou col col cou cod col cou col col cou cou cor flo bur
-siw flo cor che col col col cod cor col cod cod cor col cor col mus cou flo bur
-tab cor col cou cor cou cod cor cod cou tom cor cod cou cor cod cou col flo bur
-tab col cod col cor col cod col cou cor cod col cod cor cor col cod cor cou tab
-tab cod cou cor cod col cou cod cor cor col cod cou cou sau cor cou col flo dir
-tab cor cod col cod cod dou col cor cou cor cou col cor cou cou cod cor flo tab
-tra col cou cor col col col cor col cod cor cod cor cod cor cod col cor flo der
-tab cou col cou cod cou col col cod col cou col cou cor cou col cod col flo der
-tab cou cor flo col cor cod cod col flo flo cor cod cor cou col flo cor flo ord
-tab tab tab cut tab tab tab tab tab cut cut tab tab tab tab tab cut tab tab tab
-338 514
-755 226
+zar zav zac siw sid zaw zag zaa zas zad zaf zak zal zap zao zai pla zau zao zaj
+bur flo flo flo flo zan flo flo zbe tab flo flo flo flo flo flo flo flo flo cut
+bur flo zbf zbe flo flo zab flo flo flo flo flo flo flo zaw zav flo zac flo cut
+zav zat flo flo zag flo tab flo zah flo flo flo flo flo flo flo zad zae flo cut
+zax flo flo zbc flo flo flo flo flo zbf flo flo flo flo flo flo flo zbf flo cut
+zaa zba flo flo flo zbg flo zay zaz flo zay flo flo flo flo zaz flo flo zbg zaw
+mus flo flo zbc zbh flo flo flo flo flo flo zaz flo flo flo zay flo flo flo zaf
+sau flo zaq flo flo flo zao flo zba flo flo flo flo flo flo flo flo flo zbh zar
+zai zaf zar flo zam flo flo flo flo flo flo flo flo flo zau zab flo flo flo zab
+che flo zay zbd flo flo zbe flo tab flo flo flo flo flo flo flo zag zbi flo dou
+tom flo flo flo flo zai flo flo flo flo flo flo flo flo zan flo flo flo flo dou
+zaq zaw zae ded ded zar zat zau zah zaj zab zag zav zam zak zac zai zao zap zag
+p1startx p1starty
+p2startx p2starty
 100
 200
 300

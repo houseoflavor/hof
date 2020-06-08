@@ -85,13 +85,14 @@ public class Game{
          
          }
       };
-      
+   //pause and unpause game
    public void pause(){ 
       pause = true;
    }
    public void resume(){
       pause = false;
    }
+   // returns true if paused
    public boolean isPaused(){
       return pause;
    }
@@ -101,6 +102,7 @@ public class Game{
    public void cancel(){
       timer2.cancel();
    }
+   // add an order to the list
    public void addOrder(){
       boolean mus, sau;
       mus=false;
@@ -191,7 +193,7 @@ public class Game{
    public boolean shouldSpawn(){
       return spawnPlate;
    }
-   
+   // attemps to deliver the item (returns true if a good order)
    public boolean deliver(Item i){
       for(int j=0; j<orders.size(); j++){
          if(orders.get(j).match(i)){

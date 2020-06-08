@@ -1,3 +1,11 @@
+/*
+
+House o' Flavor
+By Ethan and Vinhan
+
+
+*/
+
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.Graphics;

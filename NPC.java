@@ -7,6 +7,7 @@ public class NPC{
    private boolean fast;
    private boolean slow;
    private String dir;
+   // constructor, sets up starting x and y of npc
    public NPC(int c, int p){
       name = c==0 ? "monkey" : c==1 ? "chicken" : c==2 ? "cat" : c==3 ? "mouse" : c==4 ? "pig" : "bunny";
       fast = Math.random()>0.85;
@@ -44,15 +45,18 @@ public class NPC{
          x=1120; y=583;
       }
    }
+   // returns an imageicon of the correct frame
    public ImageIcon getPicture(){
       return new ImageIcon("images/characters/"+name+"/active/"+dir+"/frame_"+String.valueOf((int)(frame/mult))+".gif");
    }
+   // return x and y coordinates
    public int getx(){
       return x;
    }
    public int gety(){
       return y;
    }
+   // increase frame of character by 1, moves them
    public void advance(){
       frame++;
       if(frame==(28)){
@@ -359,6 +363,7 @@ public class NPC{
          }
       }
    }
+   // returns true if the sprite is out of view
    public boolean delete(){
       if((path==1 || path==2 || path==3 || path==4 || path==11 || path==12 || path==13 || path==14 || path==15 || path==16 || path==17 || path==18) && phase==2){
          return true;

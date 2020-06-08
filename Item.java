@@ -16,16 +16,12 @@ public class Item{
    private boolean pan;
    private ArrayList<String> ingr;
    private int panCookLeft;
-   private boolean obstacle;
    private String panned;
    // Item constructor
    public Item(String name, boolean f, boolean t){
       this.name=name;
       ingr = new ArrayList<String>();
       ingr.add(name);
-      if(f && t){
-         obstacle = true;
-      }
       food = f;
       tool = t;
       if(food){
@@ -75,9 +71,6 @@ public class Item{
    
    // returns an ImageIcon of the correct picture
    public ImageIcon getPicture(){
-      if(obstacle){
-         return new ImageIcon("images/obstacles/"+name+".gif");
-      }
       if(plate){
          return new ImageIcon("images/items/"+name+"pla.gif");
       }
@@ -94,9 +87,6 @@ public class Item{
    }
    // returns the highlighted version
    public ImageIcon getHPicture(){
-      if(obstacle){
-         return new ImageIcon("images/obstacles/"+name+".gif");
-      }
       if(plate){
          return new ImageIcon("images/items/"+name+"plaH.gif");
       }
@@ -114,7 +104,7 @@ public class Item{
    
    // returns whether the item can be chopped
    public boolean canChop(){
-      if(tool || obstacle){
+      if(tool){
          return false;
       }
       if(chopLeft>0){
@@ -168,41 +158,44 @@ public class Item{
    public int getPanCook(){
       return panCookLeft;
    }
+   // sets the value of time left to cook in pan
    public void setPanCook(int c){
       panCookLeft = c;
    }
+   // returns true if pan
    public boolean isPan(){
       return name.equals("pan");
    }
+   // returns true if the food item is in a pan
    public boolean inPan(){
       return pan;
    }
+   // sets whether the food item is in a pan
    public void setPan(boolean t){
       pan = t;
    }
+   // returns true if the food item is on a plate
    public boolean hasPlate(){
       return plate;
    }
+   // returns true if the item is a clean plate
    public boolean isPlate(){
       return name.equals("pla");
    }
+   // returns true if the food item is done cooking on a pan
    public void donePan(){
       panned = "P";
    }
+   // returns the (pan) status of the item
    public String getPanned(){
       return panned;
    }
+   // sets the value if there is a plate
    public void setPlate(boolean t){
       plate = t;
    }
-   public boolean isObstacle(){
-      return obstacle;
-   }
    // combines the other food with this
    public boolean combine(Item other){ // this = what is on table; other = in hand
-      if(this.isObstacle() || other.isObstacle()){
-         return false;
-      }
       if(other.isPan()){ // holding pan, drop onto tomato
          if(other.getName().equals("pan") && this.name.equals("tom") && this.isChopped() && other.getPanCook()<561){
             ingr.add("pan");
@@ -296,6 +289,7 @@ public class Item{
    public void ovenCooked(){
       oven = "O";
    }
+   // returns true if the item has been cooked in an oven
    public boolean isOven(){
       return oven.equals("O");
    }

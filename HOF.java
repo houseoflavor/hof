@@ -369,7 +369,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      hasP1Int = false;
                   }
                   if(keysDown.contains(KeyEvent.VK_COMMA)){
-                     if(!hasP2Int){ // interactions? its really big idk whats what anymore
+                     if(!hasP2Int){
                         int i = p2.getFRow();
                         int j = p2.getFCol();
                         hasP2Int = true;
@@ -379,13 +379,29 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                            
                            }
                            else if(gameTiles[i][j].getName().startsWith("de")){ // delivering
-                           
-                              if(p2.whatHold().isOven()){ // no consequence for uncooked items
+                              if(p2.whatHold().isTool()){
+                                 error = 4;
+                                 errorTimer=180;
+                              }
+                              else if(p2.whatHold().isOven()){ // no consequence for uncooked items
                                  if(p2.whatHold().hasPlate()){
                                  // you do lose the item if the item is plated however
-                                    game.deliver(p2.whatHold()); // returns boolean is successful, if future me wants to use
-                                    p2.drop();
-                                 }  
+                                    if(game.deliver(p2.whatHold())){ // returns boolean is successful, if future me wants to use
+                                    }
+                                    else{
+                                       error = 3;
+                                       errorTimer = 180;
+                                    }
+                                    p1.drop();
+                                 } 
+                                 else{
+                                    error = 1;
+                                    errorTimer = 180;
+                                 } 
+                              }
+                              else{
+                                 error = 2;
+                                 errorTimer = 180;
                               }
                            }
                            else if(gameTiles[i][j].getName().equals("pla")){ // taking plate while holding something
@@ -1042,12 +1058,12 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       dirKeys.remove(loc);
       if(key==45){ // minus
          if(shift>0){
-         shift-=5;
+            shift-=5;
          }
       }
       else if(key==61){
          if(shift<100){
-         shift+=5;
+            shift+=5;
          }
       }
    }

@@ -14,7 +14,7 @@ public class NPC{
       if(!fast){
          slow = Math.random()>0.75;
       }
-      if(Math.random()>0.98){
+      if(Math.random()>0.989){
          name="batman";
          slow = false;
          fast = true;

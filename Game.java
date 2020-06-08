@@ -67,7 +67,7 @@ public class Game{
                   }
                }
                
-               if(Math.random()>0.2){ // chance of spawning a npc
+               if(Math.random()>0.4){ // chance of spawning a npc
                   npcs.add(new NPC((int)(Math.random()*6), (int)(Math.random()*18)+1)); // sort based on y value
                   for(int i=0; i<npcs.size(); i++){
                      for(int j = npcs.size() - 1; j > i; j--){
@@ -150,7 +150,7 @@ public class Game{
       spawnPlate = true;
       this.level=l;
       orders = new LinkedList<Order>();
-      timeLeftInRound = 18005; // 185
+      timeLeftInRound = 185; // 185
       complete = 0;
       this.start();
       coins = 0;

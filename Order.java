@@ -63,7 +63,7 @@ public class Order{
    }
    public int getScore(){
       passed = true;
-      return (40+timeLeft)+((sausage) ? 20 : 0)+((mushroom) ? 20 : 0); // calculates the score of (40+timeLeft) + 10 if sausage + 10 if mushroom
+      return (40+timeLeft)+((sausage) ? 20 : 0)+((mushroom) ? 20 : 0); // calculates the score of (40+timeLeft) + 20 if sausage + 20 if mushroom
    }
    public boolean getPassed(){
       return passed;

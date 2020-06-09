@@ -12,6 +12,8 @@ public class HOFUtil extends HOF{
    static final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
    static Font dpcomic24, dpcomic48, dpcomic60, pixellari24, dpcomic36,dpcomic72, pixellari60;
    static String[][] hoverTiles = new String[12][20];
+   static int saveS1, saveS2, saveS3, saveHS, saveCoin, saveDel, saveFail, saveLevel;
+   static boolean update = true;
    
    public static void setup(){
       try { // custom font
@@ -101,6 +103,15 @@ public class HOFUtil extends HOF{
    }
    
    public static void drawScore(Graphics g){
+      if(scoreStage==0 && countScore==-100){
+         saveLevel = game.getLevel();
+         saveCoin = game.getCoins();
+         saveS1 = star1;
+         saveS2 = star2;
+         saveS3 = star3;
+         saveDel = game.numDel();
+         saveFail = game.numFail();
+      }
       ImageIcon gradient = new ImageIcon("images/menus/gradient.png");
       g.drawImage(gradient.getImage(),0,0,null);
       g.drawImage(cloud.getPicture().getImage(),cloud.move(),0,null);
@@ -109,41 +120,46 @@ public class HOFUtil extends HOF{
       g.setColor(new Color(132, 94, 49));
       g.drawString("Score Overview", 400, 150);
       g.setFont(dpcomic48);
-      g.drawString("Level " + game.getLevel(), 100, 650);
-      if(highscore<game.getCoins() && !newhs){
-         highscore = game.getCoins();
-         replaceSelected(18, ""+highscore, game.getLevel());
+      g.drawString("Level " + saveLevel, 100, 650);
+      if(highscore<saveCoin && !newhs && update){
+         highscore = saveCoin;
+         saveHS = highscore;
+         replaceSelected(18, ""+highscore, saveLevel);
          newhs = true;
          updateLevel();
+         update = false;
+      }
+      else{
+         update = false;
       }
       if(scoreStage>=0){ // why do i abuse ternaries like this
-         g.drawString("Orders Delivered: "+game.numDel()+ "                   "+(scoreStage==0 ? (countScore>0 ? countScore : "0") : game.numDel()*40), 100, 250);
-         if(countScore>=game.numDel()*40 && scoreStage==0){
+         g.drawString("Orders Delivered: "+saveDel+ "                   "+(scoreStage==0 ? (countScore>0 ? countScore : "0") : saveDel*40), 100, 250);
+         if(countScore>=saveDel*40 && scoreStage==0){
             scoreStage=1;
             countScore=-100;
          }
          if(scoreStage>0){
-            g.drawString("Orders Failed: "+game.numFail()+ "                      -" + (scoreStage==1 ? (countScore>0 ? +countScore : "0") : +game.numFail()*30), 100, 300);
-            if(countScore>=game.numFail()*30 && scoreStage==1){
+            g.drawString("Orders Failed: "+saveFail+ "                      -" + (scoreStage==1 ? (countScore>0 ? +countScore : "0") : +saveFail*30), 100, 300);
+            if(countScore>=saveFail*30 && scoreStage==1){
                scoreStage=2;
                countScore=-100;
             }
             if(scoreStage>1){
-               g.drawString("Tips:                                    " + (scoreStage==2 ? (countScore>0 ? countScore : "0") : (game.getCoins()+(game.numFail()*30) - (game.numDel()*40))), 100, 350);
-               if(countScore >= (game.getCoins()+(game.numFail()*30) - (game.numDel()*40)) && scoreStage==2){
+               g.drawString("Tips:                                    " + (scoreStage==2 ? (countScore>0 ? countScore : "0") : (saveCoin+(saveFail*30) - (saveDel*40))), 100, 350);
+               if(countScore >= (saveCoin+(saveFail*30) - (saveDel*40)) && scoreStage==2){
                   scoreStage=3;
                   countScore=-100;
                }
                if(scoreStage>2){
                   g.setFont(dpcomic60);
-                  g.drawString("Total:                         " + (scoreStage==3 ? (countScore>0 ? countScore : "0") : (game.getCoins())), 100, 450);
-                  if(countScore >= game.getCoins() && scoreStage==3){
+                  g.drawString("Total:                         " + (scoreStage==3 ? (countScore>0 ? countScore : "0") : (saveCoin)), 100, 450);
+                  if(countScore >= saveCoin && scoreStage==3){
                      scoreStage=4;
                      countScore=-100;
                   }
                   if(scoreStage>3 && countScore>0){
                      g.setFont(dpcomic24);
-                     g.drawImage((new ImageIcon("images/menus/level/"+((game.getCoins()<star1) ? "0" : ((game.getCoins()<star2) ? "1" : ((game.getCoins()<star3) ? "2" : "3")))+"star.png")).getImage(), 900,450,null);
+                     g.drawImage((new ImageIcon("images/menus/level/"+((saveCoin<star1) ? "0" : ((saveCoin<star2) ? "1" : ((saveCoin<star3) ? "2" : "3")))+"star.png")).getImage(), 900,450,null);
                      g.drawString(""+star1, 964+95, 514+65);
                      g.drawString(""+star2, 964-95, 514+65);
                      g.drawString(""+star3, 964, 514-64);
@@ -425,6 +441,7 @@ public class HOFUtil extends HOF{
       input.close();
    }
    public static void drawGame(Graphics g){
+      update = true;
       // background image (TEMPORARY ONE IS USED)
       g.drawImage((new ImageIcon("images/menus/tempbg.png")).getImage(),0,0,null);
       

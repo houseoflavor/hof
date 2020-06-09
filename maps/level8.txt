@@ -1,15 +1,15 @@
-flo flo flo flo flo flo flo flo ove ove ove ove flo flo flo flo flo flo flo flo
-flo cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cod flo
-flo cou tab tab bur zaj bur tab tab cod cou tab tab tab flo flo tab tab cod flo
-flo cou tab flo flo flo flo flo tab cod cou tab flo flo flo flo flo tab cod flo
-flo cou tab flo flo zaq bur tab tab cod cou tab cut tab cut tab cut tab cod flo
-del cou cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cod flo
-del cou col col col col col col col col col col col col col col col col cod flo
-pld cou tab tab tab tab flo flo tab cou cod zaf siw sid zae tab tab tab cod flo
-flo cou zai flo flo flo flo flo tab cou cod tab flo flo flo flo flo flo cod flo
-flo cou tab mus sau che dou tom tab cou cod tab tab tab tra tab tab flo cod flo
-flo cou col col col col col col col col col col col col col col col col cod flo
-flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo
+wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal
+wal cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cod wal
+wal cou tab tab bur zaj bur tab tab cod cou tab tab tab flo flo tab tab cod wal
+wal cou tab flo flo flo flo flo tab cod cou tab flo flo flo flo flo tab cod wal
+wal cou tab flo flo zaq bur tab tab cod cou tab cut tab cut tab cut tab cod wal
+del cou cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cor cod wal
+del cou col col col col col col col col col col col col col col col col cod wal
+pld cou tab tab tab tab flo flo tab cou cod zaf siw sid zae tab tab tab cod wal
+wal cou zai flo flo flo flo flo tab cou cod tab flo flo flo flo flo flo cod wal
+wal cou tab mus sau che dou tom tab cou cod tab tab tab tra tab tab flo cod wal
+wal cou col col col col col col col col col col col col col col col col col wal
+wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal
 450 435
 708 273
 100

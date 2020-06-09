@@ -12,7 +12,7 @@ public class HOFUtil extends HOF{
    static final int UP = 1, RIGHT = 2, DOWN = 3, LEFT = 4;
    static Font dpcomic24, dpcomic48, dpcomic60, pixellari24, dpcomic36,dpcomic72, pixellari60;
    static String[][] hoverTiles = new String[12][20];
-   static int saveS1, saveS2, saveS3, saveHS, saveCoin, saveDel, saveFail, saveLevel;
+   static int saveS1, saveS2, saveS3, saveHS, saveCoin, saveDel, saveFail, saveLevel,saveTips;
    
    public static void setup(){
       try { // custom font
@@ -102,12 +102,13 @@ public class HOFUtil extends HOF{
    }
    
    public static void drawScore(Graphics g){
-      if(scoreStage==0 && countScore==-120){
+      if(scoreStage==0 && countScore==-119){
          saveLevel = game.getLevel();
          saveCoin = game.getCoins();
          saveS1 = star1;
          saveS2 = star2;
          saveS3 = star3;
+         saveTips = game.getTips();
          saveDel = game.numDel();
          saveFail = game.numFail();
          if(highscore<saveCoin && !newhs){
@@ -140,8 +141,8 @@ public class HOFUtil extends HOF{
                countScore=-100;
             }
             if(scoreStage>1){
-               g.drawString("Tips:                                    " + (scoreStage==2 ? (countScore>0 ? countScore : "0") : (saveCoin+(saveFail*30) - (saveDel*40))), 100, 350);
-               if(countScore >= (saveCoin+(saveFail*30) - (saveDel*40)) && scoreStage==2){
+               g.drawString("Tips:                                    " + (scoreStage==2 ? (countScore>0 ? countScore : "0") : saveTips), 100, 350);
+               if(countScore >= (saveTips) && scoreStage==2){
                   scoreStage=3;
                   countScore=-100;
                }

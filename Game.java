@@ -127,7 +127,7 @@ public class Game{
    private ArrayList<NPC> npcs = new ArrayList<NPC>();
    
    //info
-   private int numDeliv=0, numFail=0;
+   private int numDeliv=0, numFail=0, tips = 0;
    
    // tip = coins - (numDeliv*40)
    
@@ -164,6 +164,9 @@ public class Game{
    public int getCoins(){
       return coins;
    }
+   public int getTips(){
+      return tips;
+   }  
    public LinkedList getOrders(){
       return orders;
    }
@@ -193,6 +196,7 @@ public class Game{
       for(int j=0; j<orders.size(); j++){
          if(orders.get(j).match(i)){
             coins+=orders.get(j).getScore();
+            tips+=orders.get(j).getScore()-40;
             rem.add(orders.get(j));
             numDeliv++;
             remNums.add(3);

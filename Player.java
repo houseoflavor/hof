@@ -20,7 +20,7 @@ public class Player{
    // CONTROL PLAYER SPEED HERE ---
    private final double speed = 0.3;    // 0 < speed                                   recommended:   0.3
    private final double velocity = 0.8; // 0 (stop quickly) < velo < 1 (slippery)                     0.8
-   private final double boostAmt = 4;   // 1 < boostAmt                                               4
+   private final double boostAmt = 5;   // 1 < boostAmt                                               4
    // -----------------------------
    
    private ImageIcon [][][] frames; //[active or idle][direction][frameNum]

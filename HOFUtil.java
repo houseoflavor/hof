@@ -664,7 +664,9 @@ public class HOFUtil extends HOF{
       ArrayList<NPC> list = game.getList();
       for(int i=0; i<list.size(); i++){
          NPC temp = list.get(i);
-         temp.advance();
+         if(!game.isPaused()){
+            temp.advance();
+         }
          g.drawImage(temp.getPicture().getImage(), ((int)temp.getx())-aspect/2,((int)temp.gety())-aspect/2-yoffset,aspect,aspect,null);
          if(temp.delete()){
             game.getList().remove(temp);

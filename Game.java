@@ -107,7 +107,7 @@ public class Game{
       boolean mus, sau;
       mus=false;
       sau=false;
-      if(level==4){
+      if(level>=2 && level<5){
          mus = Math.random()>0.5 ? true : false;
       }
       else{

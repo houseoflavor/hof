@@ -13,6 +13,6 @@ wal tab tab bur bur tab tab wal flo flo flo flo wal tab tab cut cut tab tab wal
 356 464
 739 274
 100
-200
-300
+280
+370
 0

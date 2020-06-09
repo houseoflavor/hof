@@ -19,7 +19,7 @@ public class Game{
                if(timeLeftInRound==-4){
                   timer2.cancel();
                }
-               if(timeLeftInRound<=180 && timeLeftInRound>0){
+               if(timeLeftInRound<=200 && timeLeftInRound>0){
                   nextOrder--;
                   nextPlate--;
                   for(int i=0; i<orders.size(); i++){

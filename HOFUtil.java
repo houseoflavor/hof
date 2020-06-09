@@ -721,7 +721,7 @@ public class HOFUtil extends HOF{
    
       // timer 
       
-      String time = (game.ready()) ? (game.getTime()<0 ? "0" : String.valueOf(game.getTime())) : "180"; 
+      String time = (game.ready()) ? (game.getTime()<0 ? "0" : String.valueOf(game.getTime())) : "200"; 
       for(int i=0; i<time.length(); i++){
          g.drawImage((new ImageIcon("images/numbers/num"+time.charAt(time.length()-i-1)+".png")).getImage(), (3-(i+2))*45+1025-15, 700-shift, null);
       }
@@ -735,11 +735,11 @@ public class HOFUtil extends HOF{
       }
       
       // first 3 sec countdown
-      if(game.getTime()<=183 && game.getTime()>=179){
+      if(game.getTime()<=203 && game.getTime()>=199){
          g.setColor(new Color(163,229,226,100));
-         if(Math.abs(game.getTime()-181) == (game.getTime()-181)){
+         if(Math.abs(game.getTime()-201) == (game.getTime()-201)){
             g.fillRect(505, 550, 90, 100);
-            g.drawImage((new ImageIcon("images/numbers/num"+(game.getTime()-180)+".png")).getImage(), 514, 556, 72, 88, null);
+            g.drawImage((new ImageIcon("images/numbers/num"+(game.getTime()-200)+".png")).getImage(), 514, 556, 72, 88, null);
          }
          else{
             g.fillRect(450, 550, 200, 100);

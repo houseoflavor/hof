@@ -36,10 +36,10 @@ public class Game{
                         orders.remove(i);
                      }
                   }
-                  if(timeLeftInRound==170){
+                  if(timeLeftInRound==190){
                      spawnPlate = true;
                   }
-                  if(timeLeftInRound==160){
+                  if(timeLeftInRound==170){
                      spawnPlate = true;
                   }
                   for(int i=0; i<rem.size(); i++){
@@ -59,7 +59,7 @@ public class Game{
                   if(nextOrder == 0){
                      addOrder();
                   }
-                  if(timeLeftInRound % 30 == 0 && timeLeftInRound < 120){ // new order every x sec (and wait initial 1 minute)
+                  if(timeLeftInRound % 30 == 0 && timeLeftInRound < 140){ // new order every x sec (and wait initial 1 minute)
                      addOrder();
                   }
                   if(nextPlate == 0){
@@ -121,11 +121,11 @@ public class Game{
          }
       }
       if(orders.size()<5){
-         orders.add(new Order(60, mus, sau, true));
+         orders.add(new Order(90, mus, sau, true));
       }
    }
    
-   private static LinkedList<Order> orders;
+   private static LinkedList<Order> orders = new LinkedList<Order>();
    private int timeLeftInRound;
    private int complete;
    private int coins;
@@ -150,15 +150,18 @@ public class Game{
       spawnPlate = true;
       this.level=l;
       orders = new LinkedList<Order>();
-      timeLeftInRound = 185; // 185
+      timeLeftInRound = 205; // 185
       complete = 0;
       this.start();
       coins = 0;
-      orders.add(new Order(60, false, false, false));
-      orders.add(new Order(60, false, false, false));
+      orders.add(new Order(90, false, false, false));
+      orders.add(new Order(90, false, false, false));
    }
    public ArrayList<NPC> getList(){
       return npcs;
+   }
+   public void reset(){
+      orders = new LinkedList<Order>();
    }
    public int numDel(){
       return numDeliv;
@@ -187,7 +190,7 @@ public class Game{
       return level;
    }
    public boolean ready(){
-      return timeLeftInRound <= 180;
+      return timeLeftInRound <= 200;
    }
    
    public boolean shouldSpawn(){

@@ -21,7 +21,7 @@ public class Order{
       if(mushroom){
          type++;
       }
-      load = new LoaderV2(62);
+      load = new LoaderV2(94);
    }
    public void decrement(){
       timeLeft--;

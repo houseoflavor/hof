@@ -696,7 +696,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                }
                catch(Exception e){}
                
-               if(keysDown.contains(KeyEvent.VK_ESCAPE) && game.ready() && game.getTime()<180){ // pause
+               if(keysDown.contains(KeyEvent.VK_ESCAPE) && game.ready() && game.getTime()<200){ // pause
                   game.pause();
                }
                
@@ -841,6 +841,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             if(mode.equals("restart")){
                p1 = null;
                p2 = null;
+               game.reset();
                int curLevel = game.getLevel();
                gameTiles = new Tile[12][20];
                itemTiles = new Item[12][20];

@@ -13,7 +13,6 @@ public class HOFUtil extends HOF{
    static Font dpcomic24, dpcomic48, dpcomic60, pixellari24, dpcomic36,dpcomic72, pixellari60;
    static String[][] hoverTiles = new String[12][20];
    static int saveS1, saveS2, saveS3, saveHS, saveCoin, saveDel, saveFail, saveLevel;
-   static boolean update = true;
    
    public static void setup(){
       try { // custom font
@@ -111,6 +110,13 @@ public class HOFUtil extends HOF{
          saveS3 = star3;
          saveDel = game.numDel();
          saveFail = game.numFail();
+         if(highscore<saveCoin && !newhs){
+            highscore = saveCoin;
+            saveHS = highscore;
+            replaceSelected(18, ""+highscore, saveLevel);
+            newhs = true;
+            updateLevel();
+         }
       }
       ImageIcon gradient = new ImageIcon("images/menus/gradient.png");
       g.drawImage(gradient.getImage(),0,0,null);
@@ -121,17 +127,6 @@ public class HOFUtil extends HOF{
       g.drawString("Score Overview", 400, 150);
       g.setFont(dpcomic48);
       g.drawString("Level " + saveLevel, 100, 650);
-      if(highscore<saveCoin && !newhs && update){
-         highscore = saveCoin;
-         saveHS = highscore;
-         replaceSelected(18, ""+highscore, saveLevel);
-         newhs = true;
-         updateLevel();
-         update = false;
-      }
-      else{
-         update = false;
-      }
       if(scoreStage>=0){ // why do i abuse ternaries like this
          g.drawString("Orders Delivered: "+saveDel+ "                   "+(scoreStage==0 ? (countScore>0 ? countScore : "0") : saveDel*40), 100, 250);
          if(countScore>=saveDel*40 && scoreStage==0){
@@ -441,7 +436,6 @@ public class HOFUtil extends HOF{
       input.close();
    }
    public static void drawGame(Graphics g){
-      update = true;
       // background image (TEMPORARY ONE IS USED)
       g.drawImage((new ImageIcon("images/menus/tempbg.png")).getImage(),0,0,null);
       

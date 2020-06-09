@@ -59,7 +59,7 @@ public class Game{
                   if(nextOrder == 0){
                      addOrder();
                   }
-                  if(timeLeftInRound % 15 == 0 && timeLeftInRound < 120){ // new order every x sec (and wait initial 1 minute)
+                  if(timeLeftInRound % 30 == 0 && timeLeftInRound < 120){ // new order every x sec (and wait initial 1 minute)
                      addOrder();
                   }
                   if(nextPlate == 0){

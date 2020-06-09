@@ -846,6 +846,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                itemTiles = new Item[12][20];
                knives = new ArrayList<Particle>();
                loader = new ArrayList<Loader>();
+               boost = new ArrayList<Particle>();
                game.cancel();
                game = null;
                try{
@@ -1169,6 +1170,11 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       else if(mode.equals("level") && transMode.equals("none")){
          if(buttonTouching >10){ // level select
             transMode = "game";
+            gameTiles = new Tile[12][20];
+            itemTiles = new Item[12][20];
+            knives = new ArrayList<Particle>();
+            loader = new ArrayList<Loader>();
+            boost = new ArrayList<Particle>();
             try{
                readFile("maps/level"+(buttonTouching-10)+".txt"); // --------------------------------- read file
                p1 = new Player(name1,start1x,start1y);

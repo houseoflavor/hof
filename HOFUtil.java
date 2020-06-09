@@ -102,7 +102,7 @@ public class HOFUtil extends HOF{
    }
    
    public static void drawScore(Graphics g){
-      if(scoreStage==0 && countScore==-119){
+      if(scoreStage==0 && countScore==-120){
          saveLevel = game.getLevel();
          saveCoin = game.getCoins();
          saveS1 = star1;

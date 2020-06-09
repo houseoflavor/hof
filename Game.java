@@ -67,7 +67,7 @@ public class Game{
                   }
                }
                
-               if(Math.random()>0.5){ // chance of spawning a npc
+               if(Math.random()>0.6){ // chance of spawning a npc
                   npcs.add(new NPC((int)(Math.random()*6), (int)(Math.random()*18)+1)); // sort based on y value
                   for(int i=0; i<npcs.size(); i++){
                      for(int j = npcs.size() - 1; j > i; j--){

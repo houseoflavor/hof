@@ -112,7 +112,7 @@ public class Game{
          }
       }
       if(orders.size()<5){
-         orders.add(new Order(90, mus, sau, true));
+         orders.add(new Order(92, mus, sau, true));
       }
    }
    
@@ -145,8 +145,8 @@ public class Game{
       complete = 0;
       this.start();
       coins = 0;
-      orders.add(new Order(90, false, false, false));
-      orders.add(new Order(90, false, false, false));
+      orders.add(new Order(92, false, false, false));
+      orders.add(new Order(92, false, false, false));
    }
    public ArrayList<NPC> getList(){
       return npcs;

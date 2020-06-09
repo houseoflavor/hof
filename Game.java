@@ -27,7 +27,6 @@ public class Game{
                      if(orders.get(i).timeLeft()==0 && !orders.get(i).getPassed()){
                         coins-=30;
                         numFail++;
-                        System.out.println("Failed order num " + numFail);
                         nextOrder = 4;
                         if(coins<0){
                            coins = 0;
@@ -45,7 +44,7 @@ public class Game{
                   }
                   for(int i=0; i<rem.size(); i++){
                      if(remNums.get(i)<=0){
-                        orders.remove((int)(rem.get(i).intValue()));
+                        orders.remove(rem.get(i));
                         rem.remove(i);
                         remNums.remove(i);
                         break;
@@ -123,7 +122,7 @@ public class Game{
    private int nextOrder;
    private int nextPlate;
    private boolean pause = false;
-   private ArrayList<Integer> rem = new ArrayList<Integer>();
+   private ArrayList<Order> rem = new ArrayList<Order>();
    private ArrayList<Integer> remNums = new ArrayList<Integer>();
    private ArrayList<NPC> npcs = new ArrayList<NPC>();
    
@@ -194,7 +193,7 @@ public class Game{
       for(int j=0; j<orders.size(); j++){
          if(orders.get(j).match(i)){
             coins+=orders.get(j).getScore();
-            rem.add(j);
+            rem.add(orders.get(j));
             numDeliv++;
             remNums.add(3);
             nextPlate = 2;

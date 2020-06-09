@@ -248,7 +248,7 @@ public class Item{
          }
          // is it a valid food combination?
          // top = tomato pan (tomato is cooked)
-         String validCombo = " chedou chedoumus chedoumustop chedousau chedoutop doumus doumustop dousau dousautop doutop chedoumussautop doumussautop chedousautop"; // expand as needed
+         String validCombo = " chedou chedoumus chedoumustop chedousau chedoutop doumus doumustop dousau dousautop doutop chedoumussautop doumussautop chedousautop "; // expand as needed
          for(String n : ingr){
             oList.add(n);
          }

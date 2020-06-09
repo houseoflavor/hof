@@ -1,8 +1,8 @@
 ![splash](https://i.imgur.com/xk8pmfz.png)
 # House o' Flavor
-Advanced CS Final Project
+Advanced CS Final Project 2020
 
-by Ethan and Vinhan
+by Ethan Phan and Vinhan Truong
 
 
 Website (and journal): https://tinyurl.com/houseoflavor

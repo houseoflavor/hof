@@ -639,7 +639,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               hasP1Chop = true;
                               itemTiles[p1.getFRow()][p1.getFCol()].chop();
                               knives.add(new Particle(p1.getFCol()*32+222, p1.getFRow()*32+178-12, "knife"));
-                              sound("chop", 5);
+                              sound("chop", 4);
                            }
                         }
                         catch(Exception e){} // no item here
@@ -665,7 +665,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               hasP2Chop = true;
                               itemTiles[p2.getFRow()][p2.getFCol()].chop();
                               knives.add(new Particle(p2.getFCol()*32+222, p2.getFRow()*32+178-12, "knife"));
-                              sound("chop", 5);
+                              sound("chop", 4);
                            }
                         }
                         catch(Exception e){} // no item here

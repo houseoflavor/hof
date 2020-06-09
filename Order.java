@@ -21,7 +21,7 @@ public class Order{
       if(mushroom){
          type++;
       }
-      load = new LoaderV2(94);
+      load = new LoaderV2();
    }
    public void decrement(){
       timeLeft--;
@@ -71,7 +71,7 @@ public class Order{
    
    public void advance(){
       if(!passed){
-         load.advance();
+         load.advance(timeLeft);
       }
    }
    public ImageIcon getPicture(){

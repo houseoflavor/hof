@@ -12,7 +12,7 @@ wal flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo zat
 wal tra wal wal wal wal wal wal pld ded ded wal wal wal wal cut cut wal wal wal
 290 370
 800 370
-100
-200
-300
-195
+160
+220
+380
+0

@@ -12,7 +12,7 @@ wal flo flo flo flo flo flo flo tab tab tab tab flo flo flo flo flo wal flo wal
 wal wal tab tra wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal wal
 436 257
 660 482
-100
-200
-300
-288
+150
+280
+380
+0

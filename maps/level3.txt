@@ -12,7 +12,7 @@ wal flo flo flo zaq zab zad zag tab tab che che tab tab zaa zah zab zai zao wal
 wal zaj zac zaw zar flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo
 786 289
 307 385
-200
-350
-400
-531
+300
+550
+850
+0

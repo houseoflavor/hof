@@ -54,7 +54,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                      hasP1Boost = false;
                   }
                   //p2 dash
-                  if(keysDown.contains(KeyEvent.VK_B)){
+                  if(keysDown.contains(KeyEvent.VK_B) || keysDown.contains(KeyEvent.VK_P)){
                      if(!hasP2Boost){
                         p2Boost = true;
                         hasP2Boost = true;

@@ -239,6 +239,7 @@ public class HOFUtil extends HOF{
       ImageIcon controls = new ImageIcon("images/menus/controls.png");
       ImageIcon clickX = new ImageIcon("images/menus/X.png");
       g.drawImage(controls.getImage(),0,0,null);
+      g.drawImage((new ImageIcon("images/menus/charsel/bird.gif")).getImage(), 0, 0, 1300, 750, null);
       if(mouseX<1161 && mouseX>1136 && mouseY<151 && mouseY>113 && mode.equals("controls")){
          g.drawImage(clickX.getImage(),0,0,null);
          buttonTouching = EXIT;
@@ -282,7 +283,6 @@ public class HOFUtil extends HOF{
       
       //end
       g.drawImage((new ImageIcon("images/menus/charsel/chars.gif")).getImage(), 0, 0, null);
-      g.drawImage((new ImageIcon("images/menus/charsel/bird.gif")).getImage(), 0, 0, null);
    
    }
    

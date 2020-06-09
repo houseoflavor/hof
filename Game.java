@@ -52,7 +52,6 @@ public class Game{
                         break;
                      }
                      else{
-                        System.out.println("minus one" + remNums.get(i));
                         remNums.set(i, remNums.get(i)-1);
                      }
                   }

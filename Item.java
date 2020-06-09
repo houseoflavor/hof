@@ -274,7 +274,7 @@ public class Item{
    // putting an item in the oven
    // returns whether the item can go in the oven
    public boolean oven(){
-      String validOven = " chedoutop chedoumustop chedoumus chedousau doumustop dousautop chedoumussautop doumussautop ";
+      String validOven = " chedoutop chedoumustop chedoumus chedousau doumustop dousautop chedoumussautop doumussautop chedousautop ";
       if(validOven.contains(" " + this.getName() + " ") && oven.equals("") && cookLeft<1121){
          oven = "X"; // filler to make invisible
          return true;

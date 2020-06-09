@@ -114,6 +114,7 @@ public class HOFUtil extends HOF{
          highscore = game.getCoins();
          replaceSelected(18, ""+highscore, game.getLevel());
          newhs = true;
+         updateLevel();
       }
       if(scoreStage>=0){ // why do i abuse ternaries like this
          g.drawString("Orders Delivered: "+game.numDel()+ "                   "+(scoreStage==0 ? (countScore>0 ? countScore : "0") : game.numDel()*40), 100, 250);

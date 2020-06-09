@@ -318,7 +318,7 @@ public class HOFUtil extends HOF{
             if(distance(mouseX, mouseY, centx, centy)<size/2-5){
                high = "H";
             }
-            g.drawImage((new ImageIcon("images/menus/level/"+levels[i*5+j+1]+"star"+high+".png")).getImage(), centx-size/2, centy-size/2, size, size, null);
+            g.drawImage((new ImageIcon("images/menus/level/"+levels[i*5+j]+"star"+high+".png")).getImage(), centx-size/2, centy-size/2, size, size, null);
             if(i*5+j+1==10){
                g.drawImage((new ImageIcon("images/numbers/num"+high+(int)(i*5+j+1)+".png")).getImage(), centx-size/10-27, centy-size/10+55, null);
             }

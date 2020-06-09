@@ -12,7 +12,7 @@ tab flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo flo tab
 tab tab tab tab cut cut tab tab tab tab tab tab tab tab cut cut tab tab tab tab
 388 370
 708 370
-300
+250
 500
 800
 0

@@ -138,7 +138,7 @@ public class Game{
       spawnPlate = true;
       this.level=l;
       orders = new LinkedList<Order>();
-      timeLeftInRound = 205; // 185
+      timeLeftInRound = 205;
       complete = 0;
       this.start();
       coins = 0;

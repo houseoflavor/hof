@@ -102,7 +102,7 @@ public class HOFUtil extends HOF{
    }
    
    public static void drawScore(Graphics g){
-      if(scoreStage==0 && countScore==-120){
+      if(seeScore){
          saveLevel = game.getLevel();
          saveCoin = game.getCoins();
          saveS1 = star1;
@@ -118,6 +118,7 @@ public class HOFUtil extends HOF{
             newhs = true;
             updateLevel();
          }
+         seeScore = false;
       }
       ImageIcon gradient = new ImageIcon("images/menus/gradient.png");
       g.drawImage(gradient.getImage(),0,0,null);

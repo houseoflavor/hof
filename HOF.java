@@ -868,6 +868,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                transition = 1;
                countScore = -120;
                scoreStage = 0;
+               seeScore = true;
             }
             if(mode.equals("score")){
                countScore++;
@@ -899,6 +900,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
    static int errorTimer=0;
    
    static int shift;
+   
+   static boolean seeScore = true;
    
    static String name1="monkey", name2="chicken";   
    static int start1x, start1y, start2x, start2y, star1, star2, star3, highscore;

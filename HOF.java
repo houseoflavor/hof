@@ -282,8 +282,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               else{
                               
                                  if(itemTiles[i][j].combine(p1.whatHold())){
-                                    p1.pickUpEmpty(itemTiles[i][j]);
-                                    itemTiles[i][j] = null;
+                                    p1.drop();
                                  }
                               }
                            }
@@ -540,8 +539,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               else{
                               
                                  if(itemTiles[i][j].combine(p2.whatHold())){
-                                    p2.pickUpEmpty(itemTiles[i][j]);
-                                    itemTiles[i][j] = null;
+                                    p2.drop();
                                  }
                               }
                            }

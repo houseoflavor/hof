@@ -671,10 +671,10 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         catch(Exception e){} // no item here
                      }
                      else if(gameTiles[i][j].getName().equals("siw") && !hasP2Chop){
-                        if(gameTiles[i][j].getPlates()>0 && gameTiles[sidX][sidY].getPlates()<3){
+                        if(gameTiles[i][j].getPlates()>0 && gameTiles[sidY][sidX].getPlates()<3){
                            hasP2Chop = true;
                            gameTiles[i][j].takePlate();
-                           gameTiles[sidX][sidY].addPlate();
+                           gameTiles[sidY][sidX].addPlate();
                         }
                      }
                   }

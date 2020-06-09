@@ -24,7 +24,7 @@ public class Game{
                   nextPlate--;
                   for(int i=0; i<orders.size(); i++){
                      orders.get(i).decrement();
-                     if(orders.get(i).timeLeft()==0){
+                     if(orders.get(i).timeLeft()==0 && !orders.get(i).getPassed()){
                         coins-=30;
                         numFail++;
                         System.out.println("Failed order num " + numFail);
@@ -69,17 +69,7 @@ public class Game{
                }
                
                if(Math.random()>0.6){ // chance of spawning a npc
-                  npcs.add(new NPC((int)(Math.random()*6), (int)(Math.random()*18)+1)); // sort based on y value
-                  for(int i=0; i<npcs.size(); i++){
-                     for(int j = npcs.size() - 1; j > i; j--){
-                        if(npcs.get(i).gety() > npcs.get(j).gety()){
-                           NPC tmp = npcs.get(i);
-                           npcs.set(i,npcs.get(j));
-                           npcs.set(j,tmp);
-                        }
-                     }
-                  
-                  }
+                  npcs.add(new NPC((int)(Math.random()*6), (int)(Math.random()*18)+1));
                }
                
             }

@@ -128,7 +128,7 @@ public class HOFUtil extends HOF{
                countScore=-100;
             }
             if(scoreStage>1){
-               g.drawString("Tips:                                   " + (scoreStage==2 ? (countScore>0 ? countScore : "0") : (game.getCoins()+(game.numFail()*30) - (game.numDel()*40))), 100, 350);
+               g.drawString("Tips:                                    " + (scoreStage==2 ? (countScore>0 ? countScore : "0") : (game.getCoins()+(game.numFail()*30) - (game.numDel()*40))), 100, 350);
                if(countScore >= (game.getCoins()+(game.numFail()*30) - (game.numDel()*40)) && scoreStage==2){
                   scoreStage=3;
                   countScore=-100;
@@ -662,6 +662,15 @@ public class HOFUtil extends HOF{
          }
       }
       ArrayList<NPC> list = game.getList();
+      for(int i=0; i<list.size(); i++){
+         for(int j = list.size() - 1; j > i; j--){
+            if(list.get(i).gety() > list.get(j).gety()){
+               NPC tmp = list.get(i);
+               list.set(i,list.get(j));
+               list.set(j,tmp);
+            }
+         }
+      }
       for(int i=0; i<list.size(); i++){
          NPC temp = list.get(i);
          if(!game.isPaused()){

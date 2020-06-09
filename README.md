@@ -13,13 +13,22 @@ Website (and journal): https://tinyurl.com/houseoflavor
 These controls are also listed in game
 
 Player 1:
-WASD - moving
-Shift - Chop/Wash
-Ctrl - Dash
-E - Interact
+
+- WASD - moving
+
+- Shift - Chop/Wash
+
+- Ctrl - Dash
+
+- E - Interact
+
 
 Player 2:
-IJKL (alternative: arrow keys) - moving
-\[ - Chop/Wash
-B (alternative: P) - Dash
-O - Interact
+
+- IJKL (alternative: arrow keys) - moving
+
+- \[ - Chop/Wash
+
+- B (alternative: P) - Dash
+
+- O - Interact

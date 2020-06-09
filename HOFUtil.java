@@ -201,7 +201,7 @@ public class HOFUtil extends HOF{
          fileOut.close();
       
       } catch (Exception e) {
-         System.out.println("Problem reading file.");
+         //System.out.println("Problem reading file.");
       }   }
    
    
@@ -774,7 +774,7 @@ public class HOFUtil extends HOF{
          }
          g.setColor(Color.BLACK);
          g.setFont(dpcomic60);
-         System.out.println("timer" + errorTimer);
+         //System.out.println("timer" + errorTimer);
          if(error==1){ // needs plate
             g.drawString("Needs plate", 25, 50);
             errorTimer--;

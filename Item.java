@@ -257,7 +257,7 @@ public class Item{
          for(String n : oList){
             ret+=n;
          }
-         System.out.println(ret);
+         //System.out.println(ret);
          if(!validCombo.contains(" " + ret + " ")){
             return false;
          }

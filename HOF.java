@@ -135,6 +135,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                  if(p1.whatHold().hasPlate()){
                                  // you do lose the item if the item is plated however
                                     if(game.deliver(p1.whatHold())){ // returns boolean is successful, if future me wants to use
+                                       sound("correct", -1);
                                     }
                                     else{
                                        error = 3;
@@ -392,6 +393,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                                  if(p2.whatHold().hasPlate()){
                                  // you do lose the item if the item is plated however
                                     if(game.deliver(p2.whatHold())){ // returns boolean is successful, if future me wants to use
+                                       sound("correct", -1);
                                     }
                                     else{
                                        error = 3;
@@ -639,7 +641,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               hasP1Chop = true;
                               itemTiles[p1.getFRow()][p1.getFCol()].chop();
                               knives.add(new Particle(p1.getFCol()*32+222, p1.getFRow()*32+178-12, "knife"));
-                              sound("chop", 4);
+                              sound("chop", 2);
                            }
                         }
                         catch(Exception e){} // no item here
@@ -665,7 +667,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                               hasP2Chop = true;
                               itemTiles[p2.getFRow()][p2.getFCol()].chop();
                               knives.add(new Particle(p2.getFCol()*32+222, p2.getFRow()*32+178-12, "knife"));
-                              sound("chop", 4);
+                              sound("chop", 2);
                            }
                         }
                         catch(Exception e){} // no item here
@@ -1194,7 +1196,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                game = new Game(buttonTouching-10);
             }
             catch(Exception ee){
-               System.out.println("something broke");
+               System.out.println("Error reading file");
             }
             transX=1500;            
             transition = 1;

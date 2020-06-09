@@ -369,6 +369,9 @@ public class HOFUtil extends HOF{
                   if(hoverTiles[j][i].startsWith("co") || hoverTiles[j][i].startsWith("de")){
                      g.drawImage((new ImageIcon("images/tile/"+hoverTiles[j][i]+".png")).getImage(), (i*8)+mouseX+5, (j*8)+mouseY-275-8+50, 8, 16, null);
                   }
+                  else if(hoverTiles[j][i].startsWith("z")){
+                     g.drawImage((new ImageIcon("images/obstacles/"+hoverTiles[j][i]+".gif")).getImage(), (i*8)+mouseX+5, (j*8)+mouseY-275-8+50, 8, 16, null);
+                  }
                   else{
                      g.drawImage((new ImageIcon("images/tile/"+hoverTiles[j][i]+".gif")).getImage(), (i*8)+mouseX+5, (j*8)+mouseY-275-8+50, 8, 16, null);
                   }

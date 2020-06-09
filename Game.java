@@ -27,6 +27,7 @@ public class Game{
                      if(orders.get(i).timeLeft()==0){
                         coins-=30;
                         numFail++;
+                        System.out.println("Failed order num " + numFail);
                         nextOrder = 4;
                         if(coins<0){
                            coins = 0;

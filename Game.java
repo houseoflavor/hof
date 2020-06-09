@@ -45,7 +45,6 @@ public class Game{
                   }
                   for(int i=0; i<rem.size(); i++){
                      if(remNums.get(i)<=0){
-                        System.out.println("removing" + rem.get(i));
                         orders.remove((int)(rem.get(i).intValue()));
                         rem.remove(i);
                         remNums.remove(i);

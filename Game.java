@@ -161,6 +161,10 @@ public class Game{
       return npcs;
    }
    public void reset(){
+      timer2.cancel();
+      for(int i=0; i<orders.size(); i++){
+         orders.remove(i);
+      }
       orders = new LinkedList<Order>();
    }
    public int numDel(){

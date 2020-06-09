@@ -46,7 +46,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         hasP1Boost = true;
                         if(p1.isMoving() && (keysDown.contains(KeyEvent.VK_A) ||keysDown.contains(KeyEvent.VK_S) ||keysDown.contains(KeyEvent.VK_D) ||keysDown.contains(KeyEvent.VK_W))){
                            boost.add(new Particle((int)p1.getx()-15, (int)p1.gety()-15, "boost"));
-                           sound("dash", -10);
+                           sound("dash", -8);
                         }
                      }
                   }
@@ -60,7 +60,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                         hasP2Boost = true;
                         if(p2.isMoving() && (keysDown.contains(KeyEvent.VK_I) ||keysDown.contains(KeyEvent.VK_J) ||keysDown.contains(KeyEvent.VK_K) ||keysDown.contains(KeyEvent.VK_L) || keysDown.contains(KeyEvent.VK_UP) ||keysDown.contains(KeyEvent.VK_RIGHT) ||keysDown.contains(KeyEvent.VK_DOWN) ||keysDown.contains(KeyEvent.VK_LEFT))){
                            boost.add(new Particle((int)p2.getx()-15, (int)p2.gety()-15, "boost"));
-                           sound("dash", -10);
+                           sound("dash", -8);
                         }
                      }
                   }
@@ -694,7 +694,8 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
                }
                catch(Exception e){}
                
-               if(keysDown.contains(KeyEvent.VK_ESCAPE) && game.ready() && game.getTime()<200){ // pause
+               if(keysDown.contains(KeyEvent.VK_ESCAPE) && game.ready() && game.getTime()<200 && !game.isPaused()){ // pause
+                  sound("pause", 0);
                   game.pause();
                }
                
@@ -1123,11 +1124,13 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       else if(mode.equals("menu") && transMode.equals("none")){
          if(buttonTouching == START){ // clicking start button (from menu)
             transMode = "level";
-            transX=1500;            
+            transX=1500;          
+            sound("click", 2);  
             transition = 1;
          }
          if(buttonTouching == CONTROLS){ // clicking controls button (from menu)
-            transMode = "controls";            
+            transMode = "controls";      
+            sound("click", 2);      
             transX=1500;
             transition = 1;
            
@@ -1138,6 +1141,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          if(buttonTouching == EXIT){ // clicking X button (from controls)
             transMode = "menu";
             transX=1500;
+            sound("click", 2);
             transition = 1;
          }
       }
@@ -1145,16 +1149,19 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
       else if(mode.equals("game") && transMode.equals("none")){
          if(buttonTouching == 1){
             game.resume();
+            sound("click", 2);
          }
          if(buttonTouching == 2){
             transMode = "restart";
             transition = 1;
+            sound("click", 2);
          }
          if(buttonTouching == 3){ // quit
             transMode = "level";
             transition = 1;
             game.resume();
             game.cancel();
+            sound("click", 2);
          }
       }
       else if(mode.equals("score") && transMode.equals("none")){
@@ -1162,6 +1169,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             transMode = "level";
             transX=1500;
             transition = 1;
+            sound("click", 2);
             newhs= false;
             updateLevel();
          }
@@ -1174,6 +1182,7 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
             knives = new ArrayList<Particle>();
             loader = new ArrayList<Loader>();
             boost = new ArrayList<Particle>();
+            sound("click", 2);
             try{
                readFile("maps/level"+(buttonTouching-10)+".txt"); // --------------------------------- read file
                p1 = new Player(name1,start1x,start1y);
@@ -1192,11 +1201,13 @@ public class HOF extends JPanel implements MouseListener, MouseMotionListener{
          }
          else if(buttonTouching == 4){
             transMode = "charsel";
+            sound("click", 2);
             transX=1500;
             transition = 1;
          }
          else if(buttonTouching == 5){
             transMode = "menu";
+            sound("click", 2);
             transX=1500;
             transition = 1;
          }

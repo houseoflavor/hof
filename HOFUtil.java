@@ -157,9 +157,9 @@ public class HOFUtil extends HOF{
                   if(scoreStage>3 && countScore>0){
                      g.setFont(dpcomic24);
                      g.drawImage((new ImageIcon("images/menus/level/"+((saveCoin<star1) ? "0" : ((saveCoin<star2) ? "1" : ((saveCoin<star3) ? "2" : "3")))+"star.png")).getImage(), 900,450,null);
-                     g.drawString(""+star1, 964+95, 514+65);
-                     g.drawString(""+star2, 964-95, 514+65);
-                     g.drawString(""+star3, 964, 514-64);
+                     g.drawString(""+saveS1, 964+95, 514+65);
+                     g.drawString(""+saveS2, 964-95, 514+65);
+                     g.drawString(""+saveS3, 964, 514-64);
                      g.setFont(dpcomic60);
                      if(newhs){
                         g.drawString("New highscore!", 100, 550);

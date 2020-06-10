@@ -104,6 +104,11 @@ public class HOFUtil extends HOF{
    public static void drawScore(Graphics g){
       if(seeScore){
          saveLevel = game.getLevel();
+         try{
+            readFileHover("maps/level"+saveLevel+".txt");
+         }
+         catch(Exception e){
+         }
          saveCoin = game.getCoins();
          saveS1 = star1;
          saveS2 = star2;

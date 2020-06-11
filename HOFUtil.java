@@ -161,7 +161,7 @@ public class HOFUtil extends HOF{
                   }
                   if(scoreStage>3 && countScore>0){
                      g.setFont(dpcomic24);
-                     g.drawImage((new ImageIcon("images/menus/level/"+((saveCoin<star1) ? "0" : ((saveCoin<star2) ? "1" : ((saveCoin<star3) ? "2" : "3")))+"star.png")).getImage(), 900,450,null);
+                     g.drawImage((new ImageIcon("images/menus/level/"+((saveCoin<saveS1) ? "0" : ((saveCoin<saveS2) ? "1" : ((saveCoin<saveS3) ? "2" : "3")))+"star.png")).getImage(), 900,450,null);
                      g.drawString(""+saveS1, 964+95, 514+65);
                      g.drawString(""+saveS2, 964-95, 514+65);
                      g.drawString(""+saveS3, 964, 514-64);

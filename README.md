@@ -2,7 +2,7 @@
 # House o' Flavor
 Advanced CS Final Project 2020
 
-by Ethan Phan @ethannp and Vinhan Truong @VTruong1478
+by [Ethan Phan](https://github.com/ethannp) and [Vinhan Truong](https://github.com/VTruong1478)
 
 
 Website (and journal): https://tinyurl.com/houseoflavor

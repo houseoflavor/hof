@@ -1,0 +1,75 @@
+House O' Flavor Instructions
+Made by Ethan Phan and Vinhan Truong 
+
+INSTRUCTIONS:
+House o’ Flavor is a 2-player, cooperative cooking game, 
+where two chefs work in a pizza parlor to complete orders. 
+Chefs must gather ingredients, such as dough, cheese, 
+tomatoes, sausages, and mushrooms, then chop and assemble 
+them. However, tomatoes, after being chopped, 
+must be cooked in a pan first to turn them into tomato sauce. 
+After the pizza is assembled, bake it in the oven, place it 
+on a plate, then deliver within the time limit. You earn 
+coins based on how fast you deliver and how difficult the order is.
+
+To run the project, run the exe file from https://tinyurl.com/hof-download or HOFDriver.java
+
+CONTROLS:
+In the menus, everything except the character selection screen is point-and-click. 
+Once you get to actual game however, here are the controls.
+These controls are also listed in game in the CONTROLS menu.
+Player 1:
+-  WASD - moving
+-  Shift - Chop/Wash
+-  Ctrl - Dash
+-  E - Interact
+
+Player 2:
+-  IJKL (alternative: arrow keys) - moving
+-  [ - Chop/Wash
+-  B (alternative: P) - Dash
+-  O - Interact
+
+escape - pause game (can be done when inside a level)
+
+BASIC STRATEGY:
+Since the ingredients and various tasks are scattered around the kitchen, 
+it's good to designate tasks to try to limit the amount of time walking 
+around aimlessly or wasting time running to get something. Here are some 
+various tasks (in the suggested order that they should be completed):
+- Grabbing ingredients
+- Chopping ingredients
+- Cooking tomatoes
+- Washing dishes
+- Constructing the pizza
+- Placing the pizzas in the oven
+- Delivering the baked pizzas
+
+To retrieve ingredients, use the INTERACT key while looking at an
+ingredient drawer. This will place the item in your hand, use the same INTERACT
+key to drop, pick up, or combine items. 
+
+To chop ingredients, repeatedly click the "chop" key (SHIFT or [)
+while the ingredient is on a chopping board. The number represents how
+many more times the ingredient needs to be chopped.
+
+To cook tomatoes, place the chopped tomatoes into a pan, then place 
+the pan onto the burner. The tomatoes will start cooking, and are finished
+cooking when the green bar is complete.
+
+To wash plates, bring the dirty plates to the sink, then use the wash
+key (SHIFT or [). Clean plates will appear next to the sink.
+
+To construct the pizza, place chopped (or cooked) ingredients on top of each other.
+They will combine automatically. Careful not to make pizzas that you don't need!
+If you make a mistake, there is a green trash can in every level.
+
+Pick up the pizza using the INTERACT key, then drop it inside the 
+oven. The pizza will start cooking automatically, and will be 
+finished when the loading bar lights up green.
+
+Pick up the pizza once it is finished cooking. Get it onto a plate, then
+deliver as fast as you can to the hungry customers for points!
+
+Watch out for the timers on the right side of the screen! You must fulfill order
+before the loading bar goes all the way down, causing you to lose points.

@@ -36,6 +36,9 @@ Player 2:
 
 ESCAPE key - pause game (can be done when inside a level). Use the mouse to choose an option.
 
+SCHOOL COMPUTERS AND OTHER LAPTOPS: Use the +/- keys to adjust the score/timer at the bottom of
+the screen so they are visible in game. 
+
 -------------
 
 BASIC STRATEGY:

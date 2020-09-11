@@ -1,6 +1,8 @@
 House O' Flavor Instructions
 Made by Ethan Phan and Vinhan Truong 
 
+-------------
+
 INSTRUCTIONS:
 House o’ Flavor is a 2-player, cooperative cooking game, 
 where two chefs work in a pizza parlor to complete orders. 
@@ -14,23 +16,27 @@ coins based on how fast you deliver and how difficult the order is.
 
 To run the project, run the exe file from https://tinyurl.com/hof-download or HOFDriver.java
 
+-------------
+
 CONTROLS:
 In the menus, everything except the character selection screen is point-and-click. 
 Once you get to actual game however, here are the controls.
 These controls are also listed in game in the CONTROLS menu.
 Player 1:
--  WASD - moving
--  Shift - Chop/Wash
--  Ctrl - Dash
--  E - Interact
+  WASD - moving
+  Shift - Chop/Wash
+  Ctrl - Dash
+  E - Interact
 
 Player 2:
--  IJKL (alternative: arrow keys) - moving
--  [ - Chop/Wash
--  B (alternative: P) - Dash
--  O - Interact
+  IJKL (alternative: arrow keys) - moving
+  [ - Chop/Wash
+  B (alternative: P) - Dash
+  O - Interact
 
-escape - pause game (can be done when inside a level)
+ESCAPE key - pause game (can be done when inside a level). Use the mouse to choose an option.
+
+-------------
 
 BASIC STRATEGY:
 Since the ingredients and various tasks are scattered around the kitchen, 
